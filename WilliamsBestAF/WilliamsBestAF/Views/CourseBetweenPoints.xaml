@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WilliamsBestAF.Views.CourseBetweenPoints">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Entry x:Name="LatitudeDeg1" Text="33" FontSize="Large" TextColor="Blue" Placeholder="Latitude 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LatitudeMin1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeDeg1" Text="118" FontSize="Large" TextColor="Blue" Placeholder="Latitude 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LongitudeMin1" Text="24" FontSize="Large" TextColor="Blue" Placeholder="Longitude 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LatitudeDeg2" Text="40" FontSize="Large" TextColor="Blue" Placeholder="Latitude 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LatitudeMin2" Text="38" FontSize="Large" TextColor="Blue" Placeholder="Longitude 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeDeg2" Text="73" FontSize="Large" TextColor="Blue" Placeholder="Latitude 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LongitudeMin2" Text="47" FontSize="Large" TextColor="Blue" Placeholder="Longitude 1"  PlaceholderColor="LightCoral" />
+                <BoxView HeightRequest="5" Color="Red" />
+                <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="ComputeCourse_Clicked" />
+                <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Course in Degrees" PlaceholderColor="Chartreuse" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
