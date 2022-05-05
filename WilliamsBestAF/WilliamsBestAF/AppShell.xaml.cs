@@ -11,6 +11,14 @@ namespace WilliamsBestAF
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(CourseBetweenPoints), typeof(CourseBetweenPoints));
+            Routing.RegisterRoute(nameof(LatitudeOfPointOnGC), typeof(LatitudeOfPointOnGC));
+            Routing.RegisterRoute(nameof(LatitudeLongitudeGiveRadialAndDistance), typeof(LatitudeLongitudeGiveRadialAndDistance));
+            Routing.RegisterRoute(nameof(IntersectingRadials), typeof(IntersectingRadials));
+            Routing.RegisterRoute(nameof(ClairautsFormula), typeof(ClairautsFormula));
+            Routing.RegisterRoute(nameof(CrossingParallels), typeof(CrossingParallels));
+            Routing.RegisterRoute(nameof(IntermediatePointsOnAGreatCircle), typeof(IntermediatePointsOnAGreatCircle));
+            Routing.RegisterRoute(nameof(CrossTrackError), typeof(CrossTrackError));
+
 
         }
 

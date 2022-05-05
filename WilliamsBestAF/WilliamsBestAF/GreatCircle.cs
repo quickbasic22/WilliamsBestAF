@@ -49,7 +49,7 @@ namespace WilliamsBestAF
             double lat2 = Deg_Radians(LatDeg2);
             double long2 = Deg_Radians(LongDeg2);
 
-            double result = Math.Acos(Math.Sin(lat1) * Math.Sin(lat2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Cos(long1 - long2)) * 3440;
+            double result = Math.Acos(Math.Sin(lat1) * Math.Sin(lat2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Cos(long1 - long2));
             result = Math.Round(result, 1);
             return result;
         }

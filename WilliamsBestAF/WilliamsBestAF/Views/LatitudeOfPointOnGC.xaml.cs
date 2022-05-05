@@ -10,10 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace WilliamsBestAF.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CourseBetweenPoints : ContentPage
+    public partial class LatitudeOfPointOnGC : ContentPage
     {
         WilliamsBestAF.GreatCircle gc;
-        public CourseBetweenPoints()
+        public LatitudeOfPointOnGC()
         {
             InitializeComponent();
             gc = new WilliamsBestAF.GreatCircle();
@@ -29,33 +29,33 @@ namespace WilliamsBestAF.Views
             double latMin2 = double.Parse(LatitudeMin2.Text);
             double lngDeg2 = double.Parse(LongitudeDeg2.Text);
             double lngMin2 = double.Parse(LongitudeMin2.Text);
+            double lngDeg3 = double.Parse(IntermediateLngDeg.Text);
+            double lngMin3 = double.Parse(IntermediateLngMin.Text);
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, 0);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, 0);
             double lat2Degs = gc.DMS_Degrees(latDeg2, latMin2, 0);
             double lng2Degs = gc.DMS_Degrees(lngDeg2, lngMin2, 0);
+            double lng3Degs = gc.DMS_Degrees(lngDeg3, lngMin3, 0);
             double lat1Radians = gc.Deg_Radians(lat1Degs);
             double lng1Radians = gc.Deg_Radians(lng1Degs);
             double lat2Radians = gc.Deg_Radians(lat2Degs);
             double lng2Radians = gc.Deg_Radians(lng2Degs);
+            double lng3Radians = gc.Deg_Radians(lng3Degs);
+            double lat = 0;
 
-
-            double tc1 = 0;
-            double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat2Degs, lng2Degs);
-
-            if (Math.Cos(lat1Radians) < 0.00010)
-                if (lat1Radians > 0)
-                    tc1 = Math.PI;
-                else
-                    tc1 = 2 * Math.PI;
-            else if (Math.Sin(lng2Radians - lng1Radians) < 0)
+            if (Math.Sin(lng1Radians - lng2Radians) != 0)
             {
-                tc1 = Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
+                lat = Math.Atan((Math.Sin(lat1Radians) * Math.Cos(lat2Radians) * Math.Sin(lng3Radians - lng2Radians) - Math.Sin(lat2Radians) * Math.Cos(lat1Radians) * Math.Sin(lng3Radians - lng1Radians)) / (Math.Cos(lat1Radians) * Math.Cos(lat2Radians) * Math.Sin(lng1Radians - lng2Radians)));
             }
             else
-                tc1 = 2 * Math.PI - Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
-            double CourseDegrees = Math.Round(gc.RadiansToDegrees(tc1), 0);
+                lat = 0;
 
-            Results.Text = CourseDegrees.ToString() + " " + "Degrees Initial heading";
+            double resultInDegrees = gc.RadiansToDegrees(lat);
+            string resultDegreesMin = gc.Deg_DMS(resultInDegrees);
+
+            Results.Text = resultDegreesMin.ToString() + " " + "Latitude";    
+            Results2.Text = lngDeg3.ToString() + " " + lngMin3.ToString() + " 0" + " Longitude";
+
         }
 
         private void ClearAll_Clicked(object sender, EventArgs e)
@@ -68,7 +68,9 @@ namespace WilliamsBestAF.Views
             LatitudeMin2.Text = "";
             LongitudeDeg2.Text = "";
             LongitudeMin2.Text = "";
-
+            Results.Text = "";
+            IntermediateLngDeg.Text = "";
+            IntermediateLngMin.Text = "";
         }
     }
 }
