@@ -115,5 +115,33 @@ namespace WilliamsBestAF
         {
             return (Math.PI / 180) * degrees;
         }
+
+        //public double CourseBetweenPoints(double latDeg, double latMin, double lngDeg, double lngMin)
+        //{
+        //    double latDegrees = DMS_Degrees(latDeg, latMin, 0);
+        //    double lngDegrees = DMS_Degrees(lngDeg, lngMin, 0);
+        //    double latRadians = DegreesToRadians(latDegrees);
+        //    double lngRadians = DegreesToRadians(lngDegrees);
+
+        //    double tc1 = 0;
+        //    double distance = GreatCircle_Calculation(latDegrees, lngDegrees, )
+
+        //    if (Math.Cos(lat1Radians) < 0.00010)
+        //        if (lat1Radians > 0)
+        //            tc1 = Math.PI;
+        //        else
+        //            tc1 = 2 * Math.PI;
+        //    else if (Math.Sin(lng2Radians - lng1Radians) < 0)
+        //    {
+        //        tc1 = Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
+        //    }
+        //    else
+        //        tc1 = 2 * Math.PI - Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
+        //    double CourseDegrees = Math.Round(gc.RadiansToDegrees(tc1), 0);
+
+        //    Results.Text = CourseDegrees.ToString() + " " + "Degrees Initial heading";
+
+
+        //}
     }
 }
