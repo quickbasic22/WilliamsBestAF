@@ -12,9 +12,21 @@ namespace WilliamsBestAF.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IntermediatePointsOnAGreatCircle : ContentPage
     {
+        WilliamsBestAF.GreatCircle gc;
         public IntermediatePointsOnAGreatCircle()
         {
             InitializeComponent();
+            gc = new WilliamsBestAF.GreatCircle();
+        }
+
+        private void ComputeCourse_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClearAll_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

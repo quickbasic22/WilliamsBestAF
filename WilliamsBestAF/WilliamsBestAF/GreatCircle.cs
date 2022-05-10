@@ -116,32 +116,42 @@ namespace WilliamsBestAF
             return (Math.PI / 180) * degrees;
         }
 
-        //public double CourseBetweenPoints(double latDeg, double latMin, double lngDeg, double lngMin)
-        //{
-        //    double latDegrees = DMS_Degrees(latDeg, latMin, 0);
-        //    double lngDegrees = DMS_Degrees(lngDeg, lngMin, 0);
-        //    double latRadians = DegreesToRadians(latDegrees);
-        //    double lngRadians = DegreesToRadians(lngDegrees);
+        public double CourseBetweenPoints(double latDeg, double lngDeg, double lat2Deg, double lng2Deg)
+        {
+            double lat1Radians = DegreesToRadians(latDeg);
+            double lng1Radians = DegreesToRadians(lngDeg);
+            double lat2Radians = DegreesToRadians(lat2Deg);
+            double lng2Radians = DegreesToRadians(lng2Deg);
 
-        //    double tc1 = 0;
-        //    double distance = GreatCircle_Calculation(latDegrees, lngDegrees, )
+            double tc1 = 0;
+            double distance = GreatCircle_Calculation(latDeg, lngDeg, lat2Deg, lng2Deg);
 
-        //    if (Math.Cos(lat1Radians) < 0.00010)
-        //        if (lat1Radians > 0)
-        //            tc1 = Math.PI;
-        //        else
-        //            tc1 = 2 * Math.PI;
-        //    else if (Math.Sin(lng2Radians - lng1Radians) < 0)
-        //    {
-        //        tc1 = Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
-        //    }
-        //    else
-        //        tc1 = 2 * Math.PI - Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
-        //    double CourseDegrees = Math.Round(gc.RadiansToDegrees(tc1), 0);
+            if (Math.Cos(lat1Radians) < 0.00010)
+                if (lat1Radians > 0)
+                    tc1 = Math.PI;
+                else
+                    tc1 = 2 * Math.PI;
+            else if (Math.Sin(lng2Radians - lng1Radians) < 0)
+            {
+                tc1 = Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
+            }
+            else
+                tc1 = 2 * Math.PI - Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
+            double CourseDegrees = Math.Round(RadiansToDegrees(tc1), 0);
 
-        //    Results.Text = CourseDegrees.ToString() + " " + "Degrees Initial heading";
+            return CourseDegrees;
+        }
 
-
-        //}
+        public async System.Threading.Tasks.Task<string[]> Get_Cooridates(object sender, EventArgs e)
+        {
+            var coor = await Geolocation.GetLocationAsync(new GeolocationRequest
+            {
+                DesiredAccuracy = GeolocationAccuracy.Medium,
+                Timeout = TimeSpan.FromSeconds(30)
+            });
+            var cooridates = new string[] { coor.Latitude.ToString(), coor.Longitude.ToString() };
+            return cooridates;
+        }
+          
     }
 }

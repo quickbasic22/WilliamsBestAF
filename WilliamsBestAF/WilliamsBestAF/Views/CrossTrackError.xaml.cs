@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +18,7 @@ namespace WilliamsBestAF.Views
             gc = new WilliamsBestAF.GreatCircle();
         }
 
-        private void ComputeCourse_Clicked(object sender, EventArgs e)
+        private async void ComputeCourse_Clicked(object sender, EventArgs e)
         {
             double latDeg1 = double.Parse(LatitudeDeg1.Text);
             double latMin1 = double.Parse(LatitudeMin1.Text);
@@ -44,9 +43,46 @@ namespace WilliamsBestAF.Views
             double lng1Radians = gc.Deg_Radians(lng1Degs);
             double lat2Radians = gc.Deg_Radians(lat2Degs);
             double lng2Radians = gc.Deg_Radians(lng2Degs);
+            double XTD = 0;
+            // string[] dist_ADString = await gc.Get_Cooridates(this, null);
 
-            double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat3Degs, lng3Degs);
+            //string thisLatString = dist_ADString[0];
+            //string thisLngString = dist_ADString[1];
 
+            //double thisLat = double.Parse(thisLatString);
+            //double thisLng = double.Parse(thisLngString);
+            double thisLat = lat3Degs;
+            double thisLng = lng3Degs;
+
+            double dist_AD = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, thisLat, thisLng);
+            double crs_AD = gc.CourseBetweenPoints(lat1Radians, lng1Radians, thisLat, thisLng);
+            double crs_AB = gc.CourseBetweenPoints(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
+
+            XTD = Math.Asin(Math.Sin(dist_AD) * Math.Sin(crs_AD - crs_AB));
+
+            // positive XTD means right of course, negative means left
+            // If the point A is the N. or S. Pole replace crs_AD-crs_AB with lon_D-lon_B or lon_B-lon_D respectively
+
+            // The "along track distance", ATD, the distance from A along the course towards B to the point abeam D is given by:
+            double ATD = Math.Acos(Math.Cos(dist_AD) / Math.Cos(XTD));
+
+            // For very short distances:
+            double ATD2 = Math.Asin(Math.Sqrt((Math.Sin(Math.Pow(dist_AD, 2)) - Math.Sin(Math.Pow(XTD, 2))) / Math.Cos(XTD)));
+            string directionFromCourse = "";
+            if (ATD > 0)
+            {
+                directionFromCourse = "right of course";
+            }
+            else if (ATD < 0)
+            {
+                directionFromCourse = "left of course";
+            }
+            else
+            {
+                directionFromCourse = "On Course";
+            }
+
+            Results.Text = ATD.ToString() + " " + directionFromCourse;
             
         }
 
