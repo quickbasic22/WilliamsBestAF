@@ -152,6 +152,28 @@ namespace WilliamsBestAF
             var cooridates = new string[] { coor.Latitude.ToString(), coor.Longitude.ToString() };
             return cooridates;
         }
-          
+
+        public double NauticalMilesToRadians(double nauticalmiles)
+        {
+            double distanceradians = (Math.PI / (180 * 60)) * nauticalmiles;
+            return distanceradians;
+        }
+
+        public double RadiansToNauticalMiles(double radians)
+        {
+            double nauticalmiles = ((180 * 60) / Math.PI) * radians;
+            return nauticalmiles;
+        }
+
+        public double NauticalMilesToMiles(double nauticalmiles)
+        {
+            return 1.1507794 * nauticalmiles;
+        }
+
+        public double MilesToNauticalMiles(double miles)
+        {
+            return miles / 1.1507794;
+        }
+
     }
 }

@@ -17,8 +17,10 @@
                 <Entry x:Name="LongitudeDeg2" Text="73" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 2" PlaceholderColor="LightBlue" />
                 <Entry x:Name="LongitudeMin2" Text="47" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 2"  PlaceholderColor="LightCoral" />
                 <BoxView HeightRequest="5" Color="Red" />
-                <Entry x:Name="Distance" Text="111" FontSize="Large" TextColor="DeepSkyBlue" Placeholder="Intermediate Longitude" PlaceholderColor="Crimson" />
-                <Entry x:Name="TrueCourse" Text="0" FontSize="Large" TextColor="DeepSkyBlue" Placeholder="Intermediate Longitude" PlaceholderColor="Crimson" />
+                <Label Text="Distance along route" FontSize="Large" TextColor="Orange" />
+                <Entry x:Name="Distance" Text="100" FontSize="Large" TextColor="DeepSkyBlue" Placeholder="Distance along route" PlaceholderColor="Crimson" />
+                <Label Text="True course along route" FontSize="Large" TextColor="Orange" />
+                <Entry x:Name="TrueCourse" Text="66" FontSize="Large" TextColor="DeepSkyBlue" Placeholder="true course along route" PlaceholderColor="Crimson" />
                 <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="ComputeCourse_Clicked" />
                 <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Latitude Degrees Minutes" PlaceholderColor="Chartreuse" />
                 <Entry x:Name="Results2" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Longitude Degrees Minutes" PlaceholderColor="Chartreuse" />

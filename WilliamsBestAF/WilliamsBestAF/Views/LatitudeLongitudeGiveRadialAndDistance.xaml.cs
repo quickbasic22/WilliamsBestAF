@@ -29,8 +29,9 @@ namespace WilliamsBestAF.Views
             double latMin2 = double.Parse(LatitudeMin2.Text);
             double lngDeg2 = double.Parse(LongitudeDeg2.Text);
             double lngMin2 = double.Parse(LongitudeMin2.Text);
-            double distance = double.Parse(Distance.Text);
-            double truecourse = double.Parse(TrueCourse.Text);
+            double distancetxt = double.Parse(Distance.Text);
+            double distance = gc.NauticalMilesToRadians(distancetxt);
+            double truecoursetxt = double.Parse(TrueCourse.Text);
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, 0);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, 0);
             double lat2Degs = gc.DMS_Degrees(latDeg2, latMin2, 0);
@@ -39,8 +40,11 @@ namespace WilliamsBestAF.Views
             double lng1Radians = gc.Deg_Radians(lng1Degs);
             double lat2Radians = gc.Deg_Radians(lat2Degs);
             double lng2Radians = gc.Deg_Radians(lng2Degs);
+            double truecourse = gc.Deg_Radians(truecoursetxt);
             double lat;
             double lng;
+            double lat2;
+            double lng2;
             double dlon;
             
             // distances 1/4 around globe
@@ -50,15 +54,19 @@ namespace WilliamsBestAF.Views
             if (Math.Cos(lat) == 0)
                 lng = lng1Radians;
             else
-                lng = (lng1Radians - Math.Asin(Math.Sin(truecourse) * Math.Sin(distance) / Math.Cos(lat1Radians)) + Math.PI % 2 * Math.PI) - Math.PI;
+                lng = (lng1Radians - Math.Asin(Math.Sin(truecourse) * Math.Sin(distance) / Math.Cos(lat)) + Math.PI % (2 * Math.PI)) - Math.PI;
 
             // distances greater use this
-            lat = Math.Asin(Math.Sin(lat1Radians) * Math.Cos(distance) + Math.Cos(lat1Radians) * Math.Sin(distance) * Math.Cos(truecourse));
-            dlon = Math.Atan2(Math.Sin(truecourse) * Math.Sin(distance) * Math.Cos(lat1Radians), Math.Cos(distance) - Math.Sin(lat1Radians) * Math.Sin(lat1Radians));
-            lng = (lng1Radians - dlon + Math.PI % 2 * Math.PI) - Math.PI;
+            lat2 = Math.Asin(Math.Sin(lat1Radians) * Math.Cos(distance) + Math.Cos(lat1Radians) * Math.Sin(distance) * Math.Cos(truecourse));
+            dlon = Math.Atan2(Math.Sin(truecourse) * Math.Sin(distance) * Math.Cos(lat1Radians), Math.Cos(distance) - Math.Sin(lat1Radians) * Math.Sin(lat));
+            lng2 = (lng1Radians - dlon + Math.PI % 2 * Math.PI) - Math.PI;
+            double latAnswerDeg = gc.RadiansToDegrees(lat);
+            double lngAnswerDeg = gc.RadiansToDegrees(lng);
 
-            Results.Text = lat.ToString() + " " + "Latitude";
-            Results2.Text = lng.ToString() + " " + "Longitude";
+            string latitudeDeg = gc.Deg_DMS(latAnswerDeg);
+            string longitudeDeg = gc.Deg_DMS(lngAnswerDeg);
+            Results.Text = latitudeDeg + " " + "Latitude";
+            Results2.Text = longitudeDeg + " " + "Longitude";
             
         }
 
@@ -73,6 +81,7 @@ namespace WilliamsBestAF.Views
             LongitudeDeg2.Text = "";
             LongitudeMin2.Text = "";
             Results.Text = "";
+            Results2.Text = "";
             Distance.Text = "";
             TrueCourse.Text = "";
         }
