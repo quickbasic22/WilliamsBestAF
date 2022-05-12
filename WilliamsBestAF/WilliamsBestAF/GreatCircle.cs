@@ -49,9 +49,19 @@ namespace WilliamsBestAF
             double lat2 = Deg_Radians(LatDeg2);
             double long2 = Deg_Radians(LongDeg2);
 
-            double result = Math.Acos(Math.Sin(lat1) * Math.Sin(lat2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Cos(long1 - long2));
-            result = Math.Round(result, 1);
-            return result;
+            double result = Math.Sin(lat1) * Math.Sin(lat2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Cos(long1 - long2);
+            double resultAnswer = Math.Acos(result);
+
+            double first = Math.Sin((lat1 - lat2) / 2);
+            double second = Math.Pow(Math.Sqrt(first), 2);
+            double third = Math.Cos(lat1) * Math.Cos(lat2);
+            double fourth = Math.Pow(Math.Sin(long1 - long2) / 2, 2);
+            double fifth = second + third;
+            double sixth = fourth * fifth;
+
+            double resultAccAnswer = 2 * Math.Asin(sixth);
+            string thisResult = resultAccAnswer.ToString();
+            return resultAccAnswer;
         }
         public string ViewableMileage_AtHeight(double heightFeet)
         {
@@ -116,7 +126,7 @@ namespace WilliamsBestAF
             return (Math.PI / 180) * degrees;
         }
 
-        public double CourseBetweenPoints(double latDeg, double lngDeg, double lat2Deg, double lng2Deg)
+        public double CourseBetweenPoints(double distance, double latDeg, double lngDeg, double lat2Deg, double lng2Deg)
         {
             double lat1Radians = DegreesToRadians(latDeg);
             double lng1Radians = DegreesToRadians(lngDeg);
@@ -124,7 +134,7 @@ namespace WilliamsBestAF
             double lng2Radians = DegreesToRadians(lng2Deg);
 
             double tc1 = 0;
-            double distance = GreatCircle_Calculation(latDeg, lngDeg, lat2Deg, lng2Deg);
+                     
 
             if (Math.Cos(lat1Radians) < 0.00010)
                 if (lat1Radians > 0)

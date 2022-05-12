@@ -18,7 +18,7 @@ namespace WilliamsBestAF.Views
             gc = new WilliamsBestAF.GreatCircle();
         }
 
-        private async void ComputeCourse_Clicked(object sender, EventArgs e)
+        private void ComputeCourse_Clicked(object sender, EventArgs e)
         {
             double latDeg1 = double.Parse(LatitudeDeg1.Text);
             double latMin1 = double.Parse(LatitudeMin1.Text);
@@ -32,6 +32,7 @@ namespace WilliamsBestAF.Views
             double latMin3 = double.Parse(DLatitudeMin1.Text);
             double lngDeg3 = double.Parse(DLongitudeDeg1.Text);
             double lngMin3 = double.Parse(DLongitudeMin1.Text);
+            double distance1 = double.Parse(Ddistance1.Text);
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, 0);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, 0);
             double lat2Degs = gc.DMS_Degrees(latDeg2, latMin2, 0);
@@ -51,15 +52,14 @@ namespace WilliamsBestAF.Views
 
             //double thisLat = double.Parse(thisLatString);
             //double thisLng = double.Parse(thisLngString);
-            double thisLat = lat3Degs;
-            double thisLng = lng3Degs;
-
-            double dist_AD = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, thisLat, thisLng);
-            double crs_AD = gc.CourseBetweenPoints(lat1Radians, lng1Radians, thisLat, thisLng);
-            double crs_AB = gc.CourseBetweenPoints(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
+                       
+            double dist_AD = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat3Degs, lng3Degs);
+            double dist_AB = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat2Degs, lng2Degs);
+            double crs_AD = gc.CourseBetweenPoints(dist_AD, lat1Degs, lng1Degs, lat3Degs, lng3Degs);
+            double crs_AB = gc.CourseBetweenPoints(dist_AB, lat1Degs, lng1Degs, lat2Degs, lng2Degs);
+            
 
             XTD = Math.Asin(Math.Sin(dist_AD) * Math.Sin(crs_AD - crs_AB));
-
             // positive XTD means right of course, negative means left
             // If the point A is the N. or S. Pole replace crs_AD-crs_AB with lon_D-lon_B or lon_B-lon_D respectively
 
@@ -67,7 +67,7 @@ namespace WilliamsBestAF.Views
             double ATD = Math.Acos(Math.Cos(dist_AD) / Math.Cos(XTD));
 
             // For very short distances:
-            double ATD2 = Math.Asin(Math.Sqrt((Math.Sin(Math.Pow(dist_AD, 2)) - Math.Sin(Math.Pow(XTD, 2))) / Math.Cos(XTD)));
+            double ATD2 = Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(Math.Pow(dist_AD, 2)), 2) - Math.Pow(Math.Sin(XTD), 2) / Math.Cos(XTD)));
             string directionFromCourse = "";
             if (ATD > 0)
             {
@@ -97,6 +97,15 @@ namespace WilliamsBestAF.Views
             LongitudeDeg2.Text = "";
             LongitudeMin2.Text = "";
             Results.Text = "";
+            DLatitudeDeg1.Text = "";
+            DLatitudeMin1.Text = "";
+            DLongitudeDeg1.Text = "";
+            DLongitudeMin1.Text = "";
+            Location1.Text = "";
+            Location2.Text = "";
+            Location3.Text = "";
+            Ddistance1.Text = "";
+
         }
     }
 }

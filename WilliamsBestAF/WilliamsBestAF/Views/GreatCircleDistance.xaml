@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WilliamsBestAF.Views.CrossTrackError"
-             Title="Cross Track Error">
+             x:Class="WilliamsBestAF.Views.GreatCircleDistance">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -17,12 +16,6 @@
                 <Entry x:Name="LongitudeDeg2" Text="73" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 2" PlaceholderColor="LightBlue" />
                 <Entry x:Name="LongitudeMin2" Text="47" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 2"  PlaceholderColor="LightCoral" />
                 <BoxView HeightRequest="5" Color="Red" />
-                <Entry x:Name="Location3" Text="PointD" BackgroundColor="Indigo" HorizontalTextAlignment="Center" />
-                <Entry x:Name="Ddistance1" Text="100" FontAttributes="Bold,Italic" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 1" PlaceholderColor="LightBlue" />
-                <Entry x:Name="DLatitudeDeg1" Text="34" FontAttributes="Bold,Italic" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 1" PlaceholderColor="LightBlue" />
-                <Entry x:Name="DLatitudeMin1" Text="30" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 1"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="DLongitudeDeg1" Text="116" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 1" PlaceholderColor="LightBlue" />
-                <Entry x:Name="DLongitudeMin1" Text="30" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 1"  PlaceholderColor="LightCoral" />
                 <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="ComputeCourse_Clicked" />
                 <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Course in Degrees" PlaceholderColor="Chartreuse" />
                 <Button x:Name="ClearAll" Text="Clear All Textboxes" Clicked="ClearAll_Clicked" />
