@@ -40,11 +40,7 @@ namespace WilliamsBestAF.Views
             double lng2Radians = gc.Deg_Radians(lng2Degs);
             double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat2Degs, lng2Degs);
 
-            double distanceNauticalMiles = gc.RadiansToNauticalMiles(distance);
-            double distanceMiles = gc.NauticalMilesToMiles(distanceNauticalMiles);
-
-
-            Results.Text = distanceMiles.ToString() + " " + " miles";
+            Results.Text = distance.ToString() + " " + " miles";
         }
 
         private void ClearAll_Clicked(object sender, EventArgs e)

@@ -52,16 +52,13 @@ namespace WilliamsBestAF
             double result = Math.Sin(lat1) * Math.Sin(lat2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Cos(long1 - long2);
             double resultAnswer = Math.Acos(result);
 
-            double first = Math.Sin((lat1 - lat2) / 2);
-            double second = Math.Pow(Math.Sqrt(first), 2);
-            double third = Math.Cos(lat1) * Math.Cos(lat2);
-            double fourth = Math.Pow(Math.Sin(long1 - long2) / 2, 2);
-            double fifth = second + third;
-            double sixth = fourth * fifth;
+            double precisionAnswer = 2 * Math.Asin(Math.Sqrt((Math.Pow(Math.Sin((lat1 - lat2) / 2), 2) + Math.Cos(lat1) * Math.Cos(lat2) *(Math.Sin(Math.Pow((long1 - long2) / 2, 2))))));
 
-            double resultAccAnswer = 2 * Math.Asin(sixth);
-            string thisResult = resultAccAnswer.ToString();
-            return resultAccAnswer;
+            
+            double resultNauticalMiles = RadiansToNauticalMiles(precisionAnswer);
+            double resultMiles = NauticalMilesToMiles(resultNauticalMiles);
+
+            return resultMiles;
         }
         public string ViewableMileage_AtHeight(double heightFeet)
         {
