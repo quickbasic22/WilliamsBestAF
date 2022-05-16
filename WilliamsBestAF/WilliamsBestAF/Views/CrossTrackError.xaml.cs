@@ -32,7 +32,6 @@ namespace WilliamsBestAF.Views
             double latMin3 = double.Parse(DLatitudeMin1.Text);
             double lngDeg3 = double.Parse(DLongitudeDeg1.Text);
             double lngMin3 = double.Parse(DLongitudeMin1.Text);
-            double distance1 = double.Parse(Ddistance1.Text);
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, 0);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, 0);
             double lat2Degs = gc.DMS_Degrees(latDeg2, latMin2, 0);
@@ -71,18 +70,21 @@ namespace WilliamsBestAF.Views
             string directionFromCourse = "";
             if (ATD > 0)
             {
-                directionFromCourse = "right of course";
+                directionFromCourse = "Nautical Miles right of course";
             }
             else if (ATD < 0)
             {
-                directionFromCourse = "left of course";
+                directionFromCourse = "Nautical Miles left of course";
             }
             else
             {
                 directionFromCourse = "On Course";
             }
 
-            Results.Text = ATD.ToString() + " " + directionFromCourse;
+            double NauticalMileResult = gc.RadiansToNauticalMiles(XTD);
+            double AlongTrackDistance = gc.RadiansToNauticalMiles(ATD);
+            ResultsAlongCourse.Text = AlongTrackDistance.ToString() + " " + "Nautical Miles Along course";
+            Results.Text = NauticalMileResult.ToString() + " " + directionFromCourse;
             
         }
 
@@ -97,6 +99,7 @@ namespace WilliamsBestAF.Views
             LongitudeDeg2.Text = "";
             LongitudeMin2.Text = "";
             Results.Text = "";
+            ResultsAlongCourse.Text = "";
             DLatitudeDeg1.Text = "";
             DLatitudeMin1.Text = "";
             DLongitudeDeg1.Text = "";
@@ -104,7 +107,6 @@ namespace WilliamsBestAF.Views
             Location1.Text = "";
             Location2.Text = "";
             Location3.Text = "";
-            Ddistance1.Text = "";
 
         }
     }

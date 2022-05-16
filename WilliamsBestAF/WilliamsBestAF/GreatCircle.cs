@@ -54,11 +54,8 @@ namespace WilliamsBestAF
 
             double precisionAnswer = 2 * Math.Asin(Math.Sqrt((Math.Pow(Math.Sin((lat1 - lat2) / 2), 2) + Math.Cos(lat1) * Math.Cos(lat2) *(Math.Sin(Math.Pow((long1 - long2) / 2, 2))))));
 
-            
-            double resultNauticalMiles = RadiansToNauticalMiles(precisionAnswer);
-            double resultMiles = NauticalMilesToMiles(resultNauticalMiles);
 
-            return resultMiles;
+            return precisionAnswer;
         }
         public string ViewableMileage_AtHeight(double heightFeet)
         {
@@ -144,9 +141,9 @@ namespace WilliamsBestAF
             }
             else
                 tc1 = 2 * Math.PI - Math.Acos((Math.Sin(lat2Radians) - Math.Sin(lat1Radians) * Math.Cos(distance)) / (Math.Sin(distance) * Math.Cos(lat1Radians)));
-            double CourseDegrees = Math.Round(RadiansToDegrees(tc1), 0);
+            // double CourseDegrees = Math.Round(RadiansToDegrees(tc1), 0);
 
-            return CourseDegrees;
+            return tc1;
         }
 
         public async System.Threading.Tasks.Task<string[]> Get_Cooridates(object sender, EventArgs e)

@@ -30,6 +30,7 @@
     </Shell.Resources>
 
     <TabBar>
+        <ShellContent Title="Distance Through Earth" Icon="icon_about.png" Route="DistanceThroughEarth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
         <ShellContent Title="Great Circle Distance" Icon="icon_about.png" Route="GreatCircleDistance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
         <ShellContent Title="Course Between Points" Icon="icon_about.png" Route="CourseBetweenPoints" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
         <ShellContent Title="Latitude Of Point On GC" Icon="icon_about.png" Route="LatitudeOfPointOnGC" ContentTemplate="{DataTemplate local:LatitudeOfPointOnGC}" />

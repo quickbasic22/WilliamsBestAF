@@ -70,5 +70,30 @@ namespace WilliamsBestAF.Views
             LongitudeMin2.Text = "";
 
         }
+
+        private void ReverseComputeCourse_Clicked(object sender, EventArgs e)
+        {
+
+            var latdeg1 = LatitudeDeg1.Text;
+            var latmin1 = LatitudeMin1.Text;
+            var longdeg1 = LongitudeDeg1.Text;
+            var longmin1 = LongitudeMin1.Text;
+
+            var latdeg2 = LatitudeDeg2.Text;
+            var latmin2 = LatitudeMin2.Text;
+            var longdeg2 = LongitudeDeg2.Text;
+            var longmin2 = LongitudeMin2.Text;
+
+            LatitudeDeg2.Text = latdeg1;
+            LatitudeMin2.Text = latmin1;
+            LongitudeDeg2.Text = longdeg1;
+            LongitudeMin2.Text = longmin1;
+
+            LatitudeDeg1.Text = latdeg2;
+            LatitudeMin1.Text = latmin2;
+            LongitudeDeg1.Text = longdeg2;
+            LongitudeMin1.Text = longmin2;
+            ComputeCourse_Clicked(this, null);
+        }
     }
 }

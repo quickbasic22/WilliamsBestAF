@@ -18,6 +18,7 @@
                 <Entry x:Name="LongitudeMin2" Text="47" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 2"  PlaceholderColor="LightCoral" />
                 <BoxView HeightRequest="5" Color="Red" />
                 <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="ComputeCourse_Clicked" />
+                <Button x:Name="ReverseComputeCourse" Text="Reverse Compute Course" Clicked="ReverseComputeCourse_Clicked" />
                 <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Course in Degrees" PlaceholderColor="Chartreuse" />
                 <Button x:Name="ClearAll" Text="Clear All Textboxes" Clicked="ClearAll_Clicked" />
             </StackLayout>
