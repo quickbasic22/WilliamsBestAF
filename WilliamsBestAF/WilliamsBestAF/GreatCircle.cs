@@ -55,7 +55,7 @@ namespace WilliamsBestAF
             double precisionAnswer = 2 * Math.Asin(Math.Sqrt((Math.Pow(Math.Sin((lat1 - lat2) / 2), 2) + Math.Cos(lat1) * Math.Cos(lat2) *(Math.Sin(Math.Pow((long1 - long2) / 2, 2))))));
 
 
-            return precisionAnswer;
+            return resultAnswer;
         }
         public string ViewableMileage_AtHeight(double heightFeet)
         {

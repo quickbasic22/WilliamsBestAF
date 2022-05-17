@@ -17,7 +17,8 @@ namespace WilliamsBestAF.ViewModels
         {
             LocationInformation = new ObservableCollection<LocationInfo>()
             {
-               new LocationInfo() { Id = 1, Name = "Eustis, Florida", Latitude = 28.881541, Longitude = -81.703742},
+                new LocationInfo() {Id = 0, Name = "Select A Location", Latitude = 0, Longitude = 0 },
+                new LocationInfo() { Id = 1, Name = "Eustis, Florida", Latitude = 28.881541, Longitude = -81.703742},
                 new LocationInfo() { Id = 2, Name = "Los Angeles", Latitude = 34.05349, Longitude = -118.24532},
                 new LocationInfo() { Id = 3, Name = "Miami", Latitude = 25.775084, Longitude = -80.1947},
                 new LocationInfo() { Id = 4, Name = "New York City", Latitude = 40.71455, Longitude = -74.00712},

@@ -52,9 +52,8 @@ namespace WilliamsBestAF.Views
             double latmx = Math.Acos(Math.Abs(Math.Sin(tc) * Math.Cos(lat)));
             bool EqualParts = Math.Sin(tc1) * Math.Cos(lat1Radians) == Math.Sin(tc2) * Math.Cos(lat2Radians);
 
-
-            double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat3Degs, lng3Degs);
-        }
+            Results.Text = latmx.ToString() + " " + EqualParts.ToString();
+        } 
 
         private void ClearAll_Clicked(object sender, EventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,11 +27,15 @@ namespace WilliamsBestAF.Views
             double lat2 = double.Parse(LatDegrees2.Text);
             double lng2 = double.Parse(LongDegrees2.Text);
             double distancethroughearth = gc.GetDistantThroughEarth(lat, lng, lat2, lng2);
-            ResultDistance.Text = distancethroughearth.ToString();
+            double distancethroughearthRounded = Math.Round(distancethroughearth, 0);
+            ResultDistance.Text = distancethroughearthRounded.ToString() + " " + "Miles";
             double gcdistance = gc.GreatCircle_Calculation(lat, lng, lat2, lng2);
-            GreatCircleDistance.Text = gcdistance.ToString();
-            double GCThroughEarthDifference = gcdistance - distancethroughearth;
-            ThroughGroundGreatCircleDifference.Text = GCThroughEarthDifference.ToString();
+            double gcdistanceNM = gc.RadiansToNauticalMiles(gcdistance);
+            double gcdistanceMiles = gc.NauticalMilesToMiles(gcdistanceNM);
+            double gcdistanceMilesRounded = Math.Round(gcdistanceMiles, 0);
+            GreatCircleDistance.Text = gcdistanceMilesRounded.ToString() + " " + "Miles";
+            double GCThroughEarthDifference = gcdistanceMilesRounded - distancethroughearthRounded;
+            ThroughGroundGreatCircleDifference.Text = GCThroughEarthDifference.ToString() + " " + "Miles";
         }
 
         private void LocationPicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -50,6 +55,9 @@ namespace WilliamsBestAF.Views
                 LongDegrees2.Text = location.Longitude.ToString();
                 Location2.Text = location.Name;
             }
+
+            Debug.WriteLine(location.Name);
+            Debug.WriteLine(LocationPicker.SelectedIndex);
         }
 
         private void ClearTextButton_Clicked(object sender, EventArgs e)
@@ -60,6 +68,16 @@ namespace WilliamsBestAF.Views
             LongDegrees2.Text = "";
             Location1.Text = "";
             Location2.Text = "";
+            LocationPicker.Title = "Pick a location";
+            ResultDistance.Text = "";
+            GreatCircleDistance.Text = "";
+            ThroughGroundGreatCircleDifference.Text = "";
+        }
+
+        
+        private void LocationPicker_Unfocused(object sender, FocusEventArgs e)
+        {
+            LocationPicker.Title = "Pick a location";
         }
     }
 }

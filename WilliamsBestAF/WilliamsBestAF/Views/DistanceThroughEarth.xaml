@@ -9,18 +9,18 @@
                 <Frame BackgroundColor="#2196F3" Padding="5" CornerRadius="0">
                     <Label Text="Distance Throught Earth" HorizontalTextAlignment="Center" TextColor="White" FontSize="16"/>
                 </Frame>
-                <Label x:Name="Location1" Text="" FontSize="Large" TextColor="Blue" BackgroundColor="AliceBlue" />
+                <Entry x:Name="Location1" Text="" FontSize="Large" TextColor="Blue" BackgroundColor="AliceBlue" />
                 <Entry x:Name="LatDegrees1" Text="28.88138889" />
                 <Entry x:Name="LongDegrees1" Text="-81.7033333" />
-                <Label x:Name="Location2" Text="" FontSize="Large" TextColor="Blue" BackgroundColor="AliceBlue" />
+                <Entry x:Name="Location2" Text="" FontSize="Large" TextColor="Blue" BackgroundColor="AliceBlue" />
                 <Entry x:Name="LatDegrees2" Text="-28.881531" />
                 <Entry x:Name="LongDegrees2" Text="98.296264" />
                 <Button x:Name="Calculate" Text="Calculate" Clicked="Calculate_Clicked" />
                 <Entry x:Name="ResultDistance" FontSize="Large" Placeholder="Distance Through Earth in Miles" />
-                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" />
+                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" Unfocused="LocationPicker_Unfocused" />
                 <Button x:Name="ClearTextButton" Text="Clear Text" FontSize="Small" TextColor="YellowGreen" Clicked="ClearTextButton_Clicked" WidthRequest="100" />
-                <Label x:Name="GreatCircleDistance" FontSize="Large" TextColor="Blue" BackgroundColor="PaleVioletRed" />
-                <Label x:Name="ThroughGroundGreatCircleDifference" FontSize="Large" TextColor="Violet" BackgroundColor="MediumPurple" />
+                <Entry x:Name="GreatCircleDistance" FontSize="Large" TextColor="Blue" BackgroundColor="PaleVioletRed" Placeholder="Great Circle Distance Miles" PlaceholderColor="PaleVioletRed" />
+                <Entry x:Name="ThroughGroundGreatCircleDifference" FontSize="Large" TextColor="Violet" BackgroundColor="MediumPurple" Placeholder="Through ground Difference" PlaceholderColor="LightCoral" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
