@@ -2,11 +2,244 @@
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
+using static System.Math;
 
 namespace WilliamsBestAF
 {
     public class GreatCircle
     { 
+        public double ClairautsFormula(double lat1,double lng1,double lat2,double lng2)
+        {
+                      
+            double lat1Radians = Deg_Radians(lat1);
+            double lng1Radians = Deg_Radians(lng1);
+            double lat2Radians = Deg_Radians(lat2);
+            double lng2Radians = Deg_Radians(lng2);
+            double tc = 0;
+            double lat = 0;
+            double tc1 = 0;
+            double tc2 = 0;
+            double latmx = Math.Acos(Math.Abs(Math.Sin(tc) * Math.Cos(lat)));
+            bool EqualParts = Math.Sin(tc1) * Math.Cos(lat1Radians) == Math.Sin(tc2) * Math.Cos(lat2Radians);
+
+            string result = latmx.ToString() + " " + EqualParts.ToString();
+            return 25.0;
+        }
+
+        public double CrossingParallels(double lat1, double lng1, double lat2, double lng2, double lat3, double lng3)
+        {
+           
+            double lat1Radians = Deg_Radians(lat1);
+            double lng1Radians = Deg_Radians(lng1);
+            double lat2Radians = Deg_Radians(lat2);
+            double lng2Radians = Deg_Radians(lng2);
+            double lat3Radians = Deg_Radians(lat3);
+            double lng3Radians = Deg_Radians(lng3);
+            string stringResult = "";
+            double dlon = 0;
+            double lon3_1 = 0;
+            double lon3_2 = 0;
+            double distance = GreatCircle_Calculation(lat1, lng1, lat2, lng2);
+
+            double l12 = lng1Radians - lng2Radians;
+            double A = Math.Sin(lat1Radians) * Math.Cos(lat2Radians) * Math.Cos(lat3Radians) * Math.Sin(l12);
+            double B = Math.Sin(lat1Radians) * Math.Cos(lat2Radians) * Math.Cos(lat3Radians) * Math.Cos(l12) - Math.Cos(lat1Radians) * Math.Sin(lat2Radians) * Math.Cos(lat3Radians);
+            double C = Math.Cos(lat1Radians) * Math.Cos(lat2Radians) * Math.Sin(lat3Radians) * Math.Sin(l12);
+            double lon = Math.Atan2(B, A);      // (atan2(y, x) convention)
+            if (Math.Abs(C) > Math.Sqrt(Math.Pow(A, 2) + Math.Pow(B, 2)))
+            {
+                stringResult = "no crossing";
+            }
+
+            else
+            {
+                dlon = Math.Acos(C / Math.Sqrt(Math.Pow(A, 2) + Math.Pow(B, 2)));
+                lon3_1 = (lng1Radians + dlon + lon + Math.PI % 2 * Math.PI) - Math.PI;
+                lon3_2 = (lng1Radians - dlon + lon + Math.PI % 2 * Math.PI) - Math.PI;
+            }
+
+            string strResult = !String.IsNullOrEmpty(stringResult) ? stringResult : string.Empty;
+            return 15.0;
+
+                       
+        }
+
+        public double CrossTrackError(double lat1, double lng1, double lat2, double lng2, double lat3, double lng3)
+        {
+            
+
+            double lat1Radians = Deg_Radians(lat1);
+            double lng1Radians = Deg_Radians(lng1);
+            double lat2Radians = Deg_Radians(lat2);
+            double lng2Radians = Deg_Radians(lng2);
+            double XTD = 0;
+            // string[] dist_ADString = await gc.Get_Cooridates(this, null);
+
+            //string thisLatString = dist_ADString[0];
+            //string thisLngString = dist_ADString[1];
+
+            //double thisLat = double.Parse(thisLatString);
+            //double thisLng = double.Parse(thisLngString);
+
+            double dist_AD = GreatCircle_Calculation(lat1, lng1, lat3, lng3);
+            double dist_AB = GreatCircle_Calculation(lat1, lng1, lat2, lng2);
+            double crs_AD = CourseBetweenPoints(dist_AD, lat1, lng1, lat3, lng3);
+            double crs_AB = CourseBetweenPoints(dist_AB, lat1, lng1, lat2, lng2);
+
+
+            XTD = Math.Asin(Math.Sin(dist_AD) * Math.Sin(crs_AD - crs_AB));
+            // positive XTD means right of course, negative means left
+            // If the point A is the N. or S. Pole replace crs_AD-crs_AB with lon_D-lon_B or lon_B-lon_D respectively
+
+            // The "along track distance", ATD, the distance from A along the course towards B to the point abeam D is given by:
+            double ATD = Math.Acos(Math.Cos(dist_AD) / Math.Cos(XTD));
+
+            // For very short distances:
+            double ATD2 = Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(Math.Pow(dist_AD, 2)), 2) - Math.Pow(Math.Sin(XTD), 2) / Math.Cos(XTD)));
+            string directionFromCourse = "";
+            if (ATD > 0)
+            {
+                directionFromCourse = "Nautical Miles right of course";
+            }
+            else if (ATD < 0)
+            {
+                directionFromCourse = "Nautical Miles left of course";
+            }
+            else
+            {
+                directionFromCourse = "On Course";
+            }
+
+            double NauticalMileResult = RadiansToNauticalMiles(XTD);
+            double AlongTrackDistance = RadiansToNauticalMiles(ATD);
+            string results = AlongTrackDistance.ToString() + " " + "Nautical Miles Along course";
+            string results2 = NauticalMileResult.ToString() + " " + directionFromCourse;
+            return 15.0;
+        }
+        public double IntermediatePointsOnAGreatCircle(double f,double lat1,double lng1, double lat2,double lng2)
+        {     
+            double lat1Radians = Deg_Radians(lat1);
+            double lng1Radians = Deg_Radians(lng1);
+            double lat2Radians = Deg_Radians(lat2);
+            double lng2Radians = Deg_Radians(lng2);
+            double d = GreatCircle_Calculation(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
+
+            double A = Math.Sin((1 - f) * d) / Math.Sin(d);
+            double B = Math.Sin(f * d) / Math.Sin(d);
+            double x = A * Math.Cos(lat1Radians) * Math.Cos(lng1Radians) + B * Math.Cos(lat2Radians) * Math.Cos(lng2Radians);
+            double y = A * Math.Cos(lat1Radians) * Math.Sin(lng1Radians) + B * Math.Cos(lat2Radians) * Math.Sin(lng2Radians);
+            double z = A * Math.Sin(lat1Radians) + B * Math.Sin(lat2Radians);
+            double lat = Math.Atan2(z, Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)));
+            double lon = Math.Atan2(y, x);
+            double latDD = RadiansToDegrees(lat);
+            double lonDD = RadiansToDegrees(lon);
+            string latDMS = Deg_DMS(latDD);
+            string lonDMS = Deg_DMS(lonDD);
+
+            string results = latDMS + " " + "Latitude" + " " + lonDMS + " " + "Longitude";
+            return 15.0;
+        }
+
+        public double IntersectingRadials(double lat1, double lng1, double lat2, double lng2)
+        {
+           
+            
+            double lat1Radians = Deg_Radians(lat1);
+            double lng1Radians = Deg_Radians(lng1);
+            double lat2Radians = Deg_Radians(lat2);
+            double lng2Radians = Deg_Radians(lng2);
+            double lat3;
+            double l12;
+            double A;
+            double B;
+            double C;
+            double lon;
+            double dlon;
+            double lon3_1;
+            double lon3_2;
+
+            double distance = GreatCircle_Calculation(lat1, lng1, lat2, lng2);
+
+            lat3 = 36 * PI / 180;
+            l12 = lng1Radians - lng2Radians;
+            A = Sin(lat1Radians) * Cos(lat2Radians) * Cos(lat3) * Sin(l12);
+            B = Sin(lat1Radians) * Cos(lat2Radians) * Cos(lat3) * Cos(l12) - Cos(lat1Radians) * Sin(lat2Radians) * Cos(lat3);
+            C = Cos(lat1Radians) * Cos(lat2Radians) * Sin(lat3) * Sin(l12);
+            lon = Atan2(B, A);
+
+            var answer = Abs(C) > Sqrt(Pow(A, 2) + Pow(B, 2)) ? Abs(C) : Sqrt(Pow(A, 2) + Pow(B, 2));
+            dlon = Acos(C / Sqrt(Pow(A, 2) + Pow(B, 2)));
+            lon3_1 = (lng1Radians + dlon + lon + PI % 2 * PI) - PI;
+            lon3_2 = (lng1Radians - dlon + lon + PI % 2 * PI) - PI;
+            // lon3_1 lies between lon1 and lon2, but lon3_2 does not, so the 36 degree parallel is crossed once between LAX and JFK at lon3_1
+
+            double answerInDegrees = RadiansToDegrees(lon3_1);
+
+            string results = answerInDegrees.ToString() + " " + "degrees longitude";
+            return 15.0;
+        }
+
+        public double LatitudeLongitudeGivenRadialAndDistance(double distance,double course,double lat1, double lng1, double lat2, double lng2)
+        {
+            double distanceMiles = MilesToNauticalMiles(distance);
+            double distancetxt = NauticalMilesToRadians(distanceMiles);
+            double lat1Radians = Deg_Radians(lat1);
+            double lng1Radians = Deg_Radians(lng1);
+            double lat2Radians = Deg_Radians(lat2);
+            double lng2Radians = Deg_Radians(lng2);
+            double truecourse = Deg_Radians(course);
+            double lat;
+            double lng;
+            double dlon;
+
+            // distances 1/4 around globe
+
+            lat = Math.Asin(Math.Sin(lat1Radians) * Math.Cos(distance) + Math.Cos(lat1Radians) * Math.Sin(distance) * Math.Cos(truecourse));
+
+            if (Math.Cos(lat) == 0)
+                lng = lng1Radians;
+            else
+                lng = (lng1Radians - Math.Asin(Math.Sin(truecourse) * Math.Sin(distance) / Math.Cos(lat)) + Math.PI % (2 * Math.PI)) - Math.PI;
+
+            // distances greater use this
+            lat2 = Math.Asin(Math.Sin(lat1Radians) * Math.Cos(distance) + Math.Cos(lat1Radians) * Math.Sin(distance) * Math.Cos(truecourse));
+            dlon = Math.Atan2(Math.Sin(truecourse) * Math.Sin(distance) * Math.Cos(lat1Radians), Math.Cos(distance) - Math.Sin(lat1Radians) * Math.Sin(lat));
+            lng2 = (lng1Radians - dlon + Math.PI % 2 * Math.PI) - Math.PI;
+            double latAnswerDeg = RadiansToDegrees(lat);
+            double lngAnswerDeg = RadiansToDegrees(lng);
+
+            string latitudeDeg = Deg_DMS(latAnswerDeg);
+            string longitudeDeg = Deg_DMS(lngAnswerDeg);
+            string results = latitudeDeg + " " + "Latitude";
+            string results2 = longitudeDeg + " " + "Longitude";
+            return 15.0;
+        }
+
+        public double LatitudeOfPointOnGC(double lngDeg3,double lngMin3,double lat1, double lng1, double lat2, double lng2, double lat3, double lng3)
+        {
+            
+            double lat1Radians = Deg_Radians(lat1);
+            double lng1Radians = Deg_Radians(lng1);
+            double lat2Radians = Deg_Radians(lat2);
+            double lng2Radians = Deg_Radians(lng2);
+            double lng3Radians = Deg_Radians(lng3);
+            double lat = 0;
+
+            if (Math.Sin(lng1Radians - lng2Radians) != 0)
+            {
+                lat = Math.Atan((Math.Sin(lat1Radians) * Math.Cos(lat2Radians) * Math.Sin(lng3Radians - lng2Radians) - Math.Sin(lat2Radians) * Math.Cos(lat1Radians) * Math.Sin(lng3Radians - lng1Radians)) / (Math.Cos(lat1Radians) * Math.Cos(lat2Radians) * Math.Sin(lng1Radians - lng2Radians)));
+            }
+            else
+                lat = 0;
+
+            double resultInDegrees = RadiansToDegrees(lat);
+            string resultDegreesMin = Deg_DMS(resultInDegrees);
+
+            string results = resultDegreesMin.ToString() + " " + "Latitude";    
+            string results2 = lngDeg3.ToString() + " " + lngMin3.ToString() + " 0" + " Longitude";
+            return 15.0;
+        }
+
         public double DMS_Degrees(double deg, double min, double sec)
         {
             double answer = deg + (min / 60) + (sec / 3600);

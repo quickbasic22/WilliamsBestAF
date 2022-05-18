@@ -17,7 +17,7 @@
                 <Entry x:Name="LongDegrees2" Text="98.296264" />
                 <Button x:Name="Calculate" Text="Calculate" Clicked="Calculate_Clicked" />
                 <Entry x:Name="ResultDistance" FontSize="Large" Placeholder="Distance Through Earth in Miles" />
-                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" Unfocused="LocationPicker_Unfocused" />
+                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" />
                 <Button x:Name="ClearTextButton" Text="Clear Text" FontSize="Small" TextColor="YellowGreen" Clicked="ClearTextButton_Clicked" WidthRequest="100" />
                 <Entry x:Name="GreatCircleDistance" FontSize="Large" TextColor="Blue" BackgroundColor="PaleVioletRed" Placeholder="Great Circle Distance Miles" PlaceholderColor="PaleVioletRed" />
                 <Entry x:Name="ThroughGroundGreatCircleDifference" FontSize="Large" TextColor="Violet" BackgroundColor="MediumPurple" Placeholder="Through ground Difference" PlaceholderColor="LightCoral" />

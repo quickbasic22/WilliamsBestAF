@@ -74,10 +74,5 @@ namespace WilliamsBestAF.Views
             ThroughGroundGreatCircleDifference.Text = "";
         }
 
-        
-        private void LocationPicker_Unfocused(object sender, FocusEventArgs e)
-        {
-            LocationPicker.Title = "Pick a location";
-        }
     }
 }

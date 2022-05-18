@@ -19,6 +19,9 @@
     <EmbeddedResource Update="Views\ClairautsFormula.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\CooridatesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\CourseBetweenPoints.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -30,6 +33,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\DistanceThroughEarth.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GreatCircleCooridates.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\GreatCircleDistance.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WilliamsBestAF.Views.CooridatesPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <CheckBox x:Name="CheckedDD" CheckedChanged="CheckedDD_CheckedChanged" />
+                <Entry x:Name="Location1" Text="LAX" BackgroundColor="Indigo" HorizontalTextAlignment="Center" />
+                <Entry x:Name="LatitudeDeg1" Text="33" FontAttributes="Bold,Italic" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LatitudeMin1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LatitudeSec1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeDeg1" Text="118" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LongitudeMin1" Text="24" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeSec1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="Location2" Text="JFK" FontAttributes="Bold,Italic" BackgroundColor="Indigo" HorizontalTextAlignment="Center" />
+                <Entry x:Name="LatitudeDeg2" Text="40" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 2" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LatitudeMin2" Text="38" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 2"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LatitudeSec2" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeDeg2" Text="73" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 2" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LongitudeMin2" Text="47" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 2"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeSec2" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 2"  PlaceholderColor="LightCoral" />
+                <BoxView HeightRequest="5" Color="Red" />
+                <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="Calculate_Clicked" />
+                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" />
+                <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Course in Degrees" PlaceholderColor="Chartreuse" />
+                <Button x:Name="ClearAll" Text="Clear All Textboxes" Clicked="ClearAll_Clicked" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
