@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WilliamsBestAF.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,9 +19,9 @@ namespace WilliamsBestAF.Views
         {
             InitializeComponent();
             gc = new GreatCircle();
-            BindingContext = new ViewModels.GreatCircleViewModel();
         }
 
+       
         private void LocationPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
@@ -45,12 +46,14 @@ namespace WilliamsBestAF.Views
 
         private void Calculate_Clicked(object sender, EventArgs e)
         {
+            string location1 = Location1.Text;
             double latDeg1 = double.Parse(LatitudeDeg1.Text);
             double latMin1 = double.Parse(LatitudeMin1.Text);
             double latSec1 = double.Parse(LatitudeSec1.Text);
             double lngDeg1 = double.Parse(LongitudeDeg1.Text);
             double lngMin1 = double.Parse(LongitudeMin1.Text);
             double lngSec1 = double.Parse(LongitudeSec1.Text);
+            string location2 = Location2.Text;
             double latDeg2 = double.Parse(LatitudeDeg2.Text);
             double latMin2 = double.Parse(LatitudeMin2.Text);
             double latSec2 = double.Parse(LatitudeSec2.Text);
@@ -67,6 +70,11 @@ namespace WilliamsBestAF.Views
             double lat2Radians = gc.Deg_Radians(lat2Degs);
             double lng2Radians = gc.Deg_Radians(lng2Degs);
             double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat2Degs, lng2Degs);
+
+
+            Shell.Current.GoToAsync($"{nameof(AppSelectorPage)}?{nameof(ViewModels.AppSelectorPageViewModel.lat1)}={lat1Radians}&{nameof(ViewModels.AppSelectorPageViewModel.lng1)}={lng1Radians})&{nameof(ViewModels.AppSelectorPageViewModel.lat2)}={lat2Radians}&{nameof(ViewModels.AppSelectorPageViewModel.lng2)}={lng2Radians}");
+             //   await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+
         }
 
         private void CheckedDD_CheckedChanged(object sender, CheckedChangedEventArgs e)
