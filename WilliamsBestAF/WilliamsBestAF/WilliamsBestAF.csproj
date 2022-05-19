@@ -16,6 +16,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\LatitudeLongitudeGivenRadialAndDistance.xaml.cs">
+      <DependentUpon>LatitudeLongitudeGivenRadialAndDistance.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\AppSelectorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ClairautsFormula.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -46,7 +55,7 @@
     <EmbeddedResource Update="Views\IntersectingRadials.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LatitudeLongitudeGiveRadialAndDistance.xaml">
+    <EmbeddedResource Update="Views\LatitudeLongitudeGivenRadialAndDistance.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LatitudeOfPointOnGC.xaml">

@@ -30,13 +30,14 @@
     </Shell.Resources>
 
     <TabBar>
+        <ShellContent Title="App Selector Page" Icon="icon_about.png" Route="AppSelectorPage" ContentTemplate="{DataTemplate local:AppSelectorPage}" />
         <ShellContent Title="Cooridates Page" Icon="icon_about.png" Route="CooridatesPage" ContentTemplate="{DataTemplate local:CooridatesPage}" />
         <ShellContent Title="Great Circle Cooridates" Icon="icon_about.png" Route="GreatCircleCooridates" ContentTemplate="{DataTemplate local:GreatCircleCooridates}" />
         <ShellContent Title="Distance Through Earth" Icon="icon_about.png" Route="DistanceThroughEarth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
         <ShellContent Title="Great Circle Distance" Icon="icon_about.png" Route="GreatCircleDistance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
         <ShellContent Title="Course Between Points" Icon="icon_about.png" Route="CourseBetweenPoints" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
         <ShellContent Title="Latitude Of Point On GC" Icon="icon_about.png" Route="LatitudeOfPointOnGC" ContentTemplate="{DataTemplate local:LatitudeOfPointOnGC}" />
-        <ShellContent Title="Latitude Longitude Given Radial And Distance" Icon="icon_about.png" Route="LatitudeLongitudeGiveRadialAndDistance" ContentTemplate="{DataTemplate local:LatitudeLongitudeGiveRadialAndDistance}" />
+        <ShellContent Title="Latitude Longitude Given Radial And Distance" Icon="icon_about.png" Route="LatitudeLongitudeGivenRadialAndDistance" ContentTemplate="{DataTemplate local:LatitudeLongitudeGivenRadialAndDistance}" />
         <ShellContent Title="IntersectingRadials" Icon="icon_about.png" Route="IntersectingRadials" ContentTemplate="{DataTemplate local:IntersectingRadials}" />
         <ShellContent Title="ClairautsFormula" Icon="icon_about.png" Route="ClairautsFormula" ContentTemplate="{DataTemplate local:ClairautsFormula}" />
         <ShellContent Title="Crossing Parallels" Icon="icon_about.png" Route="CrossingParallels" ContentTemplate="{DataTemplate local:CrossingParallels}" />

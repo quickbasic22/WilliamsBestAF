@@ -4,8 +4,7 @@
              x:Class="WilliamsBestAF.Views.GreatCircleCooridates">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
+            <Label Text="Great Circle Cooridates"
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
