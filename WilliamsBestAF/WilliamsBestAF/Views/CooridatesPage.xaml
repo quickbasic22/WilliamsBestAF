@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:WilliamsBestAF.ViewModels"
+             x:DataType="viewmodels:CooridatesPageViewModel"
              x:Class="WilliamsBestAF.Views.CooridatesPage">
+    <ContentPage.BindingContext>
+        <viewmodels:CooridatesPageViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -22,7 +27,7 @@
                 <Entry x:Name="LongitudeSec2" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 2"  PlaceholderColor="LightCoral" />
                 <BoxView HeightRequest="5" Color="Red" />
                 <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="Calculate_Clicked" />
-                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" />
+                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" />
                 <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Course in Degrees" PlaceholderColor="Chartreuse" />
                 <Button x:Name="ClearAll" Text="Clear All Textboxes" Clicked="ClearAll_Clicked" />
             </StackLayout>

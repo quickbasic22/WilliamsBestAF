@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WilliamsBestAF.Model;
 using WilliamsBestAF.ViewModels;
 
 using Xamarin.Forms;
@@ -19,47 +20,25 @@ namespace WilliamsBestAF.Views
         {
             InitializeComponent();
             gc = new GreatCircle();
+            BindingContext = new CooridatesPageViewModel();
         }
-
        
-        private void LocationPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var picker = (Picker)sender;
-            var location = (Model.LocationInfo)picker.SelectedItem;
-
-            if (LatitudeDeg1.Text == "")
-            {
-                LatitudeDeg1.Text = location.Latitude.ToString();
-                LongitudeDeg1 .Text = location.Longitude.ToString();
-                Location1.Text = location.Name;
-            }
-            else
-            {
-                LatitudeDeg2.Text = location.Latitude.ToString();
-                LongitudeDeg2.Text = location.Longitude.ToString();
-                Location2.Text = location.Name;
-            }
-
-            Debug.WriteLine(location.Name);
-            Debug.WriteLine(LocationPicker.SelectedIndex);
-        }
-
         private async void Calculate_Clicked(object sender, EventArgs e)
         {
-            string location1 = Location1.Text;
-            double latDeg1 = double.Parse(LatitudeDeg1.Text);
-            double latMin1 = double.Parse(LatitudeMin1.Text);
-            double latSec1 = double.Parse(LatitudeSec1.Text);    
-            double lngDeg1 = double.Parse(LongitudeDeg1.Text);
-            double lngMin1 = double.Parse(LongitudeMin1.Text);
-            double lngSec1 = double.Parse(LongitudeSec1.Text);
-            string location2 = Location2.Text;
-            double latDeg2 = double.Parse(LatitudeDeg2.Text);
-            double latMin2 = double.Parse(LatitudeMin2.Text);
-            double latSec2 = double.Parse(LatitudeSec2.Text);
-            double lngDeg2 = double.Parse(LongitudeDeg2.Text);
-            double lngMin2 = double.Parse(LongitudeMin2.Text);
-            double lngSec2 = double.Parse(LongitudeSec2.Text);
+            string location1 = Location1?.Text;
+            double latDeg1 = double.Parse(LatitudeDeg1?.Text);
+            double latMin1 = double.Parse(LatitudeMin1?.Text);
+            double latSec1 = double.Parse(LatitudeSec1?.Text);    
+            double lngDeg1 = double.Parse(LongitudeDeg1?.Text);
+            double lngMin1 = double.Parse(LongitudeMin1?.Text);
+            double lngSec1 = double.Parse(LongitudeSec1?.Text);
+            string location2 = Location2?.Text;
+            double latDeg2 = double.Parse(LatitudeDeg2?.Text);
+            double latMin2 = double.Parse(LatitudeMin2?.Text);
+            double latSec2 = double.Parse(LatitudeSec2?.Text);
+            double lngDeg2 = double.Parse(LongitudeDeg2?.Text);
+            double lngMin2 = double.Parse(LongitudeMin2?.Text);
+            double lngSec2 = double.Parse(LongitudeSec2?.Text);
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, latSec1);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, lngSec1);
             double lat2Degs = gc.DMS_Degrees(latDeg2, latMin2, latSec2);
@@ -127,13 +106,39 @@ namespace WilliamsBestAF.Views
             LatitudeDeg1.Text = "";
             LatitudeMin1.Text = "";
             LatitudeSec1.Text = "";
+            LongitudeDeg1.Text = "";
+            LongitudeMin1.Text = "";
+            LongitudeSec1.Text = "";
             Location2.Text = "";
             LatitudeDeg2.Text = "";
             LatitudeMin2.Text = "";
             LatitudeSec2.Text = "";
+            LongitudeDeg2.Text = "";
+            LongitudeMin2.Text = "";
+            LongitudeSec2.Text = "";
 
             Results.Text = "";
+            
 
+        }
+
+        private void LocationPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var Picker = (Picker)sender;
+            var location = (LocationInfo)Picker.SelectedItem;
+           
+            if (LatitudeDeg1.Text == "")
+            {
+                LatitudeDeg1.Text = location.Latitude.ToString();
+                LongitudeDeg1.Text = location.Longitude.ToString();
+                Location1.Text = location.Name;
+            }
+            else
+            {
+                LatitudeDeg2.Text = location.Latitude.ToString();
+                LongitudeDeg2.Text = location.Longitude.ToString();
+                Location2.Text = location.Name;
+            }
         }
     }
 }
