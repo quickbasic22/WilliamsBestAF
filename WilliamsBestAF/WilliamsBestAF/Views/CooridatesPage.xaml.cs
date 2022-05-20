@@ -44,12 +44,12 @@ namespace WilliamsBestAF.Views
             Debug.WriteLine(LocationPicker.SelectedIndex);
         }
 
-        private void Calculate_Clicked(object sender, EventArgs e)
+        private async void Calculate_Clicked(object sender, EventArgs e)
         {
             string location1 = Location1.Text;
             double latDeg1 = double.Parse(LatitudeDeg1.Text);
             double latMin1 = double.Parse(LatitudeMin1.Text);
-            double latSec1 = double.Parse(LatitudeSec1.Text);
+            double latSec1 = double.Parse(LatitudeSec1.Text);    
             double lngDeg1 = double.Parse(LongitudeDeg1.Text);
             double lngMin1 = double.Parse(LongitudeMin1.Text);
             double lngSec1 = double.Parse(LongitudeSec1.Text);
@@ -72,7 +72,7 @@ namespace WilliamsBestAF.Views
             double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat2Degs, lng2Degs);
 
 
-            Shell.Current.GoToAsync($"{nameof(AppSelectorPage)}?{nameof(ViewModels.AppSelectorPageViewModel.lat1)}={lat1Radians}&{nameof(ViewModels.AppSelectorPageViewModel.lng1)}={lng1Radians})&{nameof(ViewModels.AppSelectorPageViewModel.lat2)}={lat2Radians}&{nameof(ViewModels.AppSelectorPageViewModel.lng2)}={lng2Radians}");
+            await Shell.Current.GoToAsync($"{nameof(AppSelectorPage)}?{nameof(AppSelectorPageViewModel.Latitude1)}={lat1Radians}&{nameof(AppSelectorPageViewModel.Longitude1)}={lng1Radians}&{nameof(AppSelectorPageViewModel.Latitude2)}={lat2Radians}&{nameof(AppSelectorPageViewModel.Longitude2)}={lng2Radians}");
              //   await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
 
         }
@@ -84,15 +84,24 @@ namespace WilliamsBestAF.Views
 
                 LatitudeMin1.IsVisible = false;
                 LatitudeSec1.IsVisible = false;
+                LatitudeMin1.Text = "0";
+                LatitudeSec1.Text = "0";
                 
                 LongitudeMin1.IsVisible = false;
                 LongitudeSec1.IsVisible = false;
+                LongitudeMin1.Text = "0";
+                LongitudeSec1.Text = "0";
                 
                 LatitudeMin2.IsVisible = false;
                 LatitudeSec2.IsVisible = false;
-               
+                LatitudeMin2.Text = "0";
+                LatitudeSec2.Text = "0";
+
                 LongitudeMin2.IsVisible = false;
                 LongitudeSec2.IsVisible = false;
+                LongitudeMin2.Text = "0";
+                LongitudeSec2.Text = "0";
+
 
             }
             else 

@@ -1,15 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:vm="clr-namespace:WilliamsBestAF.ViewModels" x:DataType="vm:AppSelectorPageViewModel"
+             xmlns:vm="clr-namespace:WilliamsBestAF.ViewModels" 
+             x:DataType="vm:AppSelectorPageViewModel"
              x:Class="WilliamsBestAF.Views.AppSelectorPage">
+    <ContentPage.BindingContext>
+        <vm:AppSelectorPageViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Label Text="{Binding lat1, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
-                <Label Text="{Binding lng1, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
-                <Label Text="{Binding lat2, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
-                <Label Text="{Binding lng2, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
+                <Label Text="{Binding Latitude1, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
+                <Label Text="{Binding Longitude1, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
+                <Label Text="{Binding Latitude2, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
+                <Label Text="{Binding Longitude2, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
                 <Label Text="Clairauts Formula" FontSize="Large" BackgroundColor="LightBlue" />
                 <Button x:Name="ClairautsFormula" Text="ClairautsFormula" FontSize="Large" BackgroundColor="Red" Clicked="ClairautsFormula_Clicked" />
                 <Label Text="Cooridates Page" FontSize="Large" BackgroundColor="PowderBlue" />

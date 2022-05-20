@@ -30,8 +30,8 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="App Selector Page" Icon="icon_about.png" Route="AppSelectorPage" ContentTemplate="{DataTemplate local:AppSelectorPage}" />
         <ShellContent Title="Cooridates Page" Icon="icon_about.png" Route="CooridatesPage" ContentTemplate="{DataTemplate local:CooridatesPage}" />
+        <ShellContent Title="App Selector Page" Icon="icon_about.png" Route="AppSelectorPage" ContentTemplate="{DataTemplate local:AppSelectorPage}" />
         <ShellContent Title="Great Circle Cooridates" Icon="icon_about.png" Route="GreatCircleCooridates" ContentTemplate="{DataTemplate local:GreatCircleCooridates}" />
         <ShellContent Title="Distance Through Earth" Icon="icon_about.png" Route="DistanceThroughEarth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
         <ShellContent Title="Great Circle Distance" Icon="icon_about.png" Route="GreatCircleDistance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />

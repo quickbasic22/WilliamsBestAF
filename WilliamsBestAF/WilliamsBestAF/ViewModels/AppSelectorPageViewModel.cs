@@ -7,78 +7,64 @@ using Xamarin.Forms;
 
 namespace WilliamsBestAF.ViewModels
 {
-    [QueryProperty(nameof(lat1), nameof(lat1))]
-    [QueryProperty(nameof(lng1), nameof(lng1))]
-    [QueryProperty(nameof(lat2), nameof(lat2))]
-    [QueryProperty(nameof(lng2), nameof(lng2))]
-    public class AppSelectorPageViewModel : INotifyPropertyChanged
+    [QueryProperty(nameof(Latitude1), nameof(Latitude1))]
+    [QueryProperty(nameof(Longitude1), nameof(Longitude1))]
+    [QueryProperty(nameof(Latitude2), nameof(Latitude2))]
+    [QueryProperty(nameof(Longitude2), nameof(Longitude2))]
+    public class AppSelectorPageViewModel : BindableObject
     {
-        private double flat1;
-        private double flng1;
-        private double flat2;
-        private double flng2;
+        private double latitude1;
+        private double longitude1;
+        private double latitude2;
+        private double longitude2;
 
-        public double lat1
+        public double Latitude1
         {
             get
             {
-                return flat1;
+                return latitude1;
             }
             set
             {
-                flat1 = value;
+                latitude1 = value;
                 OnPropertyChanged();
             }
         }
-        public double lng1
+        public double Longitude1
         {
             get
             {
-                return flng1;
+                return longitude1;
             }
             set
             {
-                flng1 = value;
+                longitude1 = value;
                 OnPropertyChanged();
             }
         }
-        public double lat2 
+        public double Latitude2 
         {
             get
             {
-                return flat2;
+                return latitude2;
             }
             set
             {
-                flat2 = value;
+                latitude2 = value;
                 OnPropertyChanged();
             }
         }
-        public double lng2 
+        public double Longitude2 
         {
             get
             {
-                return flng2;
+                return longitude2;
             }
             set
             {
-                flng2 = value;
+                longitude2 = value;
                 OnPropertyChanged();
             }
         }
-
-        
-        #region INotifyPropertyChanged
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
     }
 }
