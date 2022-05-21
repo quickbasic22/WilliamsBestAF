@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using WilliamsBestAF.Model;
+using WilliamsBestAF.Views;
 using Xamarin.Forms;
 
 namespace WilliamsBestAF.ViewModels
@@ -35,8 +37,8 @@ namespace WilliamsBestAF.ViewModels
 
         public AppSelectorPageViewModel()
         {
-            ClairautsFormulaCommand = new Command(async () => await Shell.Current.GoToAsync("\\ClairautsFormula", true));
-            CooridatesPageCommand = new Command(async () => await Shell.Current.GoToAsync("CooridatesPage"));
+            ClairautsFormulaCommand = new Command(async () => await Shell.Current.GoToAsync($@"\\AppSelectorPage\ClairautsFormula\", true));
+            CooridatesPageCommand = new Command(async () => await Shell.Current.GoToAsync($@"{nameof(AppSelectorPage)}?{nameof(AppSelectorPageViewModel.Latitude1)}={Latitude1}&{nameof(AppSelectorPageViewModel.Longitude1)}={Longitude1}&{nameof(AppSelectorPageViewModel.Latitude2)}={Latitude2}&{nameof(AppSelectorPageViewModel.Longitude2)}={Longitude2}"));
             CourseBetweenPointsCommand = new Command(async () => await Shell.Current.GoToAsync("\\CourseBetweenPoints", true));
             CrossingParallelsCommand = new Command(async () => await Shell.Current.GoToAsync("\\CrossingParallels", true));
             CrossTrackErrorCommand = new Command(async () => await Shell.Current.GoToAsync("\\CrossTrackError", true));
@@ -48,7 +50,7 @@ namespace WilliamsBestAF.ViewModels
             LatitudeLongitudeGivenRadialAndDistanceCommand = new Command(async () => await Shell.Current.GoToAsync("\\LatitudeLongitudeGivenRadialAndDistance", true));
             LatitudeOfPointOnGCCommand = new Command(async () => await Shell.Current.GoToAsync("\\LatitudeOfPointOnGC", true));
             LocationInformation = new ObservableCollection<LocationInfo>()
-            {
+                {
                 new LocationInfo() { Id = 0, Name = "Select A Location", Latitude = 0, Longitude = 0 },
                 new LocationInfo() { Id = 1, Name = "Eustis, Florida", Latitude = 28.881541, Longitude = -81.703742},
                 new LocationInfo() { Id = 2, Name = "Los Angeles", Latitude = 34.05349, Longitude = -118.24532},
@@ -64,11 +66,12 @@ namespace WilliamsBestAF.ViewModels
                 new LocationInfo() { Id = 12, Name = "Dubai", Latitude = 25.20498, Longitude = 55.271057},
                 new LocationInfo() { Id = 13, Name = "Juneau Alaska", Latitude = 58.300323, Longitude = -134.41763},
                 new LocationInfo() { Id = 14, Name = "Bolivar Ohio", Latitude = 40.65014, Longitude = -81.45259}
-            };
+                };
+
         }
 
 
-             
+
 
         public double Latitude1
         {
@@ -94,7 +97,7 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
-        public double Latitude2 
+        public double Latitude2
         {
             get
             {
@@ -106,7 +109,7 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
-        public double Longitude2 
+        public double Longitude2
         {
             get
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using WilliamsBestAF.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,8 +11,8 @@ namespace WilliamsBestAF
 
         public App()
         {
-            InitializeComponent();
-            MainPage = new AppShell();
+                InitializeComponent();
+                MainPage = new AppShell();
         }
 
         protected override void OnStart()

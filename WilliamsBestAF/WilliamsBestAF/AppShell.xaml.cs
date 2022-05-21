@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using WilliamsBestAF.Views;
+using System.Diagnostics;
 
 namespace WilliamsBestAF
 {

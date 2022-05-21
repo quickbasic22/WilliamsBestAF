@@ -18,9 +18,9 @@ namespace WilliamsBestAF.Views
         GreatCircle gc;
         public CooridatesPage()
         {
-            InitializeComponent();
-            gc = new GreatCircle();
-            BindingContext = new CooridatesPageViewModel();
+                InitializeComponent();
+                gc = new GreatCircle();
+                BindingContext = new CooridatesPageViewModel(); 
         }
        
         private async void Calculate_Clicked(object sender, EventArgs e)

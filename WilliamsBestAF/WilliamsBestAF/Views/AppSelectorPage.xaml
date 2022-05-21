@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:vm="clr-namespace:WilliamsBestAF.ViewModels" 
              x:DataType="vm:AppSelectorPageViewModel"
-             x:Class="WilliamsBestAF.Views.AppSelectorPage">
+             x:Class="WilliamsBestAF.Views.AppSelectorPage"
+             Shell.PresentationMode="ModalAnimated">
     <ContentPage.BindingContext>
         <vm:AppSelectorPageViewModel />
     </ContentPage.BindingContext>

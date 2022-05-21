@@ -11,11 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Views\LatitudeLongitudeGivenRadialAndDistance.xaml.cs">
       <DependentUpon>LatitudeLongitudeGivenRadialAndDistance.xaml</DependentUpon>
     </Compile>
