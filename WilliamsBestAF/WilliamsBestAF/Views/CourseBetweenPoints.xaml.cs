@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +22,31 @@ namespace WilliamsBestAF.Views
 
         private void ComputeCourse_Clicked(object sender, EventArgs e)
         {
-            double latDeg1 = double.Parse(LatitudeDeg1.Text);
-            double latMin1 = double.Parse(LatitudeMin1.Text);
-            double lngDeg1 = double.Parse(LongitudeDeg1.Text);
-            double lngMin1 = double.Parse(LongitudeMin1.Text);
-            double latDeg2 = double.Parse(LatitudeDeg2.Text);
-            double latMin2 = double.Parse(LatitudeMin2.Text);
-            double lngDeg2 = double.Parse(LongitudeDeg2.Text);
-            double lngMin2 = double.Parse(LongitudeMin2.Text);
+            double latDeg1 = 0.0;
+            double latMin1 = 0.0;
+            double lngDeg1 = 0.0;
+            double lngMin1 = 0.0;
+            double latDeg2 = 0.0;
+            double latMin2 = 0.0;
+            double lngDeg2 = 0.0;
+            double lngMin2 = 0.0;
+
+            try
+            {
+                latDeg1 = double.Parse(LatitudeDeg1.Text);
+                latMin1 = double.Parse(LatitudeMin1.Text);
+                lngDeg1 = double.Parse(LongitudeDeg1.Text);
+                lngMin1 = double.Parse(LongitudeMin1.Text);
+                latDeg2 = double.Parse(LatitudeDeg2.Text);
+                latMin2 = double.Parse(LatitudeMin2.Text);
+                lngDeg2 = double.Parse(LongitudeDeg2.Text);
+                lngMin2 = double.Parse(LongitudeMin2.Text);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+           
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, 0);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, 0);
             double lat2Degs = gc.DMS_Degrees(latDeg2, latMin2, 0);
@@ -94,6 +112,50 @@ namespace WilliamsBestAF.Views
             LongitudeDeg1.Text = longdeg2;
             LongitudeMin1.Text = longmin2;
             ComputeCourse_Clicked(this, null);
+        }
+
+        private void CheckedDD_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (CheckedDD.IsChecked)
+            {
+
+                LatitudeMin1.IsVisible = false;
+                LatitudeSec1.IsVisible = false;
+                LatitudeMin1.Text = "0";
+                LatitudeSec1.Text = "0";
+
+                LongitudeMin1.IsVisible = false;
+                LongitudeSec1.IsVisible = false;
+                LongitudeMin1.Text = "0";
+                LongitudeSec1.Text = "0";
+
+                LatitudeMin2.IsVisible = false;
+                LatitudeSec2.IsVisible = false;
+                LatitudeMin2.Text = "0";
+                LatitudeSec2.Text = "0";
+
+                LongitudeMin2.IsVisible = false;
+                LongitudeSec2.IsVisible = false;
+                LongitudeMin2.Text = "0";
+                LongitudeSec2.Text = "0";
+
+
+            }
+            else
+            {
+
+                LatitudeMin1.IsVisible = true;
+                LatitudeSec1.IsVisible = true;
+
+                LongitudeMin1.IsVisible = true;
+                LongitudeSec1.IsVisible = true;
+
+                LatitudeMin2.IsVisible = true;
+                LatitudeSec2.IsVisible = true;
+
+                LongitudeMin2.IsVisible = true;
+                LongitudeSec2.IsVisible = true;
+            }
         }
     }
 }

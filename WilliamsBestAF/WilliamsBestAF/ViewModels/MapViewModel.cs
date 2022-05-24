@@ -9,7 +9,7 @@ namespace WilliamsBestAF.ViewModels
 {
     [QueryProperty(nameof(CoorLat), nameof(CoorLat))]
     [QueryProperty(nameof(CoorLong), nameof(CoorLong))]
-    public class MapViewModel : INotifyPropertyChanged
+    public class MapViewModel : BindableObject
     {
         private double coorlat;
         private double coorlong;
@@ -32,14 +32,6 @@ namespace WilliamsBestAF.ViewModels
             }
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
+       
     }
 }

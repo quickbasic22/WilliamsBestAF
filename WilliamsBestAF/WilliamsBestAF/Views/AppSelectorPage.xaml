@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:vm="clr-namespace:WilliamsBestAF.ViewModels" 
+             xmlns:sys="clr-namespace:System;assembly=Netstandard"
              x:DataType="vm:AppSelectorPageViewModel"
              x:Class="WilliamsBestAF.Views.AppSelectorPage"
              Shell.PresentationMode="ModalAnimated">
@@ -11,6 +12,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:DataType="vm:AppSelectorPageViewModel">
+                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Large" TextColor="Yellow" BackgroundColor="Blue" HorizontalTextAlignment="Center" />
                 <Label Text="{Binding Latitude1, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
                 <Label Text="{Binding Longitude1, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />
                 <Label Text="{Binding Latitude2, Mode=TwoWay}" FontSize="Large" BackgroundColor="Orange" />

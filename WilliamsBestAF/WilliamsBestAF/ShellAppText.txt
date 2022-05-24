@@ -1,0 +1,66 @@
+﻿<TabBar FlyoutIcon="xamarin_logo.png">
+        <Tab Title="Latitude Of Point On GC" Route="LatitudeOfPointOnGC" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Latitude Of Point On GC" Icon="icon_about.png" Route="LatitudeOfPointOnGC" ContentTemplate="{DataTemplate local:LatitudeOfPointOnGC}" />
+            <ShellContent x:Name="AppSelector" Title="App Selector Page" Icon="icon_about.png" Route="AppSelectorPage" ContentTemplate="{DataTemplate local:AppSelectorPage}" />
+        </Tab>
+        <Tab Title="Latitude Longitude Given Radian And Distance">
+            <ShellContent Title="Latitude Longitude Given Radial And Distance" Icon="icon_about.png" Route="LatitudeLongitudeGivenRadialAndDistance" ContentTemplate="{DataTemplate local:LatitudeLongitudeGivenRadialAndDistance}" />
+            <ShellContent Title="Cooridates Page" Icon="icon_about.png" Route="CooridatesPage" ContentTemplate="{DataTemplate local:CooridatesPage}" />
+        </Tab>
+        <Tab Title="Intersecting Radials" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="IntersectingRadials" Icon="icon_about.png" Route="IntersectingRadials" ContentTemplate="{DataTemplate local:IntersectingRadials}" />
+            <ShellContent Title="Course Between Points" Icon="icon_about.png" Route="CourseBetweenPoints" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
+        </Tab>
+        <Tab Title="Clairauts Formula" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="ClairautsFormula" Icon="icon_about.png" Route="ClairautsFormula" ContentTemplate="{DataTemplate local:ClairautsFormula}" />
+            <ShellContent Title="Great Circle Cooridates" Icon="icon_about.png" Route="GreatCircleCooridates" ContentTemplate="{DataTemplate local:GreatCircleCooridates}" />
+        </Tab>
+        <Tab Title="Crossing Parallels" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Crossing Parallels" Icon="icon_about.png" Route="CrossingParallels" ContentTemplate="{DataTemplate local:CrossingParallels}" />
+            <ShellContent Title="Distance Through Earth" Icon="icon_about.png" Route="DistanceThroughEarth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
+        </Tab>
+        <Tab Title="Intermediate Points On a Great Circle" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Intermediate Points On A GreatCircle" Icon="icon_about.png" Route="IntermediatePointsOnAGreatCircle" ContentTemplate="{DataTemplate local:IntermediatePointsOnAGreatCircle}" />
+            <ShellContent Title="Great Circle Distance" Icon="icon_about.png" Route="GreatCircleDistance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
+        </Tab>
+        <Tab Title="Cross Track Error" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Cross Track Error" Icon="icon_about.png" Route="CrossTrackError" ContentTemplate="{DataTemplate local:CrossTrackError}" />
+        </Tab>
+    </TabBar>
+
+
+    <TabBar FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Latitude Of Point On GC" Route="LatitudeOfPointOnGC" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Latitude Of Point On GC" Icon="icon_about.png" Route="LatitudeOfPointOnGC" ContentTemplate="{DataTemplate local:LatitudeOfPointOnGC}" />
+            <ShellContent x:Name="AppSelector" Title="App Selector Page" Icon="icon_about.png" Route="AppSelectorPage" ContentTemplate="{DataTemplate local:AppSelectorPage}" />
+        </Tab>
+        <Tab Title="Latitude Longitude Given Radian And Distance">
+            <ShellContent Title="Latitude Longitude Given Radial And Distance" Icon="icon_about.png" Route="LatitudeLongitudeGivenRadialAndDistance" ContentTemplate="{DataTemplate local:LatitudeLongitudeGivenRadialAndDistance}" />
+            <ShellContent Title="Cooridates Page" Icon="icon_about.png" Route="CooridatesPage" ContentTemplate="{DataTemplate local:CooridatesPage}" />
+        </Tab>
+        <Tab Title="Intersecting Radials" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="IntersectingRadials" Icon="icon_about.png" Route="IntersectingRadials" ContentTemplate="{DataTemplate local:IntersectingRadials}" />
+            <ShellContent Title="Course Between Points" Icon="icon_about.png" Route="CourseBetweenPoints" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
+        </Tab>
+        <Tab Title="Clairauts Formula" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="ClairautsFormula" Icon="icon_about.png" Route="ClairautsFormula" ContentTemplate="{DataTemplate local:ClairautsFormula}" />
+            <ShellContent Title="Great Circle Cooridates" Icon="icon_about.png" Route="GreatCircleCooridates" ContentTemplate="{DataTemplate local:GreatCircleCooridates}" />
+        </Tab>
+        <Tab Title="Crossing Parallels" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Crossing Parallels" Icon="icon_about.png" Route="CrossingParallels" ContentTemplate="{DataTemplate local:CrossingParallels}" />
+            <ShellContent Title="Distance Through Earth" Icon="icon_about.png" Route="DistanceThroughEarth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
+        </Tab>
+        <Tab Title="Intermediate Points On a Great Circle" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Intermediate Points On A GreatCircle" Icon="icon_about.png" Route="IntermediatePointsOnAGreatCircle" ContentTemplate="{DataTemplate local:IntermediatePointsOnAGreatCircle}" />
+            <ShellContent Title="Great Circle Distance" Icon="icon_about.png" Route="GreatCircleDistance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
+        </Tab>
+        <Tab Title="Cross Track Error" Route="IntersectingRadials" FlyoutIcon="icon_about.png">
+            <ShellContent Title="Cross Track Error" Icon="icon_about.png" Route="CrossTrackError" ContentTemplate="{DataTemplate local:CrossTrackError}" />
+        </Tab>
+    </TabBar>
+
+
+
+     <ShellContent Title="Cooridates Page" NavigationPage.BackButtonTitle="My Back Button" Route="CooridatesPage" ContentTemplate="{DataTemplate local:CooridatesPage}" IsEnabled="True" IsVisible="True" />
+    <ShellContent Title="Course Between Points" NavigationPage.BackButtonTitle="Another Back Button" Route="CourseBetweenPoints" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" IsEnabled="True" IsVisible="True" />
+

@@ -38,7 +38,7 @@ namespace WilliamsBestAF.ViewModels
         public AppSelectorPageViewModel()
         {
             ClairautsFormulaCommand = new Command(async () => await Shell.Current.GoToAsync($@"\\AppSelectorPage\ClairautsFormula\", true));
-            CooridatesPageCommand = new Command(async () => await Shell.Current.GoToAsync($@"{nameof(AppSelectorPage)}?{nameof(AppSelectorPageViewModel.Latitude1)}={Latitude1}&{nameof(AppSelectorPageViewModel.Longitude1)}={Longitude1}&{nameof(AppSelectorPageViewModel.Latitude2)}={Latitude2}&{nameof(AppSelectorPageViewModel.Longitude2)}={Longitude2}"));
+            CooridatesPageCommand = new Command(async () => await Shell.Current.GoToAsync($@"\\AppSelectorPage\AppSelectorPage?{nameof(AppSelectorPageViewModel.Latitude1)}={Latitude1}&{nameof(AppSelectorPageViewModel.Longitude1)}={Longitude1}&{nameof(AppSelectorPageViewModel.Latitude2)}={Latitude2}&{nameof(AppSelectorPageViewModel.Longitude2)}={Longitude2}"));
             CourseBetweenPointsCommand = new Command(async () => await Shell.Current.GoToAsync("\\CourseBetweenPoints", true));
             CrossingParallelsCommand = new Command(async () => await Shell.Current.GoToAsync("\\CrossingParallels", true));
             CrossTrackErrorCommand = new Command(async () => await Shell.Current.GoToAsync("\\CrossTrackError", true));

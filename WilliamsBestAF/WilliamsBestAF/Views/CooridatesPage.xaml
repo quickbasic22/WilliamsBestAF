@@ -11,14 +11,14 @@
         <ScrollView>
             <StackLayout>
                 <CheckBox x:Name="CheckedDD" CheckedChanged="CheckedDD_CheckedChanged" />
-                <Entry x:Name="Location1" Text="LAX" BackgroundColor="Indigo" HorizontalTextAlignment="Center" />
+                <Entry x:Name="Location1" Text="" BackgroundColor="Indigo" HorizontalTextAlignment="Center" />
                 <Entry x:Name="LatitudeDeg1" Text="33" FontAttributes="Bold,Italic" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 1" PlaceholderColor="LightBlue" />
                 <Entry x:Name="LatitudeMin1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 1"  PlaceholderColor="LightCoral" />
                 <Entry x:Name="LatitudeSec1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
                 <Entry x:Name="LongitudeDeg1" Text="118" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 1" PlaceholderColor="LightBlue" />
                 <Entry x:Name="LongitudeMin1" Text="24" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 1"  PlaceholderColor="LightCoral" />
                 <Entry x:Name="LongitudeSec1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 1"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="Location2" Text="JFK" FontAttributes="Bold,Italic" BackgroundColor="Indigo" HorizontalTextAlignment="Center" />
+                <Entry x:Name="Location2" Text="" FontAttributes="Bold,Italic" BackgroundColor="Indigo" HorizontalTextAlignment="Center" />
                 <Entry x:Name="LatitudeDeg2" Text="40" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 2" PlaceholderColor="LightBlue" />
                 <Entry x:Name="LatitudeMin2" Text="38" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 2"  PlaceholderColor="LightCoral" />
                 <Entry x:Name="LatitudeSec2" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
@@ -27,6 +27,7 @@
                 <Entry x:Name="LongitudeSec2" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 2"  PlaceholderColor="LightCoral" />
                 <BoxView HeightRequest="5" Color="Red" />
                 <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="Calculate_Clicked" />
+                <Button x:Name="ReverseComputeCourse" Text="Reverse Compute Course" Clicked="ReverseComputeCourse_Clicked" />
                 <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" />
                 <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Course in Degrees" PlaceholderColor="Chartreuse" />
                 <Button x:Name="ClearAll" Text="Clear All Textboxes" Clicked="ClearAll_Clicked" />

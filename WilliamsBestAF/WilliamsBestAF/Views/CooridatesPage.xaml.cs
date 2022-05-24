@@ -25,20 +25,44 @@ namespace WilliamsBestAF.Views
        
         private async void Calculate_Clicked(object sender, EventArgs e)
         {
-            string location1 = Location1?.Text;
-            double latDeg1 = double.Parse(LatitudeDeg1?.Text);
-            double latMin1 = double.Parse(LatitudeMin1?.Text);
-            double latSec1 = double.Parse(LatitudeSec1?.Text);    
-            double lngDeg1 = double.Parse(LongitudeDeg1?.Text);
-            double lngMin1 = double.Parse(LongitudeMin1?.Text);
-            double lngSec1 = double.Parse(LongitudeSec1?.Text);
-            string location2 = Location2?.Text;
-            double latDeg2 = double.Parse(LatitudeDeg2?.Text);
-            double latMin2 = double.Parse(LatitudeMin2?.Text);
-            double latSec2 = double.Parse(LatitudeSec2?.Text);
-            double lngDeg2 = double.Parse(LongitudeDeg2?.Text);
-            double lngMin2 = double.Parse(LongitudeMin2?.Text);
-            double lngSec2 = double.Parse(LongitudeSec2?.Text);
+            string location1 = "";
+            double latDeg1 = 0.0;
+            double latMin1 = 0.0;
+            double latSec1 = 0.0;
+            double lngDeg1 = 0.0;
+            double lngMin1 = 0.0;
+            double lngSec1 = 0.0;
+            string location2 = "";
+            double latDeg2 = 0.0;
+            double latMin2 = 0.0;
+            double latSec2 = 0.0;
+            double lngDeg2 = 0.0;
+            double lngMin2 = 0.0;
+            double lngSec2 = 0.0;
+
+            try
+            {
+                location1 = Location1.Text;
+                latDeg1 = double.Parse(LatitudeDeg1?.Text);
+                latMin1 = double.Parse(LatitudeMin1?.Text);
+                latSec1 = double.Parse(LatitudeSec1?.Text);
+                lngDeg1 = double.Parse(LongitudeDeg1?.Text);
+                lngMin1 = double.Parse(LongitudeMin1?.Text);
+                lngSec1 = double.Parse(LongitudeSec1?.Text);
+                location2 = Location2?.Text;
+                latDeg2 = double.Parse(LatitudeDeg2?.Text);
+                latMin2 = double.Parse(LatitudeMin2?.Text);
+                latSec2 = double.Parse(LatitudeSec2?.Text);
+                lngDeg2 = double.Parse(LongitudeDeg2?.Text);
+                lngMin2 = double.Parse(LongitudeMin2?.Text);
+                lngSec2 = double.Parse(LongitudeSec2?.Text);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            location1 = Location1?.Text;
+            
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, latSec1);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, lngSec1);
             double lat2Degs = gc.DMS_Degrees(latDeg2, latMin2, latSec2);
@@ -139,6 +163,30 @@ namespace WilliamsBestAF.Views
                 LongitudeDeg2.Text = location.Longitude.ToString();
                 Location2.Text = location.Name;
             }
+        }
+
+        private void ReverseComputeCourse_Clicked(object sender, EventArgs e)
+        {
+            var latdeg1 = LatitudeDeg1.Text;
+            var latmin1 = LatitudeMin1.Text;
+            var longdeg1 = LongitudeDeg1.Text;
+            var longmin1 = LongitudeMin1.Text;
+
+            var latdeg2 = LatitudeDeg2.Text;
+            var latmin2 = LatitudeMin2.Text;
+            var longdeg2 = LongitudeDeg2.Text;
+            var longmin2 = LongitudeMin2.Text;
+
+            LatitudeDeg2.Text = latdeg1;
+            LatitudeMin2.Text = latmin1;
+            LongitudeDeg2.Text = longdeg1;
+            LongitudeMin2.Text = longmin1;
+
+            LatitudeDeg1.Text = latdeg2;
+            LatitudeMin1.Text = latmin2;
+            LongitudeDeg1.Text = longdeg2;
+            LongitudeMin1.Text = longmin2;
+            Calculate_Clicked(this, null);
         }
     }
 }
