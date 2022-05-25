@@ -1,12 +1,14 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Android.Content;
+using Java.IO;
 
 namespace WilliamsBestAF.Droid
 {
+    [IntentFilter(new[] { Xamarin.Essentials.Platform.Intent.ActionAppAction },Categories = new[] { Android.Content.Intent.CategoryDefault })]
     [Activity(Label = "WilliamsBestAF", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -24,5 +26,13 @@ namespace WilliamsBestAF.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            Xamarin.Essentials.Platform.OnNewIntent(intent);
+        }
+
+        
     }
 }
