@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:WilliamsBestAF.ViewModels"
              x:DataType="viewmodels:CooridatesPageViewModel"
-             x:Class="WilliamsBestAF.Views.CooridatesPage">
+             x:Class="WilliamsBestAF.Views.CooridatesPage"
+             Title="Cooridates start page">
     <ContentPage.BindingContext>
         <viewmodels:CooridatesPageViewModel />
     </ContentPage.BindingContext>

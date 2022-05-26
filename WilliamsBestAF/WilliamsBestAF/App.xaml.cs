@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using WilliamsBestAF.Model;
 using WilliamsBestAF.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -10,12 +11,28 @@ namespace WilliamsBestAF
 {
     public partial class App : Application
     {
+        public static string DepartureName { get; set; }
+        public static double DepartureLatitude { get; set; }
+        public static double DepartureLongitude { get; set; }
+
+        public static string DestinationName { get; set; }
+        public static double DestinationLatitude { get; set; }
+        public static double DestinationLongitude { get; set; }
 
         public App()
         {
             InitializeComponent();
             MainPage = new AppShell();
             AppActions.OnAppAction += new EventHandler<AppActionEventArgs>(AppActions_OnAppAction);
+            Application.Current.Properties.Add("DepartureName", DepartureName);
+            Application.Current.Properties.Add("DepartureLatitude", DepartureLatitude);
+            Application.Current.Properties.Add("DepartureLongitude", DepartureLongitude);
+
+            Application.Current.Properties.Add("DestinationName", DepartureName);
+            Application.Current.Properties.Add("DestinationLatitude", DepartureLatitude);
+            Application.Current.Properties.Add("DestinationLongitude", DepartureLongitude);
+
+
         }
 
         private void AppActions_OnAppAction(object sender, AppActionEventArgs e)

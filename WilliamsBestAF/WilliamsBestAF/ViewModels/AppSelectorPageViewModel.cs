@@ -17,10 +17,17 @@ namespace WilliamsBestAF.ViewModels
     [QueryProperty(nameof(Longitude2), nameof(Longitude2))]
     public class AppSelectorPageViewModel : BindableObject
     {
+        private GreatCircle gc;
         private double latitude1;
         private double longitude1;
         private double latitude2;
         private double longitude2;
+        private string distancethroughearth;
+        private string differencethroughearthvsgreatcircledistance;
+        private string greatdircledistance;
+        private string departurelocation;
+        private string destinationlocation;
+
         public Command ClairautsFormulaCommand { get; set; }
         public Command CooridatesPageCommand { get; set; }
         public Command CourseBetweenPointsCommand { get; set; }
@@ -33,10 +40,12 @@ namespace WilliamsBestAF.ViewModels
         public Command IntersectingRadialsCommand { get; set; }
         public Command LatitudeLongitudeGivenRadialAndDistanceCommand { get; set; }
         public Command LatitudeOfPointOnGCCommand { get; set; }
+        public Command GetDistanceThroughEarth { get; set; }
         public ObservableCollection<LocationInfo> LocationInformation { get; set; }
 
         public AppSelectorPageViewModel()
         {
+            gc = new GreatCircle();
             ClairautsFormulaCommand = new Command(async () => await Shell.Current.GoToAsync($@"\\AppSelectorPage\ClairautsFormula\", true));
             CooridatesPageCommand = new Command(async () => await Shell.Current.GoToAsync($@"\\AppSelectorPage\AppSelectorPage?{nameof(AppSelectorPageViewModel.Latitude1)}={Latitude1}&{nameof(AppSelectorPageViewModel.Longitude1)}={Longitude1}&{nameof(AppSelectorPageViewModel.Latitude2)}={Latitude2}&{nameof(AppSelectorPageViewModel.Longitude2)}={Longitude2}"));
             CourseBetweenPointsCommand = new Command(async () => await Shell.Current.GoToAsync("\\CourseBetweenPoints", true));
@@ -49,6 +58,7 @@ namespace WilliamsBestAF.ViewModels
             IntersectingRadialsCommand = new Command(async () => await Shell.Current.GoToAsync("\\IntersectingRadials", true));
             LatitudeLongitudeGivenRadialAndDistanceCommand = new Command(async () => await Shell.Current.GoToAsync("\\LatitudeLongitudeGivenRadialAndDistance", true));
             LatitudeOfPointOnGCCommand = new Command(async () => await Shell.Current.GoToAsync("\\LatitudeOfPointOnGC", true));
+            
             LocationInformation = new ObservableCollection<LocationInfo>()
                 {
                 new LocationInfo() { Id = 0, Name = "Select A Location", Latitude = 0, Longitude = 0 },
@@ -67,11 +77,59 @@ namespace WilliamsBestAF.ViewModels
                 new LocationInfo() { Id = 13, Name = "Juneau Alaska", Latitude = 58.300323, Longitude = -134.41763},
                 new LocationInfo() { Id = 14, Name = "Bolivar Ohio", Latitude = 40.65014, Longitude = -81.45259}
                 };
+           
 
         }
+        public string GreatCircleDistance
+        {
+            get
+            {
+                return greatdircledistance = GetGreatCircleDistance(this, null);
+            }
+            set
+            {
+                greatdircledistance = value;
+                OnPropertyChanged();
+            }
+        }
+        public string DistanceThroughEarth
+        {
+            get
+            {
+                return distancethroughearth = GetDistance_Through_Earth(this, null);
+            }
+            set
+            {
+                distancethroughearth = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public string DifferenceThroughEarthVSGreatCircleDistance
+        {
+            get
+            {
+                return differencethroughearthvsgreatcircledistance = GetDifferenceThroughEarthVSGreatCircleDistance(this, null);
+            }
+            set
+            {
+                differencethroughearthvsgreatcircledistance = value;
+                OnPropertyChanged();
+            }
+        }
 
-
+        public string DepartureLocation
+        {
+            get
+            {
+                return departurelocation;
+            }
+            set
+            {
+                departurelocation = value;
+                OnPropertyChanged();
+            }
+        }
 
         public double Latitude1
         {
@@ -94,6 +152,19 @@ namespace WilliamsBestAF.ViewModels
             set
             {
                 longitude1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DestinationLocation
+        {
+            get
+            {
+                return destinationlocation;
+            }
+            set
+            {
+                destinationlocation = value;
                 OnPropertyChanged();
             }
         }
@@ -121,5 +192,39 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public string GetDistance_Through_Earth(object sender, EventArgs e)
+        {
+            double distancethroughearth = gc.GetDistantThroughEarth(Latitude1, Longitude1, Latitude2, Longitude2);
+            double distancethroughearthRounded = Math.Round(distancethroughearth, 0);
+            string ResultDistance = distancethroughearthRounded.ToString() + " " + "Miles";
+            return ResultDistance;
+        }
+
+        public string GetDifferenceThroughEarthVSGreatCircleDistance(object sender, EventArgs e)
+        {
+            double distancethroughearth = gc.GetDistantThroughEarth(Latitude1, Longitude1, Latitude2, Longitude2);
+            double distancethroughearthRounded = Math.Round(distancethroughearth, 0);
+            string ResultDistance = distancethroughearthRounded.ToString() + " " + "Miles";
+            double gcdistance = gc.GreatCircle_Calculation(Latitude1, Longitude1, Latitude2, Longitude2);
+            double gcdistanceNM = gc.RadiansToNauticalMiles(gcdistance);
+            double gcdistanceMiles = gc.NauticalMilesToMiles(gcdistanceNM);
+            double gcdistanceMilesRounded = Math.Round(gcdistanceMiles, 0);
+            string GreatCircleDistance = gcdistanceMilesRounded.ToString() + " " + "Miles";
+            double GCThroughEarthDifference = gcdistanceMilesRounded - distancethroughearthRounded;
+            string ThroughGroundGreatCircleDifference = GCThroughEarthDifference.ToString() + " " + "Miles";
+            return ThroughGroundGreatCircleDifference;
+        }
+
+        public string GetGreatCircleDistance(object sender, EventArgs e)
+        {
+            double distance = gc.GreatCircle_Calculation(Latitude1, Longitude1, Latitude2, Longitude2);
+            double distanceRounded = Math.Round(distance, 0);
+            double distanceNM = gc.RadiansToNauticalMiles(distanceRounded);
+            double distanceMiles = gc.NauticalMilesToMiles(distanceNM);
+            string ResultDistance = distanceMiles.ToString() + " " + "Miles";
+            return ResultDistance;
+        }
     }
+    
 }

@@ -16,11 +16,13 @@ namespace WilliamsBestAF.Views
     public partial class CooridatesPage : ContentPage
     {
         GreatCircle gc;
+        AppSelectorPageViewModel _viewModel;
+
         public CooridatesPage()
         {
                 InitializeComponent();
                 gc = new GreatCircle();
-                BindingContext = new CooridatesPageViewModel(); 
+            BindingContext = _viewModel = new AppSelectorPageViewModel();
         }
        
         private async void Calculate_Clicked(object sender, EventArgs e)
@@ -74,9 +76,16 @@ namespace WilliamsBestAF.Views
             double lng2Radians = gc.Deg_Radians(lng2Degs);
             double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat2Degs, lng2Degs);
 
+            Application.Current.Properties["DepartureName"] = Location1.Text;
+            Application.Current.Properties["DepartureLatitude"] = lat1Radians;
+            Application.Current.Properties["DepartureLongitude"] = lng1Radians;
 
-            await Shell.Current.GoToAsync($"{nameof(AppSelectorPage)}?{nameof(AppSelectorPageViewModel.Latitude1)}={lat1Radians}&{nameof(AppSelectorPageViewModel.Longitude1)}={lng1Radians}&{nameof(AppSelectorPageViewModel.Latitude2)}={lat2Radians}&{nameof(AppSelectorPageViewModel.Longitude2)}={lng2Radians}");
-             //   await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            Application.Current.Properties["DestinationName"] = Location2.Text;
+            Application.Current.Properties["DestinationLatitude"] = lat2Radians;
+            Application.Current.Properties["DestinationLongitude"] = lng2Radians;
+
+            await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(AppSelectorPageViewModel.Latitude1)}={lat1Radians}&{nameof(AppSelectorPageViewModel.Longitude1)}={lng1Radians}&{nameof(AppSelectorPageViewModel.Latitude2)}={lat2Radians}&{nameof(AppSelectorPageViewModel.Longitude2)}={lng2Radians}");
+             //   await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}")
 
         }
 

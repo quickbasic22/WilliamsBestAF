@@ -37,12 +37,13 @@
   
     <FlyoutItem Title="App Selector Page" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">
         <Tab Title="Cooridates Start Page">
-            <ShellContent Title="App Selector Page" Route="AppSelectorPage" ContentTemplate="{DataTemplate local:AppSelectorPage}" IsEnabled="True" IsVisible="True" />
+            <ShellContent Title="Cooridates Page" ContentTemplate="{DataTemplate local:CooridatesPage}" IsEnabled="True" IsVisible="True" />
+            <ShellContent Title="Great Circle Distance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
             <ShellContent Title="Course Between Points"  ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
         </Tab>
         <Tab Title="Distance Pages" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">
             <ShellContent Title="Distance Through Earth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
-            <ShellContent Title="Great Circle Distance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
+            
             <ShellContent Title="Course Between Points"  ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
         </Tab>
         <Tab Title="Calculation pages"  FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">

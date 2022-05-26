@@ -8,13 +8,8 @@ namespace WilliamsBestAF
 {
     public class GreatCircle
     { 
-        public double ClairautsFormula(double lat1,double lng1,double lat2,double lng2)
+        public double ClairautsFormula(double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians)
         {
-                      
-            double lat1Radians = Deg_Radians(lat1);
-            double lng1Radians = Deg_Radians(lng1);
-            double lat2Radians = Deg_Radians(lat2);
-            double lng2Radians = Deg_Radians(lng2);
             double tc = 0;
             double lat = 0;
             double tc1 = 0;
@@ -26,20 +21,13 @@ namespace WilliamsBestAF
             return 25.0;
         }
 
-        public double CrossingParallels(double lat1, double lng1, double lat2, double lng2, double lat3, double lng3)
+        public double CrossingParallels(double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians, double lat3Radians, double lng3Radians)
         {
-           
-            double lat1Radians = Deg_Radians(lat1);
-            double lng1Radians = Deg_Radians(lng1);
-            double lat2Radians = Deg_Radians(lat2);
-            double lng2Radians = Deg_Radians(lng2);
-            double lat3Radians = Deg_Radians(lat3);
-            double lng3Radians = Deg_Radians(lng3);
             string stringResult = "";
             double dlon = 0;
             double lon3_1 = 0;
             double lon3_2 = 0;
-            double distance = GreatCircle_Calculation(lat1, lng1, lat2, lng2);
+            double distance = GreatCircle_Calculation(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
 
             double l12 = lng1Radians - lng2Radians;
             double A = Math.Sin(lat1Radians) * Math.Cos(lat2Radians) * Math.Cos(lat3Radians) * Math.Sin(l12);
@@ -64,14 +52,8 @@ namespace WilliamsBestAF
                        
         }
 
-        public double CrossTrackError(double lat1, double lng1, double lat2, double lng2, double lat3, double lng3)
+        public double CrossTrackError(double lat1Radians,double lng1Radians,double lat2Radians,double lng2Radians, double lat3Radians, double lng3Radians)
         {
-            
-
-            double lat1Radians = Deg_Radians(lat1);
-            double lng1Radians = Deg_Radians(lng1);
-            double lat2Radians = Deg_Radians(lat2);
-            double lng2Radians = Deg_Radians(lng2);
             double XTD = 0;
             // string[] dist_ADString = await gc.Get_Cooridates(this, null);
 
@@ -81,10 +63,10 @@ namespace WilliamsBestAF
             //double thisLat = double.Parse(thisLatString);
             //double thisLng = double.Parse(thisLngString);
 
-            double dist_AD = GreatCircle_Calculation(lat1, lng1, lat3, lng3);
-            double dist_AB = GreatCircle_Calculation(lat1, lng1, lat2, lng2);
-            double crs_AD = CourseBetweenPoints(dist_AD, lat1, lng1, lat3, lng3);
-            double crs_AB = CourseBetweenPoints(dist_AB, lat1, lng1, lat2, lng2);
+            double dist_AD = GreatCircle_Calculation(lat1Radians, lng1Radians, lat3Radians, lng3Radians);
+            double dist_AB = GreatCircle_Calculation(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
+            double crs_AD = CourseBetweenPoints(dist_AD, lat1Radians, lng1Radians, lat3Radians, lng3Radians);
+            double crs_AB = CourseBetweenPoints(dist_AB, lat1Radians, lng1Radians, lat2Radians, lng2Radians);
 
 
             XTD = Math.Asin(Math.Sin(dist_AD) * Math.Sin(crs_AD - crs_AB));
@@ -116,12 +98,8 @@ namespace WilliamsBestAF
             string results2 = NauticalMileResult.ToString() + " " + directionFromCourse;
             return 15.0;
         }
-        public double IntermediatePointsOnAGreatCircle(double f,double lat1,double lng1, double lat2,double lng2)
+        public double IntermediatePointsOnAGreatCircle(double f,double lat1Radians,double lng1Radians, double lat2Radians,double lng2Radians)
         {     
-            double lat1Radians = Deg_Radians(lat1);
-            double lng1Radians = Deg_Radians(lng1);
-            double lat2Radians = Deg_Radians(lat2);
-            double lng2Radians = Deg_Radians(lng2);
             double d = GreatCircle_Calculation(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
 
             double A = Math.Sin((1 - f) * d) / Math.Sin(d);
@@ -140,14 +118,8 @@ namespace WilliamsBestAF
             return 15.0;
         }
 
-        public double IntersectingRadials(double lat1, double lng1, double lat2, double lng2)
+        public double IntersectingRadials(double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians)
         {
-           
-            
-            double lat1Radians = Deg_Radians(lat1);
-            double lng1Radians = Deg_Radians(lng1);
-            double lat2Radians = Deg_Radians(lat2);
-            double lng2Radians = Deg_Radians(lng2);
             double lat3;
             double l12;
             double A;
@@ -158,7 +130,7 @@ namespace WilliamsBestAF
             double lon3_1;
             double lon3_2;
 
-            double distance = GreatCircle_Calculation(lat1, lng1, lat2, lng2);
+            double distance = GreatCircle_Calculation(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
 
             lat3 = 36 * PI / 180;
             l12 = lng1Radians - lng2Radians;
@@ -179,14 +151,10 @@ namespace WilliamsBestAF
             return 15.0;
         }
 
-        public double LatitudeLongitudeGivenRadialAndDistance(double distance,double course,double lat1, double lng1, double lat2, double lng2)
+        public double LatitudeLongitudeGivenRadialAndDistance(double distance,double course, double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians)
         {
             double distanceMiles = MilesToNauticalMiles(distance);
             double distancetxt = NauticalMilesToRadians(distanceMiles);
-            double lat1Radians = Deg_Radians(lat1);
-            double lng1Radians = Deg_Radians(lng1);
-            double lat2Radians = Deg_Radians(lat2);
-            double lng2Radians = Deg_Radians(lng2);
             double truecourse = Deg_Radians(course);
             double lat;
             double lng;
@@ -202,9 +170,9 @@ namespace WilliamsBestAF
                 lng = (lng1Radians - Math.Asin(Math.Sin(truecourse) * Math.Sin(distance) / Math.Cos(lat)) + Math.PI % (2 * Math.PI)) - Math.PI;
 
             // distances greater use this
-            lat2 = Math.Asin(Math.Sin(lat1Radians) * Math.Cos(distance) + Math.Cos(lat1Radians) * Math.Sin(distance) * Math.Cos(truecourse));
+            double lat2 = Math.Asin(Math.Sin(lat1Radians) * Math.Cos(distance) + Math.Cos(lat1Radians) * Math.Sin(distance) * Math.Cos(truecourse));
             dlon = Math.Atan2(Math.Sin(truecourse) * Math.Sin(distance) * Math.Cos(lat1Radians), Math.Cos(distance) - Math.Sin(lat1Radians) * Math.Sin(lat));
-            lng2 = (lng1Radians - dlon + Math.PI % 2 * Math.PI) - Math.PI;
+            double lng2 = (lng1Radians - dlon + Math.PI % 2 * Math.PI) - Math.PI;
             double latAnswerDeg = RadiansToDegrees(lat);
             double lngAnswerDeg = RadiansToDegrees(lng);
 
@@ -215,14 +183,8 @@ namespace WilliamsBestAF
             return 15.0;
         }
 
-        public double LatitudeOfPointOnGC(double lngDeg3,double lngMin3,double lat1, double lng1, double lat2, double lng2, double lat3, double lng3)
+        public double LatitudeOfPointOnGC(double lngDeg3,double lngMin3, double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians,double lat3Radians,double lng3Radians)
         {
-            
-            double lat1Radians = Deg_Radians(lat1);
-            double lng1Radians = Deg_Radians(lng1);
-            double lat2Radians = Deg_Radians(lat2);
-            double lng2Radians = Deg_Radians(lng2);
-            double lng3Radians = Deg_Radians(lng3);
             double lat = 0;
 
             if (Math.Sin(lng1Radians - lng2Radians) != 0)
@@ -275,13 +237,8 @@ namespace WilliamsBestAF
             string result = $"{IntegerWithSign} {MinIntegerPart} {Sec}";
             return result;
         }
-        public double GreatCircle_Calculation(double LatDeg1, double LongDeg1, double LatDeg2, double LongDeg2)
+        public double GreatCircle_Calculation(double lat1, double long1, double lat2, double long2)
         {
-            double lat1 = Deg_Radians(LatDeg1);
-            double long1 = Deg_Radians(LongDeg1);
-            double lat2 = Deg_Radians(LatDeg2);
-            double long2 = Deg_Radians(LongDeg2);
-
             double result = Math.Sin(lat1) * Math.Sin(lat2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Cos(long1 - long2);
             double resultAnswer = Math.Acos(result);
 
@@ -323,13 +280,8 @@ namespace WilliamsBestAF
             return new double[] { Lat, Long };
         }
 
-        public double GetDistantThroughEarth(double latDeg, double lngDeg, double latDeg2, double lngDeg2)
+        public double GetDistantThroughEarth(double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians)
         {
-            double lat1Radians = Deg_Radians(latDeg);
-            double lng1Radians = Deg_Radians(lngDeg);
-            double lat2Radians = Deg_Radians(latDeg2);
-            double lng2Radians = Deg_Radians(lngDeg2);
-
             double X = Math.Cos(lat1Radians) * Math.Cos(lng1Radians);
             double Y = Math.Cos(lat1Radians) * Math.Sin(lng1Radians);
             double Z = Math.Sin(lat1Radians);
@@ -353,13 +305,8 @@ namespace WilliamsBestAF
             return (Math.PI / 180) * degrees;
         }
 
-        public double CourseBetweenPoints(double distance, double latDeg, double lngDeg, double lat2Deg, double lng2Deg)
+        public double CourseBetweenPoints(double distance, double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians)
         {
-            double lat1Radians = DegreesToRadians(latDeg);
-            double lng1Radians = DegreesToRadians(lngDeg);
-            double lat2Radians = DegreesToRadians(lat2Deg);
-            double lng2Radians = DegreesToRadians(lng2Deg);
-
             double tc1 = 0;
                      
 

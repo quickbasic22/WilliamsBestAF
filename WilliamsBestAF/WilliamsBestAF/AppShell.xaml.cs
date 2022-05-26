@@ -11,12 +11,12 @@ namespace WilliamsBestAF
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(AppSelectorPage), typeof(AppSelectorPage));
             Routing.RegisterRoute(nameof(CooridatesPage), typeof(CooridatesPage));
-            Routing.RegisterRoute(nameof(GreatCircleCooridates), typeof(GreatCircleCooridates));
-            Routing.RegisterRoute(nameof(DistanceThroughEarth), typeof(DistanceThroughEarth));
             Routing.RegisterRoute(nameof(GreatCircleDistance), typeof(GreatCircleDistance));
             Routing.RegisterRoute(nameof(CourseBetweenPoints), typeof(CourseBetweenPoints));
+            Routing.RegisterRoute(nameof(AppSelectorPage), typeof(AppSelectorPage));
+            Routing.RegisterRoute(nameof(GreatCircleCooridates), typeof(GreatCircleCooridates));
+            Routing.RegisterRoute(nameof(DistanceThroughEarth), typeof(DistanceThroughEarth));
             Routing.RegisterRoute(nameof(LatitudeOfPointOnGC), typeof(LatitudeOfPointOnGC));
             Routing.RegisterRoute(nameof(LatitudeLongitudeGivenRadialAndDistance), typeof(LatitudeLongitudeGivenRadialAndDistance));
             Routing.RegisterRoute(nameof(IntersectingRadials), typeof(IntersectingRadials));
