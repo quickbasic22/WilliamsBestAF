@@ -14,7 +14,7 @@ namespace WilliamsBestAF.ViewModels
     [QueryProperty(nameof(Latitude2), nameof(Latitude2))]
     [QueryProperty(nameof(Longitude2), nameof(Longitude2))]
     public class CooridatesPageViewModel : BindableObject
-    {
+    { 
         private double latitude1;
         private double longitude1;
         private double latitude2;
@@ -90,7 +90,8 @@ namespace WilliamsBestAF.ViewModels
                 new LocationInfo() { Id = 11, Name = "Hilo Hawaii", Latitude = 19.724876, Longitude = 155.08868},
                 new LocationInfo() { Id = 12, Name = "Dubai", Latitude = 25.20498, Longitude = 55.271057},
                 new LocationInfo() { Id = 13, Name = "Juneau Alaska", Latitude = 58.300323, Longitude = -134.41763},
-                new LocationInfo() { Id = 14, Name = "Bolivar Ohio", Latitude = 40.65014, Longitude = -81.45259}
+                new LocationInfo() { Id = 14, Name = "Bolivar Ohio", Latitude = 40.65014, Longitude = -81.45259},
+                new LocationInfo() { Id = 15, Name = "Eustis AntiPodal", Latitude = -28.881541, Longitude = 98.296258}
             };
             
         }

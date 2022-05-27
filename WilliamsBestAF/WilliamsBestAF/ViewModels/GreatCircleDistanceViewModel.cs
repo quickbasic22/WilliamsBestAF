@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using WilliamsBestAF.Model;
 using Xamarin.Forms;
 
 namespace WilliamsBestAF.ViewModels
@@ -17,6 +18,15 @@ namespace WilliamsBestAF.ViewModels
         private double longitude1;
         private double latitude2;
         private double longitude2;
+        private double greatcircledistance;
+        private CooridateSummary Summary;
+        private double throughtearthdistance;
+        private double greatcircleminusthroughearthdistance;
+
+        public GreatCircleDistanceViewModel()
+        {
+            Summary = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
+        }
 
         public double Latitude1
         {
@@ -63,6 +73,45 @@ namespace WilliamsBestAF.ViewModels
             set
             {
                 longitude2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double GreatCircleDistance
+        {
+            get
+            {
+                return greatcircledistance = Summary.GreatCircleDistance;
+            }
+            set
+            {
+                greatcircledistance = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double ThroughEarthDistance
+        {
+            get
+            {
+                return throughtearthdistance = Summary.ThroughGroundDistance;
+            }
+            set
+            {
+                throughtearthdistance = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double GreatCircleMinusThroughEarthDistance
+        {
+            get
+            {
+                return greatcircleminusthroughearthdistance = Summary.GreatCircleThroughGroundDifference;
+            }
+            set
+            {
+                greatcircleminusthroughearthdistance = value;
                 OnPropertyChanged();
             }
         }

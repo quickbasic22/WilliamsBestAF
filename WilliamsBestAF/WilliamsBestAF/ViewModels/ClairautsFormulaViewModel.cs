@@ -13,6 +13,7 @@ namespace WilliamsBestAF.ViewModels
     [QueryProperty(nameof(Longitude2), nameof(Longitude2))]
     public class ClairautsFormulaViewModel : BindableObject
     {
+        public Command ClairautsFormulaCommand { get; set; }
         private double latitude1;
         private double longitude1;
         private double latitude2;

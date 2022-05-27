@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:WilliamsBestAF.ViewModels"
-             x:DataType="viewmodels:AppSelectorPageViewModel"
+             x:DataType="viewmodels:GreatCircleDistanceViewModel"
              x:Class="WilliamsBestAF.Views.GreatCircleDistance"
              Title="Great Circle Distance">
     <ContentPage.Content>
@@ -10,10 +10,10 @@
             <StackLayout>
                 <Label Text="Great circle distance" FontSize="Large" TextColor="MediumVioletRed" BackgroundColor="DarkBlue" />
                 <Entry x:Name="Results1" Text="{Binding GreatCircleDistance}" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Distance in miles" PlaceholderColor="Chartreuse" />
-                <Label Text="Difference Through Earth versus Great Circle Distance" FontSize="Large" TextColor="MediumVioletRed" BackgroundColor="DarkBlue" />
-                <Entry x:Name="Results2" Text="{Binding DifferenceThroughEarthVSGreatCircleDistance}" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Difference between  Great Circle route and through earth route" PlaceholderColor="Chartreuse" />
                 <Label Text="Distance Through Earth" FontSize="Large" TextColor="MediumVioletRed" BackgroundColor="DarkBlue" />
-                <Entry x:Name="Results3" Text="{Binding DistanceThroughEarth}" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Through earth distance" PlaceholderColor="Chartreuse" />
+                <Entry x:Name="Results3" Text="{Binding ThroughEarthDistance}" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Through earth distance" PlaceholderColor="Chartreuse" />
+                <Label Text="Difference Through Earth versus Great Circle Distance" FontSize="Large" TextColor="MediumVioletRed" BackgroundColor="DarkBlue" />
+                <Entry x:Name="Results2" Text="{Binding GreatCircleMinusThroughEarthDistance}" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Difference between  Great Circle route and through earth route" PlaceholderColor="Chartreuse" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

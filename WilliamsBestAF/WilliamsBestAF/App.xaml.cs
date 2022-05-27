@@ -11,28 +11,25 @@ namespace WilliamsBestAF
 {
     public partial class App : Application
     {
-        public static string DepartureName { get; set; }
-        public static double DepartureLatitude { get; set; }
-        public static double DepartureLongitude { get; set; }
+        private CooridateSummary cooridatesummary;
 
-        public static string DestinationName { get; set; }
-        public static double DestinationLatitude { get; set; }
-        public static double DestinationLongitude { get; set; }
+        public CooridateSummary CooridateSummary
+        {
+            get => cooridatesummary;
+            set
+            {
+                cooridatesummary = value;
+            }
+        }
+        
 
         public App()
         {
             InitializeComponent();
             MainPage = new AppShell();
             AppActions.OnAppAction += new EventHandler<AppActionEventArgs>(AppActions_OnAppAction);
-            Application.Current.Properties.Add("DepartureName", DepartureName);
-            Application.Current.Properties.Add("DepartureLatitude", DepartureLatitude);
-            Application.Current.Properties.Add("DepartureLongitude", DepartureLongitude);
-
-            Application.Current.Properties.Add("DestinationName", DepartureName);
-            Application.Current.Properties.Add("DestinationLatitude", DepartureLatitude);
-            Application.Current.Properties.Add("DestinationLongitude", DepartureLongitude);
-
-
+           CooridateSummary = new CooridateSummary();
+            Application.Current.Properties.Add("CooridateSummaryProperty", CooridateSummary);
         }
 
         private void AppActions_OnAppAction(object sender, AppActionEventArgs e)

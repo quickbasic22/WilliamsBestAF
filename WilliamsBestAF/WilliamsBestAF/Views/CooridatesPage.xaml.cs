@@ -16,25 +16,26 @@ namespace WilliamsBestAF.Views
     public partial class CooridatesPage : ContentPage
     {
         GreatCircle gc;
-        AppSelectorPageViewModel _viewModel;
+        CooridatesPageViewModel _viewModel;
+        private CooridateSummary GetSummary;
 
         public CooridatesPage()
         {
                 InitializeComponent();
                 gc = new GreatCircle();
-            BindingContext = _viewModel = new AppSelectorPageViewModel();
+            BindingContext = _viewModel = new CooridatesPageViewModel();
+           GetSummary = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
         }
        
         private async void Calculate_Clicked(object sender, EventArgs e)
         {
-            string location1 = "";
             double latDeg1 = 0.0;
             double latMin1 = 0.0;
             double latSec1 = 0.0;
             double lngDeg1 = 0.0;
             double lngMin1 = 0.0;
             double lngSec1 = 0.0;
-            string location2 = "";
+
             double latDeg2 = 0.0;
             double latMin2 = 0.0;
             double latSec2 = 0.0;
@@ -44,14 +45,13 @@ namespace WilliamsBestAF.Views
 
             try
             {
-                location1 = Location1.Text;
                 latDeg1 = double.Parse(LatitudeDeg1?.Text);
                 latMin1 = double.Parse(LatitudeMin1?.Text);
                 latSec1 = double.Parse(LatitudeSec1?.Text);
                 lngDeg1 = double.Parse(LongitudeDeg1?.Text);
                 lngMin1 = double.Parse(LongitudeMin1?.Text);
                 lngSec1 = double.Parse(LongitudeSec1?.Text);
-                location2 = Location2?.Text;
+
                 latDeg2 = double.Parse(LatitudeDeg2?.Text);
                 latMin2 = double.Parse(LatitudeMin2?.Text);
                 latSec2 = double.Parse(LatitudeSec2?.Text);
@@ -63,7 +63,6 @@ namespace WilliamsBestAF.Views
             {
                 Debug.WriteLine(ex);
             }
-            location1 = Location1?.Text;
             
             double lat1Degs = gc.DMS_Degrees(latDeg1, latMin1, latSec1);
             double lng1Degs = gc.DMS_Degrees(lngDeg1, lngMin1, lngSec1);
@@ -74,17 +73,34 @@ namespace WilliamsBestAF.Views
             double lng1Radians = gc.Deg_Radians(lng1Degs);
             double lat2Radians = gc.Deg_Radians(lat2Degs);
             double lng2Radians = gc.Deg_Radians(lng2Degs);
-            double distance = gc.GreatCircle_Calculation(lat1Degs, lng1Degs, lat2Degs, lng2Degs);
+            double distance = gc.GreatCircle_Calculation(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
+            double distanceNM = gc.RadiansToNauticalMiles(distance);
+            double distanceMiles = gc.NauticalMilesToMiles(distanceNM);
 
-            Application.Current.Properties["DepartureName"] = Location1.Text;
-            Application.Current.Properties["DepartureLatitude"] = lat1Radians;
-            Application.Current.Properties["DepartureLongitude"] = lng1Radians;
+            GetSummary.DepartureName = LocationPicker1.Title;
+            GetSummary.DepartureLatitude = lat1Radians;
+            GetSummary.DepartureLongitude = lng1Radians;
 
-            Application.Current.Properties["DestinationName"] = Location2.Text;
-            Application.Current.Properties["DestinationLatitude"] = lat2Radians;
-            Application.Current.Properties["DestinationLongitude"] = lng2Radians;
+            GetSummary.DestinationName = LocationPicker2.Title;
+            GetSummary.DestinationLatitude = lat2Radians;
+            GetSummary.DestinationLongitude = lng2Radians;
 
-            await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(AppSelectorPageViewModel.Latitude1)}={lat1Radians}&{nameof(AppSelectorPageViewModel.Longitude1)}={lng1Radians}&{nameof(AppSelectorPageViewModel.Latitude2)}={lat2Radians}&{nameof(AppSelectorPageViewModel.Longitude2)}={lng2Radians}");
+            GetSummary.GreatCircleDistance = distanceMiles;
+            double courseRadians = gc.CourseBetweenPoints(distance, lat1Radians, lng1Radians, lat2Radians, lng2Radians);
+            GetSummary.TripCourse = Math.Round(gc.RadiansToDegrees(courseRadians), 0);
+
+            double throughGround = gc.GetDistantThroughEarth(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
+            GetSummary.ThroughGroundDistance = throughGround;
+            double greatCircleMinusThroughGround = distanceMiles - throughGround;
+            GetSummary.GreatCircleThroughGroundDifference = greatCircleMinusThroughGround;
+
+            _viewModel.Latitude1 = lat1Radians;
+            _viewModel.Longitude1 = lng1Radians;
+            _viewModel.Latitude2 = lat2Radians;
+            _viewModel.Longitude2 = lng2Radians;
+
+            Results.Text = distanceMiles.ToString() + " " + "Miles";
+             await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(GreatCircleDistanceViewModel.Latitude1)}={lat1Radians}&{nameof(GreatCircleDistanceViewModel.Longitude1)}={lng1Radians}&{nameof(GreatCircleDistanceViewModel.Latitude2)}={lat2Radians}&{nameof(GreatCircleDistanceViewModel.Longitude2)}={lng2Radians}");
              //   await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}")
 
         }
@@ -135,14 +151,12 @@ namespace WilliamsBestAF.Views
                 
         private void ClearAll_Clicked(object sender, EventArgs e)
         {
-            Location1.Text = "";
             LatitudeDeg1.Text = "";
             LatitudeMin1.Text = "";
             LatitudeSec1.Text = "";
             LongitudeDeg1.Text = "";
             LongitudeMin1.Text = "";
             LongitudeSec1.Text = "";
-            Location2.Text = "";
             LatitudeDeg2.Text = "";
             LatitudeMin2.Text = "";
             LatitudeSec2.Text = "";
@@ -155,23 +169,16 @@ namespace WilliamsBestAF.Views
 
         }
 
-        private void LocationPicker_SelectedIndexChanged(object sender, EventArgs e)
+        private void LocationPicker1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var Picker = (Picker)sender;
             var location = (LocationInfo)Picker.SelectedItem;
            
-            if (LatitudeDeg1.Text == "")
-            {
+            
                 LatitudeDeg1.Text = location.Latitude.ToString();
                 LongitudeDeg1.Text = location.Longitude.ToString();
-                Location1.Text = location.Name;
-            }
-            else
-            {
-                LatitudeDeg2.Text = location.Latitude.ToString();
-                LongitudeDeg2.Text = location.Longitude.ToString();
-                Location2.Text = location.Name;
-            }
+            
+           
         }
 
         private void ReverseComputeCourse_Clicked(object sender, EventArgs e)
@@ -196,6 +203,17 @@ namespace WilliamsBestAF.Views
             LongitudeDeg1.Text = longdeg2;
             LongitudeMin1.Text = longmin2;
             Calculate_Clicked(this, null);
+        }
+
+        private void LocationPicker2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var Picker = (Picker)sender;
+            var location = (LocationInfo)Picker.SelectedItem;
+
+            
+                LatitudeDeg2.Text = location.Latitude.ToString();
+                LongitudeDeg2.Text = location.Longitude.ToString();
+            
         }
     }
 }
