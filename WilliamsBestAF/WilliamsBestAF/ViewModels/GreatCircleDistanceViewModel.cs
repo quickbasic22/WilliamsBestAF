@@ -20,12 +20,14 @@ namespace WilliamsBestAF.ViewModels
         private double longitude2;
         private double greatcircledistance;
         private CooridateSummary Summary;
+        private GreatCircle gc;
         private double throughtearthdistance;
         private double greatcircleminusthroughearthdistance;
 
         public GreatCircleDistanceViewModel()
         {
             Summary = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
+            gc = new GreatCircle();
         }
 
         public double Latitude1
@@ -81,6 +83,7 @@ namespace WilliamsBestAF.ViewModels
         {
             get
             {
+                Summary.GreatCircleDistance = gc.GreatCircle_Calculation(Latitude1, Longitude1, Latitude2, Longitude2);
                 return greatcircledistance = Summary.GreatCircleDistance;
             }
             set
@@ -94,6 +97,7 @@ namespace WilliamsBestAF.ViewModels
         {
             get
             {
+                Summary.ThroughGroundDistance = gc.GetDistantThroughEarth(Latitude1, Longitude1, Latitude2, Longitude2);
                 return throughtearthdistance = Summary.ThroughGroundDistance;
             }
             set
@@ -107,6 +111,7 @@ namespace WilliamsBestAF.ViewModels
         {
             get
             {
+                Summary.GreatCircleThroughGroundDifference = Summary.GreatCircleDistance - Summary.ThroughGroundDistance;
                 return greatcircleminusthroughearthdistance = Summary.GreatCircleThroughGroundDifference;
             }
             set
@@ -115,5 +120,7 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
+
+
     }
 }

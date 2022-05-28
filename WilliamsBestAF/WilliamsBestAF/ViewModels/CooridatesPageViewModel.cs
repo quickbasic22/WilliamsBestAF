@@ -5,75 +5,43 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using WilliamsBestAF.Model;
+using WilliamsBestAF.Views;
 using Xamarin.Forms;
 
 namespace WilliamsBestAF.ViewModels
 {
-    [QueryProperty(nameof(Latitude1), nameof(Latitude1))]
-    [QueryProperty(nameof(Longitude1), nameof(Longitude1))]
-    [QueryProperty(nameof(Latitude2), nameof(Latitude2))]
-    [QueryProperty(nameof(Longitude2), nameof(Longitude2))]
+    
     public class CooridatesPageViewModel : BindableObject
-    { 
-        private double latitude1;
-        private double longitude1;
-        private double latitude2;
-        private double longitude2;
+    {
+        private CooridateSummary Summarize;
+        private GreatCircle gc;
+        private double latitude1degree = 33;
+        private double latitude1minute = 57;
+        private double latitude1second = 0;
+        private double longitude1degree = 118;
+        private double longitude1minute = 24;
+        private double longitude1second = 0;
+        private double latitude2degree = 40;
+        private double latitude2minute = 38;
+        private double latitude2second = 0;
+        private double longitude2degree = 73;
+        private double longitude2minute = 47;
+        private double longitude2second = 0;
+        public double Latitude1Radians;
+        public double Longitude1Radians;
+        public double Latitude2Radians;
+        public double Longitude2Radians;
+        public string departurelocation;
+        public string destinationlocation;
+        public Command ConvertDegreesToRadiansCommand { get; set; }
 
         public ObservableCollection<LocationInfo> LocationInformation { get; set; }
 
-
-        public double Latitude1
-        {
-            get
-            {
-                return latitude1;
-            }
-            set
-            {
-                latitude1 = value;
-                OnPropertyChanged();
-            }
-        }
-        public double Longitude1
-        {
-            get
-            {
-                return longitude1;
-            }
-            set
-            {
-                longitude1 = value;
-                OnPropertyChanged();
-            }
-        }
-        public double Latitude2
-        {
-            get
-            {
-                return latitude2;
-            }
-            set
-            {
-                latitude2 = value;
-                OnPropertyChanged();
-            }
-        }
-        public double Longitude2
-        {
-            get
-            {
-                return longitude2;
-            }
-            set
-            {
-                longitude2 = value;
-                OnPropertyChanged();
-            }
-        }
-
         public CooridatesPageViewModel()
         {
+            Summarize = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
+            gc = new GreatCircle();
+            ConvertDegreesToRadiansCommand = new Command(ConvertDegToRadCommand);
             LocationInformation = new ObservableCollection<LocationInfo>()
             {
                 new LocationInfo() { Id = 0, Name = "Select A Location", Latitude = 0, Longitude = 0 },
@@ -93,7 +61,220 @@ namespace WilliamsBestAF.ViewModels
                 new LocationInfo() { Id = 14, Name = "Bolivar Ohio", Latitude = 40.65014, Longitude = -81.45259},
                 new LocationInfo() { Id = 15, Name = "Eustis AntiPodal", Latitude = -28.881541, Longitude = 98.296258}
             };
-            
+
+                        
+        }
+        public string DepartureLocation
+        {
+            get
+            {
+                return departurelocation;
+            }
+            set
+            {
+                departurelocation = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Latitude1Degree
+        {
+            get
+            {
+                return latitude1degree;
+            }
+            set
+            {
+                latitude1degree = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Latitude1Minute
+        {
+            get
+            {
+                return latitude1minute;
+            }
+            set
+            {
+                latitude1minute = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Latitude1Second
+        {
+            get
+            {
+                return latitude1second;
+            }
+            set
+            {
+                latitude1second = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Longitude1Degree
+        {
+            get
+            {
+                return longitude1degree;
+            }
+            set
+            {
+                longitude1degree = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Longitude1Minute
+        {
+            get
+            {
+                return longitude1minute;
+            }
+            set
+            {
+                longitude1minute = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Longitude1Second
+        {
+            get
+            {
+                return longitude1second;
+            }
+            set
+            {
+                longitude1second = value;
+                OnPropertyChanged();
+            }
+        }
+        public string DestinationLocation
+        {
+            get
+            {
+                return destinationlocation;
+            }
+            set
+            {
+                destinationlocation = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Latitude2Degree
+        {
+            get
+            {
+                return latitude2degree;
+            }
+            set
+            {
+                latitude2degree = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Latitude2Minute
+        {
+            get
+            {
+                return latitude2minute;
+            }
+            set
+            {
+                latitude2minute = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Latitude2Second
+        {
+            get
+            {
+                return latitude2second;
+            }
+            set
+            {
+                latitude2second = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Longitude2Degree
+        {
+            get
+            {
+                return longitude2degree;
+            }
+            set
+            {
+                longitude2degree = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Longitude2Minute
+        {
+            get
+            {
+                return longitude2minute;
+            }
+            set
+            {
+                longitude2minute = value;
+                OnPropertyChanged();
+            }
+        }
+        public double Longitude2Second
+        {
+            get
+            {
+                return longitude2second;
+            }
+            set
+            {
+                longitude2second = value;
+                OnPropertyChanged();
+            }
+        }
+       
+
+        private async void ConvertDegToRadCommand(object obj)
+        {
+            Convert_Degrees_Radians();
+            await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(GreatCircleDistanceViewModel.Latitude1)}={Latitude1Radians}&{nameof(GreatCircleDistanceViewModel.Longitude1)}={Longitude1Radians}&{nameof(GreatCircleDistanceViewModel.Latitude2)}={Latitude2Radians}&{nameof(GreatCircleDistanceViewModel.Longitude2)}={Longitude2Radians}");
+        }
+
+        private string Calculate()
+        {
+            double distance = gc.GreatCircle_Calculation(Latitude1Radians, Longitude1Radians, Latitude2Radians, Longitude2Radians);
+            double distanceNM = gc.RadiansToNauticalMiles(distance);
+            double distanceMiles = gc.NauticalMilesToMiles(distanceNM);
+
+            Summarize.DepartureName = DepartureLocation;
+            Summarize.DepartureLatitude = Latitude1Radians;
+            Summarize.DepartureLongitude = Longitude1Radians;
+
+            Summarize.DestinationName = DestinationLocation;
+            Summarize.DestinationLatitude = Latitude2Radians;
+            Summarize.DestinationLongitude = Longitude2Radians;
+
+            Summarize.GreatCircleDistance = distanceMiles;
+            double courseRadians = gc.CourseBetweenPoints(distance, Latitude1Radians, Longitude1Radians, Latitude2Radians, Longitude2Radians);
+            Summarize.TripCourse = Math.Round(gc.RadiansToDegrees(courseRadians), 0);
+
+            double throughGround = gc.GetDistantThroughEarth(Latitude1Radians, Longitude1Radians, Latitude2Radians, Longitude2Radians);
+            Summarize.ThroughGroundDistance = throughGround;
+            double greatCircleMinusThroughGround = distanceMiles - throughGround;
+            Summarize.GreatCircleThroughGroundDifference = greatCircleMinusThroughGround;
+            return "";
+        }
+
+        public void Convert_Degrees_Radians()
+        {
+           double Latitude1Deg = gc.DMS_Degrees(Latitude1Degree, Latitude1Minute, Latitude1Second);
+           double Longitude1Deg = gc.DMS_Degrees(Longitude1Degree, Longitude1Minute, Longitude1Second);
+           double Latitude2Deg = gc.DMS_Degrees(Latitude2Degree, Latitude2Minute, Latitude2Second);
+           double Longitude2Deg = gc.DMS_Degrees(Longitude2Degree, Longitude2Minute, Longitude2Second);
+            Latitude1Radians = gc.DegreesToRadians(Latitude1Deg);
+            Longitude1Radians = gc.DegreesToRadians(Longitude1Deg);
+            Latitude2Radians = gc.DegreesToRadians(Latitude2Deg);
+            Longitude2Radians = gc.DegreesToRadians(Longitude2Deg);
         }
 
     }

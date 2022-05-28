@@ -18,6 +18,7 @@ namespace WilliamsBestAF.Views
         {
             InitializeComponent();
             gc = new WilliamsBestAF.GreatCircle();
+            BindingContext = new ViewModels.CourseBetweenPointsViewModel();
         }
 
         private void ComputeCourse_Clicked(object sender, EventArgs e)

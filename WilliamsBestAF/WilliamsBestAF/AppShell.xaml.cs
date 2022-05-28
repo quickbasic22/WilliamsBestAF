@@ -15,7 +15,6 @@ namespace WilliamsBestAF
             Routing.RegisterRoute(nameof(GreatCircleDistance), typeof(GreatCircleDistance));
             Routing.RegisterRoute(nameof(CourseBetweenPoints), typeof(CourseBetweenPoints));
             Routing.RegisterRoute(nameof(AppSelectorPage), typeof(AppSelectorPage));
-            Routing.RegisterRoute(nameof(GreatCircleCooridates), typeof(GreatCircleCooridates));
             Routing.RegisterRoute(nameof(DistanceThroughEarth), typeof(DistanceThroughEarth));
             Routing.RegisterRoute(nameof(LatitudeOfPointOnGC), typeof(LatitudeOfPointOnGC));
             Routing.RegisterRoute(nameof(LatitudeLongitudeGivenRadialAndDistance), typeof(LatitudeLongitudeGivenRadialAndDistance));

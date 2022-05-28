@@ -14,6 +14,10 @@
                 <Entry x:Name="Results3" Text="{Binding ThroughEarthDistance}" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Through earth distance" PlaceholderColor="Chartreuse" />
                 <Label Text="Difference Through Earth versus Great Circle Distance" FontSize="Large" TextColor="MediumVioletRed" BackgroundColor="DarkBlue" />
                 <Entry x:Name="Results2" Text="{Binding GreatCircleMinusThroughEarthDistance}" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Difference between  Great Circle route and through earth route" PlaceholderColor="Chartreuse" />
+                <Label Text="{Binding Latitude1}" />
+                <Label Text="{Binding Longitude1}" />
+                <Label Text="{Binding Latitude2}" />
+                <Label Text="{Binding Longitude2}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

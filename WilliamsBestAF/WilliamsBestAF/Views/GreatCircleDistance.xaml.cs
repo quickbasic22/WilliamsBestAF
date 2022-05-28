@@ -18,6 +18,7 @@ namespace WilliamsBestAF.Views
             InitializeComponent();
             gc = new WilliamsBestAF.GreatCircle();
             BindingContext = new GreatCircleDistanceViewModel();
+            
         }
 
         

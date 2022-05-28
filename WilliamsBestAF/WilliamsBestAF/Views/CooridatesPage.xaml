@@ -10,27 +10,26 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout x:DataType="{x:Type viewmodels:CooridatesPageViewModel}">
                 <CheckBox x:Name="CheckedDD" CheckedChanged="CheckedDD_CheckedChanged" />
-                <Picker x:Name="LocationPicker1" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker1_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" />
-                <Entry x:Name="LatitudeDeg1" Text="33" FontAttributes="Bold,Italic" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 1" PlaceholderColor="LightBlue" />
-                <Entry x:Name="LatitudeMin1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 1"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="LatitudeSec1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="LongitudeDeg1" Text="118" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 1" PlaceholderColor="LightBlue" />
-                <Entry x:Name="LongitudeMin1" Text="24" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 1"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="LongitudeSec1" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 1"  PlaceholderColor="LightCoral" />
-                <Picker x:Name="LocationPicker2" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker2_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" />
-                <Entry x:Name="LatitudeDeg2" Text="40" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 2" PlaceholderColor="LightBlue" />
-                <Entry x:Name="LatitudeMin2" Text="38" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 2"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="LatitudeSec2" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="LongitudeDeg2" Text="73" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 2" PlaceholderColor="LightBlue" />
-                <Entry x:Name="LongitudeMin2" Text="47" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 2"  PlaceholderColor="LightCoral" />
-                <Entry x:Name="LongitudeSec2" Text="57" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 2"  PlaceholderColor="LightCoral" />
+                <Picker x:Name="LocationPicker1" Title="{Binding DepartureLocation, Mode=TwoWay}" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker1_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" />
+                <Entry x:Name="LatitudeDeg1" Text="{Binding Latitude1Degree, Mode=TwoWay}" FontAttributes="Bold,Italic" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LatitudeMin1" Text="{Binding Latitude1Minute, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LatitudeSec1" Text="{Binding Latitude1Second, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeDeg1" Text="{Binding Longitude1Degree, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 1" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LongitudeMin1" Text="{Binding Longitude1Minute, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeSec1" Text="{Binding Longitude1Second, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 1"  PlaceholderColor="LightCoral" />
+                <Picker x:Name="LocationPicker2" Title="{Binding DestinationLocation, Mode=TwoWay}" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker2_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" />
+                <Entry x:Name="LatitudeDeg2" Text="{Binding Latitude2Degree, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 2" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LatitudeMin2" Text="{Binding Latitude2Minute, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 2"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LatitudeSec2" Text="{Binding Latitude2Second, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Latitude Seconds 1"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeDeg2" Text="{Binding Longitude2Degree, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Longitude Degrees 2" PlaceholderColor="LightBlue" />
+                <Entry x:Name="LongitudeMin2" Text="{Binding Longitude2Minute, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Longitude Minutes 2"  PlaceholderColor="LightCoral" />
+                <Entry x:Name="LongitudeSec2" Text="{Binding Longitude2Second, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 2"  PlaceholderColor="LightCoral" />
                 <BoxView HeightRequest="5" Color="Red" />
-                <Button x:Name="ComputeCourse" Text="Compute Course" Clicked="Calculate_Clicked" />
+                <Button x:Name="ComputeCourse" Text="Compute Course" Command="{Binding ConvertDegreesToRadiansCommand}" />
                 <Button x:Name="ReverseComputeCourse" Text="Reverse Compute Course" Clicked="ReverseComputeCourse_Clicked" />
-                
-                <Entry x:Name="Results" BackgroundColor="CadetBlue" FontSize="Large" TextColor="DarkMagenta" Placeholder="Course in Degrees" PlaceholderColor="Chartreuse" />
+                                
                 <Button x:Name="ClearAll" Text="Clear All Textboxes" Clicked="ClearAll_Clicked" />
             </StackLayout>
         </ScrollView>
