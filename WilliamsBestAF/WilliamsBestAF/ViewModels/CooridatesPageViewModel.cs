@@ -240,7 +240,7 @@ namespace WilliamsBestAF.ViewModels
             await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(GreatCircleDistanceViewModel.Latitude1)}={Latitude1Radians}&{nameof(GreatCircleDistanceViewModel.Longitude1)}={Longitude1Radians}&{nameof(GreatCircleDistanceViewModel.Latitude2)}={Latitude2Radians}&{nameof(GreatCircleDistanceViewModel.Longitude2)}={Longitude2Radians}");
         }
 
-        private string Calculate()
+        private void Calculate()
         {
             double distance = gc.GreatCircle_Calculation(Latitude1Radians, Longitude1Radians, Latitude2Radians, Longitude2Radians);
             double distanceNM = gc.RadiansToNauticalMiles(distance);
@@ -262,7 +262,6 @@ namespace WilliamsBestAF.ViewModels
             Summarize.ThroughGroundDistance = throughGround;
             double greatCircleMinusThroughGround = distanceMiles - throughGround;
             Summarize.GreatCircleThroughGroundDifference = greatCircleMinusThroughGround;
-            return "";
         }
 
         public void Convert_Degrees_Radians()
@@ -275,6 +274,7 @@ namespace WilliamsBestAF.ViewModels
             Longitude1Radians = gc.DegreesToRadians(Longitude1Deg);
             Latitude2Radians = gc.DegreesToRadians(Latitude2Deg);
             Longitude2Radians = gc.DegreesToRadians(Longitude2Deg);
+            Calculate();
         }
 
     }

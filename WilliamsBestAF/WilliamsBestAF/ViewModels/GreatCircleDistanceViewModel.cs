@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
 using WilliamsBestAF.Model;
 using Xamarin.Forms;
 
@@ -23,11 +24,15 @@ namespace WilliamsBestAF.ViewModels
         private GreatCircle gc;
         private double throughtearthdistance;
         private double greatcircleminusthroughearthdistance;
+        public ICommand CalculateDistanceCommand { get; }
+
+
 
         public GreatCircleDistanceViewModel()
         {
             Summary = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
             gc = new GreatCircle();
+            CalculateDistanceCommand = new Command(CalculateDistance);
         }
 
         public double Latitude1
@@ -83,9 +88,9 @@ namespace WilliamsBestAF.ViewModels
         {
             get
             {
-                Summary.GreatCircleDistance = gc.GreatCircle_Calculation(Latitude1, Longitude1, Latitude2, Longitude2);
+                //Summary.GreatCircleDistance = gc.GreatCircle_Calculation(Latitude1, Longitude1, Latitude2, Longitude2);
                 return greatcircledistance = Summary.GreatCircleDistance;
-            }
+            }   
             set
             {
                 greatcircledistance = value;
@@ -97,7 +102,7 @@ namespace WilliamsBestAF.ViewModels
         {
             get
             {
-                Summary.ThroughGroundDistance = gc.GetDistantThroughEarth(Latitude1, Longitude1, Latitude2, Longitude2);
+                // Summary.ThroughGroundDistance = gc.GetDistantThroughEarth(Latitude1, Longitude1, Latitude2, Longitude2);
                 return throughtearthdistance = Summary.ThroughGroundDistance;
             }
             set
@@ -111,7 +116,7 @@ namespace WilliamsBestAF.ViewModels
         {
             get
             {
-                Summary.GreatCircleThroughGroundDifference = Summary.GreatCircleDistance - Summary.ThroughGroundDistance;
+                // Summary.GreatCircleThroughGroundDifference = Summary.GreatCircleDistance - Summary.ThroughGroundDistance;
                 return greatcircleminusthroughearthdistance = Summary.GreatCircleThroughGroundDifference;
             }
             set
@@ -121,6 +126,16 @@ namespace WilliamsBestAF.ViewModels
             }
         }
 
+         void CalculateDistance()
+        {
+            double result = GreatCircleDistance;
+            double result2 = ThroughEarthDistance;
+            double result3 = GreatCircleMinusThroughEarthDistance;
+            Summary.GreatCircleDistance = result;
+            Summary.ThroughGroundDistance = result2;
+            Summary.GreatCircleThroughGroundDifference = result3;
+
+        }
 
     }
 }
