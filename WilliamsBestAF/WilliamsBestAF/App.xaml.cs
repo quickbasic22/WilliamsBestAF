@@ -28,8 +28,8 @@ namespace WilliamsBestAF
             InitializeComponent();
             MainPage = new AppShell();
             AppActions.OnAppAction += new EventHandler<AppActionEventArgs>(AppActions_OnAppAction);
-           CooridateSummary = new CooridateSummary();
-            Application.Current.Properties.Add("CooridateSummaryProperty", CooridateSummary);
+            cooridatesummary = new CooridateSummary();
+            Application.Current.Properties.Add("CooridateSummaryProperty", cooridatesummary);
         }
 
         private void AppActions_OnAppAction(object sender, AppActionEventArgs e)

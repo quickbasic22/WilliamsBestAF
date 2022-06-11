@@ -43,7 +43,7 @@
         </Tab>
         <Tab Title="Distance Pages" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">
             <ShellContent Title="Distance Through Earth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
-            
+            <ShellContent Title="Plotting Points on Great Circle Route" ContentTemplate="{DataTemplate local:PlottingPoints}" /> 
             <ShellContent Title="Course Between Points"  ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
         </Tab>
         <Tab Title="Calculation pages"  FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">

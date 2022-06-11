@@ -16,14 +16,15 @@ namespace WilliamsBestAF.Views
     {
         GreatCircle gc;
         CooridatesPageViewModel _viewModel;
-        private CooridateSummary GetSummary;
+        private CooridateSummary GetSummary { get; set; }
 
         public CooridatesPage()
         {
                 InitializeComponent();
                 gc = new GreatCircle();
-            BindingContext = _viewModel = new CooridatesPageViewModel();
            GetSummary = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
+            BindingContext = _viewModel = new CooridatesPageViewModel();
+
         }
                
         private void CheckedDD_CheckedChanged(object sender, CheckedChangedEventArgs e)

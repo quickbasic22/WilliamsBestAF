@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:codebehind="clr-namespace:WilliamsBestAF.Views"
+             x:DataType="codebehind:PlottingPoints"
+             xmlns:local="clr-namespace:WilliamsBestAF.Model"
+             x:Class="WilliamsBestAF.Views.PlottingPoints"
+             Title="Plotting Points on Great Circle Route">
+
+    <ListView x:Name="MyListView" x:DataType="{x:Type codebehind:PlottingPoints}">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="{x:Type local:CooridateSummary}">
+                <ViewCell>
+                    <StackLayout>
+                    <Label TextColor="Black" Text="{Binding DepartureLatitude}" />
+                    <Label TextColor="Black" Text="{Binding DepartureLongitude}" />
+                    <Label TextColor="Black" Text="{Binding DestinationLatitude}" />
+                    <Label TextColor="Black" Text="{Binding DestinationLongitude}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

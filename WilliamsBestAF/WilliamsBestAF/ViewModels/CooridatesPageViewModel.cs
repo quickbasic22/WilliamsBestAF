@@ -10,11 +10,11 @@ using Xamarin.Forms;
 
 namespace WilliamsBestAF.ViewModels
 {
-    
+
     public class CooridatesPageViewModel : BindableObject
     {
-        private CooridateSummary Summarize;
-        private GreatCircle gc;
+        public CooridateSummary Summarize { get; set; }
+        private GreatCircle gc = new GreatCircle();
         private double latitude1degree = 33;
         private double latitude1minute = 57;
         private double latitude1second = 0;
@@ -27,12 +27,12 @@ namespace WilliamsBestAF.ViewModels
         private double longitude2degree = 73;
         private double longitude2minute = 47;
         private double longitude2second = 0;
-        public double Latitude1Radians;
-        public double Longitude1Radians;
-        public double Latitude2Radians;
-        public double Longitude2Radians;
-        public string departurelocation;
-        public string destinationlocation;
+        public double Latitude1Radians = 0.0;
+        public double Longitude1Radians = 0.0;
+        public double Latitude2Radians = 0.0;
+        public double Longitude2Radians = 0.0;
+        public string departurelocation = "";
+        public string destinationlocation = "";
         public Command ConvertDegreesToRadiansCommand { get; set; }
 
         public ObservableCollection<LocationInfo> LocationInformation { get; set; }
@@ -40,7 +40,6 @@ namespace WilliamsBestAF.ViewModels
         public CooridatesPageViewModel()
         {
             Summarize = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
-            gc = new GreatCircle();
             ConvertDegreesToRadiansCommand = new Command(ConvertDegToRadCommand);
             LocationInformation = new ObservableCollection<LocationInfo>()
             {
@@ -237,7 +236,8 @@ namespace WilliamsBestAF.ViewModels
         private async void ConvertDegToRadCommand(object obj)
         {
             Convert_Degrees_Radians();
-            await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(GreatCircleDistanceViewModel.Latitude1)}={Latitude1Radians}&{nameof(GreatCircleDistanceViewModel.Longitude1)}={Longitude1Radians}&{nameof(GreatCircleDistanceViewModel.Latitude2)}={Latitude2Radians}&{nameof(GreatCircleDistanceViewModel.Longitude2)}={Longitude2Radians}");
+           // await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(GreatCircleDistanceViewModel.Latitude1)}={Latitude1Radians}&{nameof(GreatCircleDistanceViewModel.Longitude1)}={Longitude1Radians}&{nameof(GreatCircleDistanceViewModel.Latitude2)}={Latitude2Radians}&{nameof(GreatCircleDistanceViewModel.Longitude2)}={Longitude2Radians}");
+            await Shell.Current.GoToAsync($"{nameof(PlottingPoints)}?{nameof(PlottingPointsViewModel.Latitude1)}={Latitude1Radians}&{nameof(PlottingPointsViewModel.Longitude1)}={Longitude1Radians}&{nameof(PlottingPointsViewModel.Latitude2)}={Latitude2Radians}&{nameof(PlottingPointsViewModel.Longitude2)}={Longitude2Radians}");
         }
 
         private void Calculate()

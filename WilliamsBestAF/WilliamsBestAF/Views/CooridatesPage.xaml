@@ -11,7 +11,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:DataType="{x:Type viewmodels:CooridatesPageViewModel}">
-                <CheckBox x:Name="CheckedDD" CheckedChanged="CheckedDD_CheckedChanged" />
+                <CheckBox x:Name="CheckedDD" IsChecked="false" CheckedChanged="CheckedDD_CheckedChanged" />
                 <Picker x:Name="LocationPicker1" Title="{Binding DepartureLocation, Mode=TwoWay}" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker1_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" />
                 <Entry x:Name="LatitudeDeg1" Text="{Binding Latitude1Degree, Mode=TwoWay}" FontAttributes="Bold,Italic" FontSize="Large" TextColor="Blue" Placeholder="Latitude Degrees 1" PlaceholderColor="LightBlue" />
                 <Entry x:Name="LatitudeMin1" Text="{Binding Latitude1Minute, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Latitude Minutes 1"  PlaceholderColor="LightCoral" />

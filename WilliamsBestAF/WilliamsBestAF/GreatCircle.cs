@@ -98,7 +98,7 @@ namespace WilliamsBestAF
             string results2 = NauticalMileResult.ToString() + " " + directionFromCourse;
             return 15.0;
         }
-        public double IntermediatePointsOnAGreatCircle(double f,double lat1Radians,double lng1Radians, double lat2Radians,double lng2Radians)
+        public double[] IntermediatePointsOnAGreatCircle(double f,double lat1Radians,double lng1Radians, double lat2Radians,double lng2Radians)
         {     
             double d = GreatCircle_Calculation(lat1Radians, lng1Radians, lat2Radians, lng2Radians);
 
@@ -111,11 +111,11 @@ namespace WilliamsBestAF
             double lon = Math.Atan2(y, x);
             double latDD = RadiansToDegrees(lat);
             double lonDD = RadiansToDegrees(lon);
-            string latDMS = Deg_DMS(latDD);
-            string lonDMS = Deg_DMS(lonDD);
+            // string latDMS = Deg_DMS(latDD);
+            // string lonDMS = Deg_DMS(lonDD);
 
-            string results = latDMS + " " + "Latitude" + " " + lonDMS + " " + "Longitude";
-            return 15.0;
+            // string results = latDMS + " " + "Latitude" + " " + lonDMS + " " + "Longitude";
+            return new double[] { latDD, lonDD };
         }
 
         public double IntersectingRadials(double lat1Radians, double lng1Radians, double lat2Radians, double lng2Radians)
