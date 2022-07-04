@@ -85,6 +85,9 @@ namespace WilliamsBestAF.Views
             LongitudeDeg2.Text = "";
             LongitudeMin2.Text = "";
             LongitudeSec2.Text = "";
+            LocationPicker1.SelectedIndex = 0;
+            LocationPicker2.SelectedIndex = 0;
+            
         }
 
         private void LocationPicker1_SelectedIndexChanged(object sender, EventArgs e)

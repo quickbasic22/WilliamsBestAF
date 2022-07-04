@@ -41,14 +41,29 @@
             <ShellContent Title="Great Circle Distance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
             <ShellContent Title="Course Between Points"  ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
         </Tab>
-        <Tab Title="Distance Pages" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">
+        <!--<Tab Title="Distance Pages" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">
             <ShellContent Title="Distance Through Earth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
             <ShellContent Title="Plotting Points on Great Circle Route" ContentTemplate="{DataTemplate local:PlottingPoints}" /> 
             <ShellContent Title="Course Between Points"  ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
-        </Tab>
-        <Tab Title="Calculation pages"  FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsMultipleItems">
+        </Tab>-->
+    </FlyoutItem>
+   
+    <FlyoutItem Title="Calculation Pages" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsSingleItem">
+        <Tab Title="Distance Pages first Item">
+            <ShellContent Title="Distance Throught Earth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
             <ShellContent Title="Cross Track Error" ContentTemplate="{DataTemplate local:CrossTrackError}" />
             <ShellContent Title="Intersecting Radials" ContentTemplate="{DataTemplate local:IntersectingRadials}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Distance Pages" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsSingleItem">
+        <Tab Title="Distance Pages first Item">
+            <ShellContent Title="Distance Throught Earth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
+            <ShellContent Title="Plotting Points" ContentTemplate="{DataTemplate local:PlottingPoints}" />
+            <ShellContent Title="Course Between Points" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
+        </Tab>
+        <Tab Title="Flyout Item 2">
+            <ShellContent Title="Course Between Points" Route="CourseBetweenPoints" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" IsEnabled="True" IsVisible="True" />
+            <ShellContent Title="Cooridates Page"  ContentTemplate="{DataTemplate local:CooridatesPage}" />
         </Tab>
     </FlyoutItem>
 

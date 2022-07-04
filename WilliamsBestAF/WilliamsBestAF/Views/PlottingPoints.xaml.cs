@@ -28,15 +28,16 @@ namespace WilliamsBestAF.Views
 			//LoadItemsCommand = new Command(() => ExecuteLoadItemsCommand());
 		    Items = new ObservableCollection<CooridateSummary>();
 			getCooridates(0.10);
-			MyListView.BindingContext = Items;
+			MyListView.ItemsSource = Items;
 			Title = "Plotted Points on Great Circle";
 			MyListView.BackgroundColor = Color.Crimson;
 		}
+
 		
 		private void getCooridates(double distancePercent)
 		{
-			double course = Summary.TripCourse;
 			double lat1 = Summary.DepartureLatitude;
+			double course = Summary.TripCourse;
 			double lng1 = Summary.DepartureLongitude;
 			double lat2 = Summary.DestinationLatitude;
 			double lng2 = Summary.DestinationLongitude;
@@ -66,6 +67,8 @@ namespace WilliamsBestAF.Views
 				//PlottedPoints[counter].DestinationLatitude = lat2;
 				//PlottedPoints[counter].DestinationLongitude = lng2;
 			}
+			Debug.WriteLine("Done getting Cooridates");
+            
 			
 		}
 
