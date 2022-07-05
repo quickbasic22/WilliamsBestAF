@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WilliamsBestAF.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,36 +17,43 @@ namespace WilliamsBestAF.Views
         public DistanceThroughEarth()
         {
             InitializeComponent();
-            BindingContext = new ViewModels.AppSelectorPageViewModel();
+            BindingContext = new ViewModels.DistanceThroughEarthViewModel();
             gc = new WilliamsBestAF.GreatCircle();
         }
 
-        private void Calculate_Clicked(object sender, EventArgs e)
-        {
-            
-            
-        }
-
+        
         private void LocationPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var picker = (Picker)sender;
-            var location = (Model.LocationInfo)picker.SelectedItem;
 
-            if (LatDegrees1.Text == "")
+            var picker = sender as Picker;
+            var picker1 = (Picker)picker.FindByName("LocationPicker1");
+            var picker2 = (Picker)picker.FindByName("LocationPicker2");
+            
+            if (picker1.SelectedItem is LocationInfo)
             {
-                LatDegrees1.Text = location.Latitude.ToString();
-                LongDegrees1.Text = location.Longitude.ToString();
-                Location1.Text = location.Name;
+                var location = (Model.LocationInfo)picker1.SelectedItem;
+
+               
+                    LatDegrees1.Text = location.Latitude.ToString();
+                    LongDegrees1.Text = location.Longitude.ToString();
+
+               
+                Debug.WriteLine(location.Name);
+                Debug.WriteLine(LocationPicker1.SelectedIndex);
             }
             else
             {
-                LatDegrees2.Text = location.Latitude.ToString();
-                LongDegrees2.Text = location.Longitude.ToString();
-                Location2.Text = location.Name;
+                var location = (Model.LocationInfo)picker2.SelectedItem;
+
+                
+                    LatDegrees2.Text = location.Latitude.ToString();
+                    LongDegrees2.Text = location.Longitude.ToString();
+                
+                Debug.WriteLine(location.Name);
+                Debug.WriteLine(LocationPicker2.SelectedIndex);
             }
 
-            Debug.WriteLine(location.Name);
-            Debug.WriteLine(LocationPicker.SelectedIndex);
+            
         }
 
         private void ClearTextButton_Clicked(object sender, EventArgs e)
@@ -54,11 +62,11 @@ namespace WilliamsBestAF.Views
             LongDegrees1.Text = "";
             LatDegrees2.Text = "";
             LongDegrees2.Text = "";
-            Location1.Text = "";
-            Location2.Text = "";
-            LocationPicker.Title = "Pick a location";
+            LocationPicker1.SelectedIndex = 0;
+            LocationPicker2.SelectedIndex = 0;
             ResultDistance.Text = "";
             ThroughGroundGreatCircleDifference.Text = "";
+            
         }
 
     }

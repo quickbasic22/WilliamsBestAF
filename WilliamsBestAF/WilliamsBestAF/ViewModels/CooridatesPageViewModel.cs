@@ -13,34 +13,40 @@ namespace WilliamsBestAF.ViewModels
 
     public class CooridatesPageViewModel : BindableObject
     {
-        public CooridateSummary Summarize { get; set; }
         private GreatCircle gc = new GreatCircle();
-        private double latitude1degree = 33;
-        private double latitude1minute = 57;
-        private double latitude1second = 0;
-        private double longitude1degree = 118;
-        private double longitude1minute = 24;
-        private double longitude1second = 0;
-        private double latitude2degree = 40;
-        private double latitude2minute = 38;
-        private double latitude2second = 0;
-        private double longitude2degree = 73;
-        private double longitude2minute = 47;
-        private double longitude2second = 0;
-        public double Latitude1Radians = 0.0;
-        public double Longitude1Radians = 0.0;
-        public double Latitude2Radians = 0.0;
-        public double Longitude2Radians = 0.0;
-        public string departurelocation = "";
-        public string destinationlocation = "";
-        public Command ConvertDegreesToRadiansCommand { get; set; }
+        private double latitude1degree;
+        private double latitude1minute;
+        private double latitude1second;
+        private double longitude1degree;
+        private double longitude1minute;
+        private double longitude1second;
+        private double latitude2degree;
+        private double latitude2minute;
+        private double latitude2second;
+        private double longitude2degree;
+        private double longitude2minute;
+        private double longitude2second;
+        public double Latitude1Radians;
+        public double Longitude1Radians;
+        public double Latitude2Radians;
+        public double Longitude2Radians;
+        private string distance;
+        private double Lat1Deg;
+        private double Lat2Deg;
+        private double Lng1Deg;
+        private double Lng2Deg;
+        private double Lat1Rad;
+        private double Lat2Rad;
+        private double Lng1Rad;
+        private double Lng2Rad;
+        public Command CalculateCommand { get; set; }
 
         public ObservableCollection<LocationInfo> LocationInformation { get; set; }
 
         public CooridatesPageViewModel()
         {
-            Summarize = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
-            ConvertDegreesToRadiansCommand = new Command(ConvertDegToRadCommand);
+            CalculateCommand = new Command(Calculate);
+
             LocationInformation = new ObservableCollection<LocationInfo>()
             {
                 new LocationInfo() { Id = 0, Name = "Select A Location", Latitude = 0, Longitude = 0 },
@@ -63,18 +69,23 @@ namespace WilliamsBestAF.ViewModels
 
                         
         }
-        public string DepartureLocation
+
+        private void Calculate(object obj)
         {
-            get
-            {
-                return departurelocation;
-            }
-            set
-            {
-                departurelocation = value;
-                OnPropertyChanged();
-            }
+            Lat1Deg = latitude1degree + (latitude1minute / 60) + (latitude1second / 3600);
+            Lng1Deg = longitude1degree + (longitude1minute / 60) + (longitude1second / 3600);
+            Lat2Deg = latitude2degree + (latitude2minute / 60) + (latitude2second / 3600);
+            Lng2Deg = longitude2degree + (longitude2minute / 60) + (longitude2second / 3600);
+            Lat1Rad = gc.DegreesToRadians(Lat1Deg);
+            Lng1Rad = gc.DegreesToRadians(Lng1Deg);
+            Lat2Rad = gc.DegreesToRadians(Lat2Deg);
+            Lng2Rad = gc.DegreesToRadians(Lng2Deg);
+            var distanceRadians = gc.GreatCircle_Calculation(Lat1Rad, Lng1Rad, Lat2Rad, Lng2Rad);
+            var distanceMiles = gc.RadiansToMiles(distanceRadians);
+            Distance = distanceMiles.ToString();
+
         }
+
         public double Latitude1Degree
         {
             get
@@ -147,18 +158,7 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
-        public string DestinationLocation
-        {
-            get
-            {
-                return destinationlocation;
-            }
-            set
-            {
-                destinationlocation = value;
-                OnPropertyChanged();
-            }
-        }
+        
         public double Latitude2Degree
         {
             get
@@ -231,51 +231,18 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
-       
-
-        private async void ConvertDegToRadCommand(object obj)
-        {
-            Convert_Degrees_Radians();
-           // await Shell.Current.GoToAsync($"{nameof(GreatCircleDistance)}?{nameof(GreatCircleDistanceViewModel.Latitude1)}={Latitude1Radians}&{nameof(GreatCircleDistanceViewModel.Longitude1)}={Longitude1Radians}&{nameof(GreatCircleDistanceViewModel.Latitude2)}={Latitude2Radians}&{nameof(GreatCircleDistanceViewModel.Longitude2)}={Longitude2Radians}");
-            await Shell.Current.GoToAsync($"{nameof(PlottingPoints)}?{nameof(PlottingPointsViewModel.Latitude1)}={Latitude1Radians}&{nameof(PlottingPointsViewModel.Longitude1)}={Longitude1Radians}&{nameof(PlottingPointsViewModel.Latitude2)}={Latitude2Radians}&{nameof(PlottingPointsViewModel.Longitude2)}={Longitude2Radians}");
+                
+        public string Distance
+        { 
+            get => distance;
+            set
+            {
+                distance = value;
+                OnPropertyChanged();
+            }
+            
         }
 
-        private void Calculate()
-        {
-            double distance = gc.GreatCircle_Calculation(Latitude1Radians, Longitude1Radians, Latitude2Radians, Longitude2Radians);
-            double distanceNM = gc.RadiansToNauticalMiles(distance);
-            double distanceMiles = gc.NauticalMilesToMiles(distanceNM);
-
-            Summarize.DepartureName = DepartureLocation;
-            Summarize.DepartureLatitude = Latitude1Radians;
-            Summarize.DepartureLongitude = Longitude1Radians;
-
-            Summarize.DestinationName = DestinationLocation;
-            Summarize.DestinationLatitude = Latitude2Radians;
-            Summarize.DestinationLongitude = Longitude2Radians;
-
-            Summarize.GreatCircleDistance = distanceMiles;
-            double courseRadians = gc.CourseBetweenPoints(distance, Latitude1Radians, Longitude1Radians, Latitude2Radians, Longitude2Radians);
-            Summarize.TripCourse = Math.Round(gc.RadiansToDegrees(courseRadians), 0);
-
-            double throughGround = gc.GetDistantThroughEarth(Latitude1Radians, Longitude1Radians, Latitude2Radians, Longitude2Radians);
-            Summarize.ThroughGroundDistance = throughGround;
-            double greatCircleMinusThroughGround = distanceMiles - throughGround;
-            Summarize.GreatCircleThroughGroundDifference = greatCircleMinusThroughGround;
-        }
-
-        public void Convert_Degrees_Radians()
-        {
-           double Latitude1Deg = gc.DMS_Degrees(Latitude1Degree, Latitude1Minute, Latitude1Second);
-           double Longitude1Deg = gc.DMS_Degrees(Longitude1Degree, Longitude1Minute, Longitude1Second);
-           double Latitude2Deg = gc.DMS_Degrees(Latitude2Degree, Latitude2Minute, Latitude2Second);
-           double Longitude2Deg = gc.DMS_Degrees(Longitude2Degree, Longitude2Minute, Longitude2Second);
-            Latitude1Radians = gc.DegreesToRadians(Latitude1Deg);
-            Longitude1Radians = gc.DegreesToRadians(Longitude1Deg);
-            Latitude2Radians = gc.DegreesToRadians(Latitude2Deg);
-            Longitude2Radians = gc.DegreesToRadians(Longitude2Deg);
-            Calculate();
-        }
 
     }
 }

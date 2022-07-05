@@ -17,6 +17,11 @@ namespace WilliamsBestAF.ViewModels
         private double longitude1;
         private double latitude2;
         private double longitude2;
+        private double resultDistance;
+        private GreatCircle gc = new GreatCircle();
+        private CooridateSummary cooridateSummary { get; set; }
+        public Command CalculateCommand { get; set; }
+        private double greatcircledistance;
 
         public double Latitude1
         {
@@ -66,12 +71,50 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
+        public double ResultDistance
+        {
+            get
+            {
+                return resultDistance;
+            }
+            set
+            {
+                resultDistance = value;
+                OnPropertyChanged();
+            }
+        }
+        public double GreatCircleDistance
+        {
+            get
+            {
+                return greatcircledistance;
+            }
+            set
+            {
+                greatcircledistance = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<LocationInfo> LocationInformation { get; set; }
 
         public DistanceThroughEarthViewModel()
         {
+            cooridateSummary = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
+            Latitude1 = cooridateSummary.DepartureLatitude;
+            Longitude1 = cooridateSummary.DepartureLongitude;
+            Latitude2 = cooridateSummary.DestinationLatitude;
+            Longitude2 = cooridateSummary.DestinationLongitude;
+            var distanceRadians = gc.GreatCircle_Calculation(Latitude1, Longitude1, Latitude2, Longitude2);
+            GreatCircleDistance = gc.RadiansToMiles(distanceRadians);
+            
+            CalculateCommand = new Command(() =>
+            {
+               var distanceRadians2 = gc.GetDistantThroughEarth(Latitude1, Longitude1, Latitude2, Longitude2);
+                ResultDistance = gc.RadiansToMiles(distanceRadians2);
+            });
             LocationInformation = new ObservableCollection<LocationInfo>()
             {
+                new LocationInfo() { Id = 0, Name = "Select a location", Latitude = 0, Longitude = 0 },
                 new LocationInfo() { Id = 1, Name = "Eustis, Florida", Latitude = 28.881541, Longitude = -81.703742},
                 new LocationInfo() { Id = 2, Name = "Los Angeles", Latitude = 34.05349, Longitude = -118.24532},
                 new LocationInfo() { Id = 3, Name = "Miami", Latitude = 25.775084, Longitude = -80.1947},

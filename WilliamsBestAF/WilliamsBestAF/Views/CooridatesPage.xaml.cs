@@ -14,17 +14,14 @@ namespace WilliamsBestAF.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CooridatesPage : ContentPage
     {
-        GreatCircle gc;
+        GreatCircle gc = new GreatCircle();
         CooridatesPageViewModel _viewModel;
-        private CooridateSummary GetSummary { get; set; }
+       
 
         public CooridatesPage()
         {
-                InitializeComponent();
-                gc = new GreatCircle();
-           GetSummary = (CooridateSummary)Application.Current.Properties["CooridateSummaryProperty"];
+            InitializeComponent();          
             BindingContext = _viewModel = new CooridatesPageViewModel();
-
         }
                
         private void CheckedDD_CheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -51,6 +48,11 @@ namespace WilliamsBestAF.Views
                 LongitudeSec2.IsVisible = false;
                 LongitudeMin2.Text = "0";
                 LongitudeSec2.Text = "0";
+                BoxView1.IsVisible = true;
+                Distance.IsVisible = true;
+                ComputeCourse.IsVisible = true;
+                ReverseComputeCourse.IsVisible = true;
+                ClearAll.IsVisible = true;
 
 
             }
@@ -68,6 +70,12 @@ namespace WilliamsBestAF.Views
                 
                 LongitudeMin2.IsVisible = true;
                 LongitudeSec2.IsVisible = true;
+                BoxView1.IsVisible = true;
+                Distance.IsVisible = true;
+                ComputeCourse.IsVisible = true;
+                ReverseComputeCourse.IsVisible = true;
+                ClearAll.IsVisible = true;
+
             }
         }
                 

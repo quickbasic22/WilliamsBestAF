@@ -5,27 +5,26 @@
              x:DataType="viewmodels:DistanceThroughEarthViewModel"
              x:Class="WilliamsBestAF.Views.DistanceThroughEarth"
              Title="Distance Through Earth">
-    <!--<ContentPage.BindingContext>
+    <ContentPage.BindingContext>
         <viewmodels:DistanceThroughEarthViewModel />
-    </ContentPage.BindingContext>-->
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="20">
                 <Frame BackgroundColor="#2196F3" Padding="5" CornerRadius="0">
                     <Label Text="Distance Throught Earth" HorizontalTextAlignment="Center" TextColor="White" FontSize="16"/>
                 </Frame>
-                <Entry x:Name="Location1" Text="LAX" FontSize="Large" TextColor="Blue" BackgroundColor="AliceBlue" />
-                <Entry x:Name="LatDegrees1" Text="Lat1" />
-                <Entry x:Name="LongDegrees1" Text="Long1" />
-                <Entry x:Name="Location2" Text="JFK" FontSize="Large" TextColor="Blue" BackgroundColor="AliceBlue" />
-                <Entry x:Name="LatDegrees2" Text="Lat2" />
-                <Entry x:Name="LongDegrees2" Text="Long2" />
-                <Button x:Name="Calculate" Text="Calculate" Clicked="Calculate_Clicked" />
-                <Entry x:Name="ResultDistance" Text="ResultDistance" FontSize="Large" Placeholder="Distance Through Earth in Miles" />
-                <Picker x:Name="LocationPicker" Title="Pick Location from list" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" />
+                <Picker x:Name="LocationPicker1" FontSize="Large" TextColor="Blue" BackgroundColor="AliceBlue" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" />
+                <Entry x:Name="LatDegrees1" Text="{Binding Latitude1}" />
+                <Entry x:Name="LongDegrees1" Text="{Binding Longitude1}" />
+                <Picker x:Name="LocationPicker2" TextColor="Blue" BackgroundColor="LightPink" TitleColor="Purple" FontSize="Large" SelectedIndexChanged="LocationPicker_SelectedIndexChanged" ItemsSource="{Binding LocationInformation}" ItemDisplayBinding="{Binding Name}" />
+                <Entry x:Name="LatDegrees2" Text="{Binding Latitude2}" />
+                <Entry x:Name="LongDegrees2" Text="{Binding Longitude2}" />
+                <Button x:Name="Calculate" Text="Calculate" Command="{Binding CalculateCommand}" CommandParameter="{Binding .}" />
+                <Entry x:Name="ResultDistance" Text="{Binding ResultDistance}" FontSize="Large" Placeholder="Distance Through Earth in Miles" />
                 <Button x:Name="ClearTextButton" Text="Clear Text" FontSize="Small" TextColor="YellowGreen" Clicked="ClearTextButton_Clicked" WidthRequest="100" />
-                <Label Text="Difference Great Circle Vs Through Ground Distance" FontSize="Large" TextColor="Blue" BackgroundColor="PaleVioletRed" />
-                <Entry x:Name="ThroughGroundGreatCircleDifference" Text="Hello" FontSize="Large" TextColor="Violet" BackgroundColor="MediumPurple" Placeholder="Through ground Difference" PlaceholderColor="LightCoral" />
+                <Label Text="Great Circle distance:" FontSize="Large" TextColor="Blue" BackgroundColor="PaleVioletRed" />
+                <Entry x:Name="ThroughGroundGreatCircleDifference" Text="{Binding GreatCircleDistance}" FontSize="Large" TextColor="Violet" BackgroundColor="MediumPurple" Placeholder="Through ground Difference" PlaceholderColor="LightCoral" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

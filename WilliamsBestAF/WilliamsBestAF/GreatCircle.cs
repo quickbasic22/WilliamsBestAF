@@ -343,9 +343,15 @@ namespace WilliamsBestAF
             return distanceradians;
         }
 
+        public double RadiansToMiles(double radians)
+        {
+            double miles = 3959 * radians;
+            return miles;
+        }
+
         public double RadiansToNauticalMiles(double radians)
         {
-            double nauticalmiles = ((180 * 60) / Math.PI) * radians;
+            double nauticalmiles = 180 * 60 / Math.PI * radians;
             return nauticalmiles;
         }
 
