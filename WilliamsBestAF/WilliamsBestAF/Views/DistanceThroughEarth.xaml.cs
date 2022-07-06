@@ -22,40 +22,7 @@ namespace WilliamsBestAF.Views
         }
 
         
-        private void LocationPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            var picker = sender as Picker;
-            var picker1 = (Picker)picker.FindByName("LocationPicker1");
-            var picker2 = (Picker)picker.FindByName("LocationPicker2");
-            
-            if (picker1.SelectedItem is LocationInfo)
-            {
-                var location = (Model.LocationInfo)picker1.SelectedItem;
-
-               
-                    LatDegrees1.Text = location.Latitude.ToString();
-                    LongDegrees1.Text = location.Longitude.ToString();
-
-               
-                Debug.WriteLine(location.Name);
-                Debug.WriteLine(LocationPicker1.SelectedIndex);
-            }
-            else
-            {
-                var location = (Model.LocationInfo)picker2.SelectedItem;
-
-                
-                    LatDegrees2.Text = location.Latitude.ToString();
-                    LongDegrees2.Text = location.Longitude.ToString();
-                
-                Debug.WriteLine(location.Name);
-                Debug.WriteLine(LocationPicker2.SelectedIndex);
-            }
-
-            
-        }
-
+        
         private void ClearTextButton_Clicked(object sender, EventArgs e)
         {
             LatDegrees1.Text = "";
@@ -69,5 +36,23 @@ namespace WilliamsBestAF.Views
             
         }
 
+        private void LocationPicker1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var Picker = (Picker)sender;
+            var location = (LocationInfo)Picker.SelectedItem;
+
+            
+            LatDegrees1.Text = location.Latitude.ToString();
+            LongDegrees1.Text = location.Longitude.ToString();
+        }
+
+        private void LocationPicker2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var Picker = (Picker)sender;
+            var location = (LocationInfo)Picker.SelectedItem;
+
+            LatDegrees2.Text = location.Latitude.ToString();
+            LongDegrees2.Text = location.Longitude.ToString();
+        }
     }
 }
