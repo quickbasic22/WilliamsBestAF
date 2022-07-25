@@ -31,21 +31,18 @@ namespace WilliamsBestAF.ViewModels
         public double Latitude2Radians;
         public double Longitude2Radians;
         private string distance;
-        private double Lat1Deg;
-        private double Lat2Deg;
-        private double Lng1Deg;
-        private double Lng2Deg;
+
         private double Lat1Rad;
         private double Lat2Rad;
         private double Lng1Rad;
         private double Lng2Rad;
-        public Command CalculateCommand { get; set; }
+        public Command<object> CalculateCommand { get; set; }
 
         public ObservableCollection<LocationInfo> LocationInformation { get; set; }
 
         public CooridatesPageViewModel()
         {
-            CalculateCommand = new Command(Calculate);
+            CalculateCommand = new Command<object>(Calculate);
 
             LocationInformation = new ObservableCollection<LocationInfo>()
             {
@@ -67,19 +64,35 @@ namespace WilliamsBestAF.ViewModels
                 new LocationInfo() { Id = 15, Name = "Eustis AntiPodal", Latitude = -28.881541, Longitude = 98.296258}
             };
 
-                        
+
         }
 
         private void Calculate(object obj)
         {
-            Lat1Deg = latitude1degree + (latitude1minute / 60) + (latitude1second / 3600);
-            Lng1Deg = longitude1degree + (longitude1minute / 60) + (longitude1second / 3600);
-            Lat2Deg = latitude2degree + (latitude2minute / 60) + (latitude2second / 3600);
-            Lng2Deg = longitude2degree + (longitude2minute / 60) + (longitude2second / 3600);
+
+
+            var Lat1Deg = latitude1degree;
+            var Lat1Min = latitude1minute;
+            var Lat1Sec = latitude1second;
+            var Lng1Deg = longitude1degree;
+            var Lng1Min = longitude1minute;
+            var Lng1Sec = longitude1second;
+            var Lat2Deg = latitude2degree;
+            var Lat2Min = latitude2minute;
+            var Lat2Sec = latitude2second;
+            var Lng2Deg = longitude2degree;
+            var Lng2Min = longitude2minute;
+            var Lng2Sec = longitude2second;
+            Lat1Deg = gc.DMS_Degrees(Lat1Deg, Lat1Min, Lat1Sec);
+            Lng1Deg = gc.DMS_Degrees(Lng1Deg, Lng1Min, Lng1Sec);
+            Lat2Deg = gc.DMS_Degrees(Lat2Deg, Lat2Min, Lat2Sec);
+            Lng2Deg = gc.DMS_Degrees(Lng2Deg, Lng2Min, Lng2Sec);
             Lat1Rad = gc.DegreesToRadians(Lat1Deg);
             Lng1Rad = gc.DegreesToRadians(Lng1Deg);
             Lat2Rad = gc.DegreesToRadians(Lat2Deg);
             Lng2Rad = gc.DegreesToRadians(Lng2Deg);
+
+
             var distanceRadians = gc.GreatCircle_Calculation(Lat1Rad, Lng1Rad, Lat2Rad, Lng2Rad);
             var distanceMiles = gc.RadiansToMiles(distanceRadians);
             Distance = distanceMiles.ToString();
@@ -158,7 +171,7 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         public double Latitude2Degree
         {
             get
@@ -231,16 +244,16 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
         }
-                
+
         public string Distance
-        { 
+        {
             get => distance;
             set
             {
                 distance = value;
                 OnPropertyChanged();
             }
-            
+
         }
 
 

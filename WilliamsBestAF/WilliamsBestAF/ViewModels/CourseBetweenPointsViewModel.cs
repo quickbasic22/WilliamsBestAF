@@ -29,10 +29,7 @@ namespace WilliamsBestAF.ViewModels
         public double Latitude2Radians;
         public double Longitude2Radians;
         private string distance;
-        private double Lat1Deg;
-        private double Lat2Deg;
-        private double Lng1Deg;
-        private double Lng2Deg;
+
         private double Lat1Rad;
         private double Lat2Rad;
         private double Lng1Rad;
@@ -48,21 +45,21 @@ namespace WilliamsBestAF.ViewModels
             LocationInformation = new ObservableCollection<LocationInfo>()
             {
                 new LocationInfo() { Id = 0, Name = "Select A Location", Latitude = 0, Longitude = 0 },
-                new LocationInfo() { Id = 1, Name = "Eustis, Florida", Latitude = ConvertDegreesToRadians(28.881541), Longitude = ConvertDegreesToRadians(-81.703742)},
-                new LocationInfo() { Id = 2, Name = "Los Angeles", Latitude = ConvertDegreesToRadians(34.05349), Longitude = ConvertDegreesToRadians(-118.24532)},
-                new LocationInfo() { Id = 3, Name = "Miami", Latitude = ConvertDegreesToRadians(25.775084), Longitude = ConvertDegreesToRadians(-80.1947)},
-                new LocationInfo() { Id = 4, Name = "New York City", Latitude = ConvertDegreesToRadians(40.71455), Longitude = ConvertDegreesToRadians(-74.00712)},
-                new LocationInfo() { Id = 5, Name = "London England", Latitude = ConvertDegreesToRadians(51.500153), Longitude = ConvertDegreesToRadians(-0.1262362)},
-                new LocationInfo() { Id = 6, Name = "Frankfurt Germany", Latitude = ConvertDegreesToRadians(50.11208), Longitude = ConvertDegreesToRadians(8.68341)},
-                new LocationInfo() { Id = 7, Name = "Chicago", Latitude = ConvertDegreesToRadians(41.88425), Longitude = ConvertDegreesToRadians(-87.63245)},
-                new LocationInfo() { Id = 8, Name = "Singapore", Latitude = ConvertDegreesToRadians(1.29016), Longitude = ConvertDegreesToRadians(103.852)},
-                new LocationInfo() { Id = 9, Name = "Brazil", Latitude = ConvertDegreesToRadians(-10.8104515), Longitude = ConvertDegreesToRadians(-52.973118)},
-                new LocationInfo() { Id = 10, Name = "Galápagos Islands", Latitude = ConvertDegreesToRadians(-0.43609226), Longitude = ConvertDegreesToRadians(-90.59137)},
-                new LocationInfo() { Id = 11, Name = "Hilo Hawaii", Latitude = ConvertDegreesToRadians(19.724876), Longitude = ConvertDegreesToRadians(155.08868)},
-                new LocationInfo() { Id = 12, Name = "Dubai", Latitude = ConvertDegreesToRadians(25.20498), Longitude = ConvertDegreesToRadians(55.271057)},
-                new LocationInfo() { Id = 13, Name = "Juneau Alaska", Latitude = ConvertDegreesToRadians(58.300323), Longitude = ConvertDegreesToRadians(-134.41763)},
-                new LocationInfo() { Id = 14, Name = "Bolivar Ohio", Latitude = ConvertDegreesToRadians(40.65014), Longitude = ConvertDegreesToRadians(-81.45259)},
-                new LocationInfo() { Id = 15, Name = "Eustis AntiPodal", Latitude = ConvertDegreesToRadians(-28.881541), Longitude = ConvertDegreesToRadians(98.296258)}
+                new LocationInfo() { Id = 1, Name = "Eustis, Florida", Latitude = 28.881541, Longitude = -81.703742},
+                new LocationInfo() { Id = 2, Name = "Los Angeles", Latitude = 34.05349, Longitude = -118.24532},
+                new LocationInfo() { Id = 3, Name = "Miami", Latitude = 25.775084, Longitude = -80.1947},
+                new LocationInfo() { Id = 4, Name = "New York City", Latitude = 40.71455, Longitude = -74.00712},
+                new LocationInfo() { Id = 5, Name = "London England", Latitude = 51.500153, Longitude = -0.1262362},
+                new LocationInfo() { Id = 6, Name = "Frankfurt Germany", Latitude = 50.11208, Longitude = 8.68341},
+                new LocationInfo() { Id = 7, Name = "Chicago", Latitude = 41.88425, Longitude = -87.63245},
+                new LocationInfo() { Id = 8, Name = "Singapore", Latitude = 1.29016, Longitude = 103.852},
+                new LocationInfo() { Id = 9, Name = "Brazil", Latitude = -10.8104515, Longitude = -52.973118},
+                new LocationInfo() { Id = 10, Name = "Galápagos Islands", Latitude = -0.43609226, Longitude = -90.59137},
+                new LocationInfo() { Id = 11, Name = "Hilo Hawaii", Latitude = 19.724876, Longitude = 155.08868},
+                new LocationInfo() { Id = 12, Name = "Dubai", Latitude = 25.20498, Longitude = 55.271057},
+                new LocationInfo() { Id = 13, Name = "Juneau Alaska", Latitude = 58.300323, Longitude = -134.41763},
+                new LocationInfo() { Id = 14, Name = "Bolivar Ohio", Latitude = 40.65014, Longitude = -81.45259},
+                new LocationInfo() { Id = 15, Name = "Eustis AntiPodal", Latitude = -28.881541, Longitude = 98.296258}
             };
 
 
@@ -70,19 +67,33 @@ namespace WilliamsBestAF.ViewModels
 
         private void Calculate(object obj)
         {
-           
 
-            Lat1Deg = latitude1degree + (latitude1minute / 60) + (latitude1second / 3600);
-            Lng1Deg = longitude1degree + (longitude1minute / 60) + (longitude1second / 3600);
-            Lat2Deg = latitude2degree + (latitude2minute / 60) + (latitude2second / 3600);
-            Lng2Deg = longitude2degree + (longitude2minute / 60) + (longitude2second / 3600);
+
+            var Lat1Deg = latitude1degree;
+            var Lat1Min = latitude1minute;
+            var Lat1Sec = latitude1second;
+            var Lng1Deg = longitude1degree;
+            var Lng1Min = longitude1minute;
+            var Lng1Sec = longitude1second;
+            var Lat2Deg = latitude2degree;
+            var Lat2Min = latitude2minute;
+            var Lat2Sec = latitude2second;
+            var Lng2Deg = longitude2degree;
+            var Lng2Min = longitude2minute;
+            var Lng2Sec = longitude2second;
+            Lat1Deg = gc.DMS_Degrees(Lat1Deg, Lat1Min, Lat1Sec);
+            Lng1Deg = gc.DMS_Degrees(Lng1Deg, Lng1Min, Lng1Sec);
+            Lat2Deg = gc.DMS_Degrees(Lat2Deg, Lat2Min, Lat2Sec);
+            Lng2Deg = gc.DMS_Degrees(Lng2Deg, Lng2Min, Lng2Sec);
             Lat1Rad = gc.DegreesToRadians(Lat1Deg);
             Lng1Rad = gc.DegreesToRadians(Lng1Deg);
             Lat2Rad = gc.DegreesToRadians(Lat2Deg);
             Lng2Rad = gc.DegreesToRadians(Lng2Deg);
+
+
             var distanceRadians = gc.GreatCircle_Calculation(Lat1Rad, Lng1Rad, Lat2Rad, Lng2Rad);
-            var courseRadians = gc.CourseBetweenPoints(distanceRadians, Lat1Rad, Lng1Rad, Lat2Rad, Lng2Rad);
-            var courseDegrees = gc.RadiansToMiles(courseRadians);
+            var courseraw = gc.CourseBetweenPoints(distanceRadians, Lat1Rad, Lng1Rad, Lat2Rad, Lng2Rad);
+            var courseDegrees = gc.RadiansToDegrees(courseraw);
             Distance = courseDegrees.ToString();
 
         }
@@ -242,11 +253,6 @@ namespace WilliamsBestAF.ViewModels
                 OnPropertyChanged();
             }
 
-        }
-
-        private double ConvertDegreesToRadians(double radians)
-        {
-            return gc.DegreesToRadians(radians);
         }
     }
 }

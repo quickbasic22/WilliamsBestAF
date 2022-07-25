@@ -28,7 +28,7 @@ namespace WilliamsBestAF.Views
         {
             if (CheckedDD.IsChecked)
             {
-
+                LocationPicker1.IsVisible = true;
                 LatitudeMin1.IsVisible = false;
                 LatitudeSec1.IsVisible = false;
                 LatitudeMin1.Text = "0";
@@ -38,7 +38,8 @@ namespace WilliamsBestAF.Views
                 LongitudeSec1.IsVisible = false;
                 LongitudeMin1.Text = "0";
                 LongitudeSec1.Text = "0";
-                
+
+                LocationPicker2.IsVisible = true;
                 LatitudeMin2.IsVisible = false;
                 LatitudeSec2.IsVisible = false;
                 LatitudeMin2.Text = "0";
@@ -58,13 +59,14 @@ namespace WilliamsBestAF.Views
             }
             else 
             {
-
+                LocationPicker1.IsVisible = true;
                 LatitudeMin1.IsVisible = true;
                 LatitudeSec1.IsVisible = true;
                 
                 LongitudeMin1.IsVisible = true;
                 LongitudeSec1.IsVisible = true;
-                
+
+                LocationPicker2.IsVisible = true;
                 LatitudeMin2.IsVisible = true;
                 LatitudeSec2.IsVisible = true;
                 
