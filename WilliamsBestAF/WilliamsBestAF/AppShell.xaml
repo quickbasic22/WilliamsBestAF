@@ -50,7 +50,7 @@
    
     <FlyoutItem Title="Calculation Pages" FlyoutIcon="xamarin_logo.png" FlyoutDisplayOptions="AsSingleItem">
         <Tab Title="3 common Earth Measurements">
-            <ShellContent Title="Great Circle Distance" ContentTemplate="{DataTemplate local:CooridatesPage}" />
+            <ShellContent Title="Great Circle Distance" ContentTemplate="{DataTemplate local:GreatCircleDistance}" />
             <ShellContent Title="Distance Through Earth" ContentTemplate="{DataTemplate local:DistanceThroughEarth}" />
             <ShellContent Title="Course Between Points" ContentTemplate="{DataTemplate local:CourseBetweenPoints}" />
         </Tab>

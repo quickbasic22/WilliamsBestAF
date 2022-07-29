@@ -27,7 +27,7 @@
                 <Entry x:Name="LongitudeSec2" Text="{Binding Longitude2Second, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Longitude Seconds 2"  PlaceholderColor="LightCoral" />
                 <BoxView x:Name="BoxView1" HeightRequest="5" Color="Red" />
                 <Entry x:Name="Distance" Text="{Binding Distance, Mode=TwoWay}" FontSize="Large" TextColor="Blue" Placeholder="Distance"  PlaceholderColor="LightCoral" />
-                <Button x:Name="ComputeCourse" Text="Compute Course" Command="{Binding CalculateCommand}" CommandParameter="{Binding .}" Clicked="ComputeCourse_Clicked" />
+                <Button x:Name="ComputeCourse" Text="Compute Course" Command="{Binding CalculateCommand}" CommandParameter="{Binding .}" />
                 <Button x:Name="ReverseComputeCourse" Text="Reverse Compute Course" Clicked="ReverseComputeCourse_Clicked" />
                 <Button x:Name="ClearAll" Text="Clear All Textboxes" Clicked="ClearAll_Clicked" />
             </StackLayout>

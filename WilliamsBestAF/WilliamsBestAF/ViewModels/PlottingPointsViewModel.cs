@@ -3,10 +3,6 @@ using Xamarin.Forms;
 
 namespace WilliamsBestAF.ViewModels
 {
-    [QueryProperty(nameof(Latitude1), nameof(Latitude1))]
-    [QueryProperty(nameof(Longitude1), nameof(Longitude1))]
-    [QueryProperty(nameof(Latitude2), nameof(Latitude2))]
-    [QueryProperty(nameof(Longitude2), nameof(Longitude2))]
     public class PlottingPointsViewModel : BindableObject
     {
         private double latitude1;

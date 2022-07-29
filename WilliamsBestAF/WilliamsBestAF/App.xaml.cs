@@ -10,26 +10,13 @@ using Xamarin.Forms.Xaml;
 namespace WilliamsBestAF
 {
     public partial class App : Application
-    {
-        private CooridateSummary cooridatesummary;
-
-        public CooridateSummary CooridateSummary
-        {
-            get => cooridatesummary;
-            set
-            {
-                cooridatesummary = value;
-            }
-        }
-        
+    {               
 
         public App()
         {
             InitializeComponent();
             MainPage = new AppShell();
             AppActions.OnAppAction += new EventHandler<AppActionEventArgs>(AppActions_OnAppAction);
-            cooridatesummary = new CooridateSummary();
-            Application.Current.Properties.Add("CooridateSummaryProperty", cooridatesummary);
         }
 
         private void AppActions_OnAppAction(object sender, AppActionEventArgs e)
@@ -41,8 +28,8 @@ namespace WilliamsBestAF
             }
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                if (e.AppAction.Id == "AppSelectorPage")
-                    await Shell.Current.GoToAsync(nameof(AppSelectorPage));
+                if (e.AppAction.Id == "GreatCircleDistance")
+                    await Shell.Current.GoToAsync(nameof(GreatCircleDistance));
                 else if (e.AppAction.Id == "CourseBetweenPoints")
                     await Shell.Current.GoToAsync(nameof(CourseBetweenPoints));
                 else if (e.AppAction.Id == "DistanceThroughEarth")
@@ -55,7 +42,7 @@ namespace WilliamsBestAF
             try
             {
                 await AppActions.SetAsync(
-                    new AppAction("AppSelectorPage", "App Selector Page", icon: "icon_about"),
+                    new AppAction("GreatCircleDistance", "Great Circle Distance", icon: "icon_about"),
                 new AppAction("CourseBetweenPoints", "Course Between Points", icon: "icon_feed"),
                     new AppAction("DistanceThroughEarth", "Distance Through Earth", icon: "icon_feed")
                     );

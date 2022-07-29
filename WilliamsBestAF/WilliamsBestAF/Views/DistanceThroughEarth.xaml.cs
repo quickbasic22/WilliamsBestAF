@@ -51,19 +51,32 @@ namespace WilliamsBestAF.Views
                 LatitudeDeg1.IsVisible = true;
                 LatitudeMin1.IsVisible = false;
                 LatitudeSec1.IsVisible = false;
+                LatitudeMin1.Text = "0";
+                LatitudeSec1.Text = "0";
 
                 LongitudeDeg1.IsVisible = true;
                 LongitudeMin1.IsVisible = false;
                 LongitudeSec1.IsVisible = false;
+                LongitudeMin1.Text = "0";
+                LongitudeSec1.Text = "0";
 
                 LocationPicker2.IsVisible = true;
                 LatitudeDeg2.IsVisible = true;
                 LatitudeMin2.IsVisible = false;
                 LatitudeSec2.IsVisible = false;
+                LatitudeMin2.Text = "0";
+                LatitudeSec2.Text = "0";
 
                 LongitudeDeg2.IsVisible = true;
                 LongitudeMin2.IsVisible = false;
                 LongitudeSec2.IsVisible = false;
+                LongitudeMin2.Text = "0";
+                LongitudeSec2.Text = "0";
+                BoxView1.IsVisible = true;
+                Distance.IsVisible = true;
+                ReverseComputeCourse.IsVisible = true;
+                ClearAll.IsVisible = true;
+
 
 
             }
@@ -73,19 +86,32 @@ namespace WilliamsBestAF.Views
                 LatitudeDeg1.IsVisible = true;
                 LatitudeMin1.IsVisible = true;
                 LatitudeSec1.IsVisible = true;
+                LatitudeMin1.Text = "0";
+                LatitudeSec1.Text = "0";
 
-                LongitudeMin1.IsVisible = true;
+                LongitudeDeg1.IsVisible = true;
                 LongitudeMin1.IsVisible = true;
                 LongitudeSec1.IsVisible = true;
+                LongitudeMin1.Text = "0";
+                LongitudeSec1.Text = "0";
 
                 LocationPicker2.IsVisible = true;
                 LatitudeDeg2.IsVisible = true;
                 LatitudeMin2.IsVisible = true;
                 LatitudeSec2.IsVisible = true;
+                LatitudeMin2.Text = "0";
+                LatitudeSec2.Text = "0";
 
                 LongitudeDeg2.IsVisible = true;
                 LongitudeMin2.IsVisible = true;
                 LongitudeSec2.IsVisible = true;
+                LongitudeMin2.Text = "0";
+                LongitudeSec2.Text = "0";
+                BoxView1.IsVisible = true;
+                Distance.IsVisible = true;
+                ReverseComputeCourse.IsVisible = true;
+                ClearAll.IsVisible = true;
+
             }
         }
 
@@ -122,6 +148,8 @@ namespace WilliamsBestAF.Views
             LatitudeMin2.Text = "";
             LongitudeDeg2.Text = "";
             LongitudeMin2.Text = "";
+            LocationPicker1.SelectedIndex = 0;
+            LocationPicker2.SelectedIndex = 0;
             Distance.Text = "";
         }
     }
